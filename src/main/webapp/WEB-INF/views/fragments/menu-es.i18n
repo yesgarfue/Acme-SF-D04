@@ -20,7 +20,9 @@ master.menu.sign-out = Salir
 master.menu.anonymous = Anónimo
 master.menu.anonymous.favourite-link = Enlace Favorito
 master.menu.anonymous.favourite-link-lidia = 53963925Z: Jiménez Soriano, Lidia
- 
+master.menu.anonymous.favourite-link-oscar = 75914431X: Menendez Marquez, Oscar
+master.menu.anonymous.favourite-link-alvaro = 54188420Y: Ruiz Gutiérrez, Álvaro
+
 # master.menu.administrator ###################################################
 
 master.menu.administrator = Administrador
