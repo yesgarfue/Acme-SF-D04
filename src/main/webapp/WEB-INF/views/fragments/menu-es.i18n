@@ -18,8 +18,9 @@ master.menu.sign-out = Salir
 # master.menu.anonymous #######################################################
 
 master.menu.anonymous = Anónimo
-master.menu.anonymous.favourite-link = Enlace favorito
-
+master.menu.anonymous.favourite-link = Enlace Favorito
+master.menu.anonymous.favourite-link-lidia = 53963925Z: Jiménez Soriano, Lidia
+ 
 # master.menu.administrator ###################################################
 
 master.menu.administrator = Administrador
