@@ -20,9 +20,9 @@
 	<acme:menu-left>
 		<acme:menu-option code="master.menu.anonymous" access="isAnonymous()">
 			<acme:menu-suboption code="master.menu.anonymous.favourite-link-oscar" action="https://www.marca.com/"/>
-			<acme:menu-suboption code="master.menu.anonymous.favourite-link" action="http://www.example.com/"/>
 			<acme:menu-suboption code="master.menu.anonymous.favourite-link-lidia" action="https://i.pinimg.com/originals/da/18/38/da18386cc9b32a3f09350f378a04e793.gif"/>
 			<acme:menu-suboption code="master.menu.anonymous.favourite-link-alvaro" action="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMnY5OWtvZmRkbnNlYmdtcXlleWFzbGh3cW1oOXE3YmVhZnRnMnpmZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6W58C44RnFnEap4qK1/giphy.gif"/>
+			<acme:menu-suboption code="master.menu.anonymous.favourite-link-carlos" action="https://www.realmadrid.com/es-ES"/>
 
 		</acme:menu-option>
 
