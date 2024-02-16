@@ -8,7 +8,7 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
-﻿# master.menu #################################################################
+# master.menu #################################################################
 
 master.menu.home = Inicio
 master.menu.sign-up = Registrarse
@@ -18,9 +18,11 @@ master.menu.sign-out = Salir
 # master.menu.anonymous #######################################################
 
 master.menu.anonymous = Anónimo
-master.menu.anonymous.favourite-link = Enlace favorito
+master.menu.anonymous.favourite-link-yesica = Y8101055D: Garate Fuentes, Yesica Leydi
+master.menu.anonymous.favourite-link-lidia = 53963925Z: Jiménez Soriano, Lidia
 master.menu.anonymous.favourite-link-oscar = 75914431X: Menendez Marquez, Oscar
 master.menu.anonymous.favourite-link-alvaro = 54188420Y: Ruiz Gutiérrez, Álvaro
+master.menu.anonymous.favourite-link-carlos = 53739238Z: Martín de Prado Barragán, Carlos
 
 # master.menu.administrator ###################################################
 
