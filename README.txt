@@ -8,14 +8,14 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
-This is a starter project.  It is intended to be a core learning asset for the students
-who have enrolled the Design and Testing subject of the Software Engineering curriculum of the 
-University of Seville.  This project helps them start working on their new information system 
-projects.
+The resources provided by the Testing Design II course will be collaboratively utilized to
+ensure its success, constituting a valuable learning experience in implementing frameworks
+like Acme and other related tools. 
 
-To get this project up and running, please follow the guideline in the theory/lab materials,
-taking into account that you must link the appropriate version of the Acme-Framework excluding 
-the following resources:
+Thus Acme SF, Inc. (Acme Software Factory) is born, a fictitious company specialized in 
+consulting for businesses looking to venture into the areas of software project management
+and development. 
 
-- **/fragments/**
- 
+In these initial steps towards delivery D01, we are in the process of adapting these tools
+for optimal usage and customization. To kickstart this project, we have meticulously followed
+the guidelines outlined in the theoretical and lab materials.
