@@ -41,10 +41,10 @@ public class Risk extends AbstractEntity {
 	private LocalDateTime		identificationDate;
 
 	@Positive
-	@Max(100)
 	private Double				impact;
 
 	@Positive
+	@Max(100)
 	private Double				probability;
 
 	@NotBlank
@@ -56,6 +56,9 @@ public class Risk extends AbstractEntity {
 
 	// Derived attributes -----------------------------------------------------
 
-	private Double				value				= this.impact * this.probability;
+
+	private Double value() {
+		return this.impact * this.probability;
+	}
 
 }
