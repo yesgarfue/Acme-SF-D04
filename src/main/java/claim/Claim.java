@@ -1,29 +1,28 @@
 
 package claim;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import org.checkerframework.common.aliasing.qual.Unique;
+import org.hibernate.validator.constraints.URL;
 
-import lombok.AllArgsConstructor;
+import acme.client.data.AbstractEntity;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
-public class Claim {
+public class Claim extends AbstractEntity {
 	/*
 	 * A claim is an opposition or contradiction posted by anyone
 	 * that is made to something considered to be unjust.
@@ -41,18 +40,14 @@ public class Claim {
 	private static final long	serialVersionUID	= 1L;
 
 	// Attributes -------------------------------------------------------------
-	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
-	private int					id;
-
 	@NotBlank
 	@Pattern(regexp = "C-[0-9]{4}", message = "La referencia debe seguir el patrón R-XXX")
-	@Unique
+	@Column(unique = true)
 	private String				code;
 
 	@Past
-	@NotNull
-	private LocalDateTime		instantiation;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date				instantiation;
 
 	@Size(max = 76, message = "Heading must be shorter than 76 characters.")
 	@NotBlank
@@ -64,8 +59,9 @@ public class Claim {
 	@NotBlank
 	@Size(max = 101, message = "Departament must be shorter than 101 characters.")
 	private String				departament;
-
+	@Email
 	private String				emailOptional;
+	@URL
 	private String				linkInfoOpcional;
 
 }
