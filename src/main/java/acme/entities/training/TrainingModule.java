@@ -53,7 +53,7 @@ public class TrainingModule extends AbstractEntity {
 	@Past
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	//que sea despues de la creacion
+	//que sea despues de la creacion hacer en servicio
 	private Date				updatedMoment;
 
 	@URL
