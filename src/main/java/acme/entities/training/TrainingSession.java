@@ -1,7 +1,7 @@
 
 package acme.entities.training;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,7 +35,7 @@ public class TrainingSession extends AbstractEntity {
 	@Column(unique = true)
 	private String				code;
 
-	private LocalDateTime		period; // corregir y poner restricciones
+	private Date				period; // poner restricciones en servicio
 
 	@NotNull
 	@NotBlank
