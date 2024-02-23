@@ -10,7 +10,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -39,7 +38,7 @@ public class TrainingModule extends AbstractEntity {
 	@Pattern(regexp = "[A-Z]{1,3}-[0-9]{3}", message = "The code must follow the pattern XXX-XXX.")
 	private String				code;
 
-	@Past
+	//@PastOrPresent arreglar
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				creationMoment;
@@ -52,8 +51,7 @@ public class TrainingModule extends AbstractEntity {
 	@NotNull
 	private Difficulty			difficultyLevel;
 
-	@Past
-	@NotNull
+	//@PastOrPresent
 	@Temporal(TemporalType.TIMESTAMP)
 	//que sea despues de la creacion
 	private Date				updatedMoment;
@@ -63,7 +61,7 @@ public class TrainingModule extends AbstractEntity {
 
 	// Derived attributes -----------------------------------------------------
 
-	private Date				totalTime; // hacer en service
+	private Double				totalTime; // hacer en service
 
 	@ManyToOne
 	private Project				project;

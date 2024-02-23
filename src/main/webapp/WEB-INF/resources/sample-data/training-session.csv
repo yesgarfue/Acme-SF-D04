@@ -1,0 +1,2 @@
+key,code,time-start,time-end,location,instructor,contact-email,optional-link,key:training-module
+training-session-01,TS-LJS-333,2023/04/07 15:00,2023/04/21 17:00,Spain,"This is a instructor,",ts1@ejemplo.com,https://www.ejemplo.com,training-module-01

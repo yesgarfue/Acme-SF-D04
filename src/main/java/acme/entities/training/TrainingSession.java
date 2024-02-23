@@ -6,6 +6,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -35,7 +37,11 @@ public class TrainingSession extends AbstractEntity {
 	@Column(unique = true)
 	private String				code;
 
-	private Date				period; // poner restricciones en servicio
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date				timeStart;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date				timeEnd;
 
 	@NotNull
 	@NotBlank
