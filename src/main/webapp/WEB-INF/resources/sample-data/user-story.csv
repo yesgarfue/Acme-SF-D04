@@ -1,0 +1,3 @@
+key,version,acceptance-criteria,description,estimated-cost,link,priority,title,key:manager,key:project
+user-story-01,1,criteria Example,Description Example,20,http://example.com,SHOULD,Title Example,manager-01,project-01
+user-story-02,1,criteria Example,Description Example,20,http://example.com,COULD,Title Example,manager-02,project-02

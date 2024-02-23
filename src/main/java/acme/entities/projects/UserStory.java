@@ -12,6 +12,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.URL;
 
 import acme.client.data.AbstractEntity;
+import acme.enumerate.Priorities;
 import acme.roles.Manager;
 import lombok.Getter;
 import lombok.Setter;
@@ -48,7 +49,7 @@ public class UserStory extends AbstractEntity {
 	@Size(max = 101, message = "Acceptance criteria must be shorter than 101 characters.")
 	private String				acceptanceCriteria;
 
-	@NotBlank
+	@NotNull
 	private Priorities			priority;
 
 	@URL

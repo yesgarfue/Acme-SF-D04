@@ -15,14 +15,12 @@ import org.hibernate.validator.constraints.URL;
 
 import acme.client.data.AbstractEntity;
 import acme.roles.Manager;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 
 public class Project extends AbstractEntity {
 	/*
@@ -33,7 +31,7 @@ public class Project extends AbstractEntity {
 	 * information. Projects containing fatal errors must be rejected by the system.
 	 */
 
-	//Note: Evitar OneToMany y ManyToMany, poblar en los archivos csv
+	//Note: Evitar OneToMany y ManyToMany.
 
 	// Serialisation identifier -----------------------------------------------
 
