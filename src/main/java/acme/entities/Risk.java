@@ -55,8 +55,7 @@ public class Risk extends AbstractEntity {
 	private String				optionalLink;
 
 	@NotNull
-	private Double				value;
-
+	private Double				value; //hacer en service
 	// Derived attributes -----------------------------------------------------
 
 }

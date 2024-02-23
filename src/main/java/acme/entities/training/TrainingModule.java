@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
@@ -16,6 +17,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.URL;
 
 import acme.client.data.AbstractEntity;
+import acme.entities.projects.Project;
 import acme.enumerate.Difficulty;
 import lombok.Getter;
 import lombok.Setter;
@@ -53,7 +55,7 @@ public class TrainingModule extends AbstractEntity {
 	@Past
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	//que sea despues de la creacion hacer en servicio
+	//que sea despues de la creacion
 	private Date				updatedMoment;
 
 	@URL
@@ -61,13 +63,9 @@ public class TrainingModule extends AbstractEntity {
 
 	// Derived attributes -----------------------------------------------------
 
-	private Date				totalTime;
+	private Date				totalTime; // hacer en service
 
-
-	private Date getTotaltime() {
-		return new Date(this.updatedMoment.getTime() - this.creationMoment.getTime());
-	}
-
-	// relacion con project
+	@ManyToOne
+	private Project				project;
 
 }
