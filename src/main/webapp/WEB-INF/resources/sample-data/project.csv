@@ -1,0 +1,3 @@
+key,version,abstracts,code,cost,fatal-errors,link,title,key:manager
+project-01,1,abstrac example,ABC-1234,100,false,http://www.example.com,HazmeJobs,manager-01
+project-02,1,abstract Example 2,DFG-5678,50,false,http://www.example.com,PetClinic,manager-02

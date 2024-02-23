@@ -1,0 +1,3 @@
+key,key:manager,number-must,number-should,number-could,number-wont,average-estimate,deviation-estimate,minimum-estimate,maximum-estimate,average-cost,deviation-cost,minimum-cost,maximum-cost
+manager-dashboard-01,manager-01,1,1,1,1,1,1,1,1,1,1,1,1
+manager-dashboard-02,manager-02,1,1,1,1,1,1,1,1,1,1,1,1
