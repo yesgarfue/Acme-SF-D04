@@ -40,7 +40,7 @@ public class Project extends AbstractEntity {
 	// Attributes -------------------------------------------------------------
 
 	@NotBlank
-	@Pattern(regexp = "[A-Z]{3}-[0-9]{4}", message = "La referencia debe seguir el patrón R-XXX")
+	@Pattern(regexp = "[A-Z]{3}-[0-9]{4}", message = "La referencia debe seguir el patrón AAA-XXXX")
 	@Column(unique = true)
 	private String				code;
 
@@ -61,6 +61,7 @@ public class Project extends AbstractEntity {
 	private String				link;
 
 	// Relationships ----------------------------------------------------------
+
 	@NotNull
 	@Valid
 	@ManyToOne(optional = false)
