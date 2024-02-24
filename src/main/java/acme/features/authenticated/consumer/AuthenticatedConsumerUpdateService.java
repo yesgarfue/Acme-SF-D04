@@ -30,7 +30,7 @@ public class AuthenticatedConsumerUpdateService extends AbstractService<Authenti
 	@Autowired
 	private AuthenticatedConsumerRepository repository;
 
-	// AbstractService interface ----------------------------------------------ç
+	// AbstractService interface ----------------------------------------------
 
 
 	@Override
