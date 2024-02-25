@@ -41,7 +41,7 @@ public class Claim extends AbstractEntity {
 
 	// Attributes -------------------------------------------------------------
 	@NotBlank
-	@Pattern(regexp = "C-[0-9]{4}", message = "La referencia debe seguir el patrón R-XXX")
+	@Pattern(regexp = "C-[0-9]{4}", message = "La referencia debe seguir el patrón C-XXXX")
 	@Column(unique = true)
 	private String				code;
 
@@ -62,6 +62,6 @@ public class Claim extends AbstractEntity {
 	@Email
 	private String				emailOptional;
 	@URL
-	private String				linkInfoOpcional;
+	private String				link;
 
 }

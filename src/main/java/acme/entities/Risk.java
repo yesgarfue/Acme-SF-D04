@@ -1,7 +1,7 @@
 
 package acme.entities;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,7 +38,7 @@ public class Risk extends AbstractEntity {
 
 	@Past
 	@NotNull
-	private LocalDateTime		identificationDate;
+	private Date				identificationDate;
 
 	@Positive
 	private Double				impact;
@@ -52,13 +52,10 @@ public class Risk extends AbstractEntity {
 	private String				description;
 
 	@URL
-	private String				additionalInfoLink;
+	private String				optionalLink;
 
+	@NotNull
+	private Double				value; //hacer en service
 	// Derived attributes -----------------------------------------------------
-
-
-	private Double value() {
-		return this.impact * this.probability;
-	}
 
 }
