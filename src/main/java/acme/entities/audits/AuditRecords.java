@@ -1,5 +1,5 @@
 
-package acme.entities;
+package acme.entities.audits;
 
 import java.time.Duration;
 
