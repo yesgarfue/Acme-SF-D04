@@ -21,7 +21,6 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-
 public class Project extends AbstractEntity {
 	/*
 	 * A project aggregates several user stories elicited by the same manager. The system must store the
