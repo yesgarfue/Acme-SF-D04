@@ -52,9 +52,11 @@ public class Project extends AbstractEntity {
 	@Size(max = 101, message = "Abstract must be shorter than 101 characters.")
 	private String				abstracts;
 
+	@NotNull
 	private Boolean				fatalErrors;
 
 	@Positive
+	@NotNull
 	private Double				cost;
 
 	@URL

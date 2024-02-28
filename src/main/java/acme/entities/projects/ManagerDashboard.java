@@ -3,6 +3,7 @@ package acme.entities.projects;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
 import acme.client.data.AbstractEntity;
@@ -27,31 +28,43 @@ public class ManagerDashboard extends AbstractEntity {
 
 	// Attributes -------------------------------------------------------------
 	@PositiveOrZero
+	@NotNull
 	private Integer				numberMust;
 	@PositiveOrZero
+	@NotNull
 	private Integer				numberShould;
 	@PositiveOrZero
+	@NotNull
 	private Integer				numberCould;
 	@PositiveOrZero
+	@NotNull
 	private Integer				numberWont;
 	@PositiveOrZero
+	@NotNull
 	private Double				averageEstimate;
 	@PositiveOrZero
+	@NotNull
 	private Double				deviationEstimate;
 	@PositiveOrZero
+	@NotNull
 	private Double				minimumEstimate;
 	@PositiveOrZero
+	@NotNull
 	private Double				maximumEstimate;
 	@PositiveOrZero
+	@NotNull
 	private Double				averageCost;
 	@PositiveOrZero
+	@NotNull
 	private Double				deviationCost;
 	@PositiveOrZero
+	@NotNull
 	private Double				minimumCost;
 	@PositiveOrZero
 	private Double				maximumCost;
 
 	// Relationships ----------------------------------------------------------
 	@OneToOne
+	@NotNull
 	private Manager				manager;
 }

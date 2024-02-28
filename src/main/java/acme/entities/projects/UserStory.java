@@ -43,6 +43,7 @@ public class UserStory extends AbstractEntity {
 	private String				description;
 
 	@Positive
+	@NotNull
 	private Double				estimatedCost;
 
 	@NotBlank
