@@ -47,19 +47,19 @@ public class Objective extends AbstractEntity {
 
 	@NotBlank
 	@NotNull
-	@Length(max = 76)
+	@Length(max = 75)
 	private String				title;
 
 	@NotBlank
 	@NotNull
-	@Length(max = 101)
+	@Length(max = 100)
 	private String				description;
 
 	@NotNull
 	private ObjPriority			priority;
 
 	@NotNull
-	private Boolean				status;
+	private Boolean				criticalStatus;
 
 	@NotNull
 	private Duration			duration;
