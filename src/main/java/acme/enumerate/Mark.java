@@ -4,7 +4,7 @@ package acme.enumerate;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public enum Nota {
+public enum Mark {
 
 	A_Plus("A+"), A("A"), B("B"), C("C"), F("F"), F_Minus("F-");
 
