@@ -1,5 +1,5 @@
 
-package acme.entities.objetive;
+package acme.entities.objective;
 
 import java.time.Duration;
 import java.util.Date;
