@@ -14,7 +14,7 @@ import org.hibernate.validator.constraints.URL;
 import org.hibernate.validator.constraints.time.DurationMin;
 
 import acme.client.data.AbstractEntity;
-import acme.enumerate.Nota;
+import acme.enumerate.Mark;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -50,7 +50,7 @@ public class AuditRecords extends AbstractEntity {
 	private Duration			period;
 
 	@NotNull
-	private Nota				mark;
+	private Mark				mark;
 
 	@URL
 	private String				optionalLink;
