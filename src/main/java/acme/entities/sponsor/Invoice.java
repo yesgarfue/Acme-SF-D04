@@ -15,13 +15,14 @@ import javax.validation.constraints.PositiveOrZero;
 
 import org.hibernate.validator.constraints.URL;
 
+import acme.client.data.AbstractEntity;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-public class Invoice {
+public class Invoice extends AbstractEntity {
 
 	//Serialisation identifier -----------------------------------------------
 
