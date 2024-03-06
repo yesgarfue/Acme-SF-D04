@@ -10,10 +10,10 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.URL;
 
 import acme.client.data.AbstractEntity;
@@ -47,24 +47,24 @@ public class Claim extends AbstractEntity {
 	private String				code;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@PastOrPresent
+	@Past
 	@NotNull
 	private Date				instantiation;
 
-	@Size(max = 76, message = "Heading must be shorter than 76 characters.")
+	@Length(max = 76)
 	@NotBlank
 	private String				heading;
 
 	@NotBlank
-	@Size(max = 101, message = "Description must be shorter than 101 characters.")
+	@Length(max = 101)
 	private String				description;
 
 	@NotBlank
-	@Size(max = 101, message = "Departament must be shorter than 101 characters.")
+	@Length(max = 101)
 	private String				departament;
 
 	@Email
-	private String				emailOptional;
+	private String				email;
 
 	@URL
 	private String				link;

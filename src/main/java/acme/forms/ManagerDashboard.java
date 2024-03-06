@@ -21,28 +21,17 @@ public class ManagerDashboard extends AbstractForm {
 
 	// Attributes -------------------------------------------------------------
 
-	private Integer				numberMust;
-
-	private Integer				numberShould;
-
-	private Integer				numberCould;
-
-	private Integer				numberWont;
-
-	private Double				averageEstimate;
-
-	private Double				deviationEstimate;
-
-	private Double				minimumEstimate;
-
-	private Double				maximumEstimate;
-
-	private Double				averageCost;
-
-	private Double				deviationCost;
-
-	private Double				minimumCost;
-
-	private Double				maximumCost;
+	Integer						numberMust;
+	Integer						numberShould;
+	Integer						numberCould;
+	Integer						numberWont;
+	Double						averageEstimate;
+	Double						deviationEstimate;
+	Double						minimumEstimate;
+	Double						maximumEstimate;
+	Double						averageCost;
+	Double						deviationCost;
+	Double						minimumCost;
+	Double						maximumCost;
 
 }
