@@ -37,7 +37,6 @@ public class Risk extends AbstractEntity {
 	private String				reference;
 
 	@Past
-	@NotNull
 	private Date				identificationDate;
 
 	@Positive
