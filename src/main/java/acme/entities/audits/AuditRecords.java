@@ -5,6 +5,8 @@ import java.time.Duration;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -24,15 +26,12 @@ import lombok.Setter;
 public class AuditRecords extends AbstractEntity {
 
 	/*
-	 * Code audits are essential pieces to ensure the quality
-	 * of a project. The system must store the following data
-	 * about them: a code (pattern “[A-Z]{1,3}-[0-9]{3}”, not blank, unique),
-	 * an execution date (in the past), a type (“Static”, “Dynamic”),
-	 * a list of proposed corrective actions (not blank, shorter
-	 * than 101 characters), a mark (computed as the mode of the
-	 * marks in the corresponding auditing records; ties must be
-	 * broken arbitrarily if necessary), and an optional link with
-	 * further information.
+	 * The result of each code audit is based on the analysis of their
+	 * audit records. The system must store the following data about them:
+	 * a code (pattern “AU-[0-9]{4}-[0-9]{3}”, not blank, unique),
+	 * the period during which the subject was audited (in the past, at least one hour long),
+	 * a mark (“A+”, “A”, “B”, “C”, “F”, or “F-”), and an optional link with further
+	 * information
 	 */
 	// Serialisation identifier -----------------------------------------------
 	public static final long	serialVersionUID	= 1L;
@@ -41,17 +40,23 @@ public class AuditRecords extends AbstractEntity {
 	@NotNull
 	@NotBlank
 	@Column(unique = true)
-	@Pattern(regexp = "^AU-[0-9]{4}-[0-9]{3}$")
-	private String				code;
+	@Pattern(regexp = "AU-[0-9]{4}-[0-9]{3}")
+	protected String			code;
 
 	@NotNull
 	@Past
 	@DurationMin(hours = 1)
-	private Duration			period;
+	protected Duration			period;
 
 	@NotNull
-	private Mark				mark;
+	protected Mark				mark;
 
 	@URL
-	private String				optionalLink;
+	protected String			optionalLink;
+
+	// Relationships ----------------------------------------------------------
+	@ManyToOne
+	@NotNull
+	@Valid
+	private CodeAudits			codeAudit;
 }

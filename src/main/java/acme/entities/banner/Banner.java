@@ -61,4 +61,12 @@ public class Banner extends AbstractEntity {
 	@NotNull
 	@URL
 	private String				linkDocument;
+
+	// Derived attributes -----------------------------------------------------
+
+
+	private Date period() {
+		Long difference = this.finishTime.getTime() - this.startTime.getTime();
+		return new Date(difference);
+	}
 }
