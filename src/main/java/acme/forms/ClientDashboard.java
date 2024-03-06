@@ -1,8 +1,6 @@
 
 package acme.forms;
 
-import javax.validation.constraints.NotNull;
-
 import acme.client.data.AbstractForm;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,27 +22,13 @@ public class ClientDashboard extends AbstractForm {
 
 	// Attributes -------------------------------------------------------------
 
-	@NotNull
-	public Integer				progressLogsBelow25;
+	Integer						progressLogsBelow25;
+	Integer						progressLogsBetween25And50;
+	Integer						progressLogsBetween50And75;
+	Integer						progressLogsAbove75;
 
-	@NotNull
-	public Integer				progressLogsBetween25And50;
-
-	@NotNull
-	public Integer				progressLogsBetween50And75;
-
-	@NotNull
-	public Integer				progressLogsAbove75;
-
-	@NotNull
-	public Double				averageBudget;
-
-	@NotNull
-	public Double				deviationBudget;
-
-	@NotNull
-	public Double				minimumBudget;
-
-	@NotNull
-	public Double				maximumBudget;
+	Double						averageBudget;
+	Double						deviationBudget;
+	Double						minimumBudget;
+	Double						maximumBudget;
 }
