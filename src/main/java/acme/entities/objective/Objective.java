@@ -1,7 +1,6 @@
 
 package acme.entities.objective;
 
-import java.time.Duration;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -62,7 +61,12 @@ public class Objective extends AbstractEntity {
 	private Boolean				criticalStatus;
 
 	@NotNull
-	private Duration			duration;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date				startDuration;
+
+	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date				endDuration;
 
 	@URL
 	private String				infLink;

@@ -9,3 +9,5 @@ user-account-administrator-02,true,"UserIdentity{name: 'Admin1', surname: 'Admin
 user-account-administrator-03,true,"UserIdentity{name: 'Admin2', surname: 'Administrator2', email: 'administrator2@acme.com'}",administrator2,administrator2
 user-account-auditor-01,true,"UserIdentity{name: 'Sutiti', surname: 'jeje', email: 'primor@acme.com'}",auditor1,auditor1
 user-account-auditor-02,true,"UserIdentity{name: 'Alvaroelnegro', surname: 'jaja', email: 'mediamark@acme.com'}",auditor2,auditor2
+user-account-client-01,true,"UserIdentity{name: 'Charly', surname: 'Gonzalez', email: 'madridtv@acme.com'}",client1,client1
+user-account-client-02,true,"UserIdentity{name: 'Λορεμ', surname: '濯よ芝弾テソ', email: 'zara@acme.com'}",client2,client2

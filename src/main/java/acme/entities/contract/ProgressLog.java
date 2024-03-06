@@ -1,5 +1,5 @@
 
-package acme.entities.progressLogs;
+package acme.entities.contract;
 
 import java.util.Date;
 
@@ -18,7 +18,6 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
 import acme.client.data.AbstractEntity;
-import acme.entities.contract.Contract;
 import lombok.Getter;
 import lombok.Setter;
 
