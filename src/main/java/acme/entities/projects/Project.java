@@ -21,7 +21,6 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-
 public class Project extends AbstractEntity {
 	/*
 	 * A project aggregates several user stories elicited by the same manager. The system must store the
@@ -52,9 +51,11 @@ public class Project extends AbstractEntity {
 	@Size(max = 101, message = "Abstract must be shorter than 101 characters.")
 	private String				abstracts;
 
+	@NotNull
 	private Boolean				fatalErrors;
 
 	@Positive
+	@NotNull
 	private Double				cost;
 
 	@URL

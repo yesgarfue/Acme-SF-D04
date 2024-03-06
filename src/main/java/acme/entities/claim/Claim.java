@@ -9,7 +9,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Past;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -45,8 +46,9 @@ public class Claim extends AbstractEntity {
 	@Column(unique = true)
 	private String				code;
 
-	@Past
 	@Temporal(TemporalType.TIMESTAMP)
+	@PastOrPresent
+	@NotNull
 	private Date				instantiation;
 
 	@Size(max = 76, message = "Heading must be shorter than 76 characters.")
@@ -56,11 +58,14 @@ public class Claim extends AbstractEntity {
 	@NotBlank
 	@Size(max = 101, message = "Description must be shorter than 101 characters.")
 	private String				description;
+
 	@NotBlank
 	@Size(max = 101, message = "Departament must be shorter than 101 characters.")
 	private String				departament;
+
 	@Email
 	private String				emailOptional;
+
 	@URL
 	private String				link;
 
