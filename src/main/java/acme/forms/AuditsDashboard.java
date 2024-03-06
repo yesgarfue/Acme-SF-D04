@@ -1,5 +1,5 @@
 
-package acme.entities.audits;
+package acme.forms;
 
 import acme.client.data.AbstractForm;
 import lombok.Getter;
