@@ -7,3 +7,5 @@ user-account-manager-01,true,"UserIdentity{name: 'Álvaro', surname: 'Ruiz Guti'
 user-account-manager-02,true,"UserIdentity{name: 'Lidia', surname: 'Ruiz Jiménez', email: 'lidjimsor@acme.com'}",manager2,manager2
 user-account-administrator-02,true,"UserIdentity{name: 'Admin1', surname: 'Administrator1', email: 'administrator1@acme.com'}",administrator1,administrator1
 user-account-administrator-03,true,"UserIdentity{name: 'Admin2', surname: 'Administrator2', email: 'administrator2@acme.com'}",administrator2,administrator2
+user-account-auditor-01,true,"UserIdentity{name: 'Sutiti', surname: 'jeje', email: 'primor@acme.com'}",auditor1,auditor1
+user-account-auditor-02,true,"UserIdentity{name: 'Alvaroelnegro', surname: 'jaja', email: 'mediamark@acme.com'}",auditor2,auditor2
