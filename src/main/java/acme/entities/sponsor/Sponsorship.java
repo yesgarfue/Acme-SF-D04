@@ -27,6 +27,7 @@ import lombok.Setter;
 public class Sponsorship extends AbstractEntity {
 
 	//Serialisation identifier -----------------------------------------------
+
 	private static final long	serialVersionUID	= 1L;
 
 	//------------------------------------------------------------------------
