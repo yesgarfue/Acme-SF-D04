@@ -1,5 +1,5 @@
 
-package acme.entities;
+package acme.entities.notice;
 
 import java.util.Date;
 
@@ -47,7 +47,6 @@ public class Notice extends AbstractEntity {
 	@NotBlank
 	private String				title;
 
-	//@Pattern(regexp = "<[A-Z]{100}>", message = "The author must be computed as follows: “〈username〉 - 〈surname, name〉”")
 	@Size(max = 76, message = "A author (not blank, shorter than 76 characters)")
 	@NotBlank
 	private Authenticated		author;
