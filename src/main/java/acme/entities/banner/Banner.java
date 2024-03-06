@@ -37,6 +37,7 @@ public class Banner extends AbstractEntity {
 	// Attributes -------------------------------------------------------------
 	@NotNull
 	@Past
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date				instationUpdateMoment;
 
 	//////////////////////////
@@ -50,7 +51,6 @@ public class Banner extends AbstractEntity {
 	private Date				finishTime;
 	////////////////////////// 
 
-	@NotNull
 	@URL
 	private String				linkPicture;
 
@@ -58,15 +58,9 @@ public class Banner extends AbstractEntity {
 	@Length(max = 76)
 	private String				slogan;
 
-	@NotNull
 	@URL
 	private String				linkDocument;
 
 	// Derived attributes -----------------------------------------------------
 
-
-	private Date period() {
-		Long difference = this.finishTime.getTime() - this.startTime.getTime();
-		return new Date(difference);
-	}
 }

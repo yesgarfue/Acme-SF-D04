@@ -1,11 +1,13 @@
 
 package acme.entities.audits;
 
-import java.time.Duration;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -13,7 +15,6 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.URL;
-import org.hibernate.validator.constraints.time.DurationMin;
 
 import acme.client.data.AbstractEntity;
 import acme.enumerate.Mark;
@@ -41,18 +42,21 @@ public class AuditRecords extends AbstractEntity {
 	@NotBlank
 	@Column(unique = true)
 	@Pattern(regexp = "AU-[0-9]{4}-[0-9]{3}")
-	protected String			code;
+	private String				code;
 
 	@NotNull
 	@Past
-	@DurationMin(hours = 1)
-	protected Duration			period;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date				startTime;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date				finishTime;
 
 	@NotNull
-	protected Mark				mark;
+	private Mark				mark;
 
 	@URL
-	protected String			optionalLink;
+	private String				optionalLink;
 
 	// Relationships ----------------------------------------------------------
 	@ManyToOne
