@@ -67,12 +67,12 @@ public class Sponsorship extends AbstractEntity {
 	//Relationships -------------------------------------------------------------
 
 	//Muchos sponsorchips pueden estar relacionados a u proyecto por eso la relación de muchos a uno
-	@ManyToOne(optional = false)
-	private Project				project;
+	//@ManyToOne(optional = false)
+	//private Project				project;
 
 	//Aqui le iba a poner de UNO A UNO, pero dijo que no lo usaramos entonces es de UNO A MUCHOS (QUE PUEDE SER UNO)
 	//o asi pienso que puede ser
-	@OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Invoice				invoice;
+	//@OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+	//private Invoice				invoice;
 
 }
