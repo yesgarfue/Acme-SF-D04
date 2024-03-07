@@ -42,15 +42,17 @@ public class ProgressLog extends AbstractEntity {
 
 	// Attributes -------------------------------------------------------------
 
+	@NotNull
 	@NotBlank
 	@Column(unique = true)
-	@Pattern(regexp = "^PG-[A-Z]{1,2}-[0-9]{4}$", message = "La referencia debe seguir el patrón PG-AA-XXXX")
+	@Pattern(regexp = "PG-[A-Z]{1,2}-[0-9]{4}", message = "La referencia debe seguir el patrón PG-AA-XXXX")
 	private String				recordId;
 
 	@NotNull
 	@Range(min = 0, max = 100)
 	private Double				completenessPercentage;
 
+	@NotNull
 	@NotBlank
 	@Length(max = 100)
 	private String				progressComment;
@@ -61,6 +63,7 @@ public class ProgressLog extends AbstractEntity {
 	private Date				registrationMoment;
 
 	@NotBlank
+	@NotNull
 	@Length(max = 75)
 	private String				responsiblePerson;
 
