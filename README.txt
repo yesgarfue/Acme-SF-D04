@@ -19,3 +19,6 @@ and development.
 In these initial steps towards delivery D01, we are in the process of adapting these tools
 for optimal usage and customization. To kickstart this project, we have meticulously followed
 the guidelines outlined in the theoretical and lab materials.
+
+We have continue doing the delivery D02. We keep adapting these tools for optimal usage and 
+customization. We have meticulously followed the guidelines and the theory slides for it.
