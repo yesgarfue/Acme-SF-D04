@@ -51,16 +51,16 @@ public class Claim extends AbstractEntity {
 	@NotNull
 	private Date				instantiation;
 
-	@Length(max = 76)
+	@Length(max = 75)
 	@NotBlank
 	private String				heading;
 
 	@NotBlank
-	@Length(max = 101)
+	@Length(max = 100)
 	private String				description;
 
 	@NotBlank
-	@Length(max = 101)
+	@Length(max = 100)
 	private String				departament;
 
 	@Email

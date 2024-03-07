@@ -45,12 +45,10 @@ public class Objective extends AbstractEntity {
 	private Date				instantiationMoment;
 
 	@NotBlank
-	@NotNull
 	@Length(max = 75)
 	private String				title;
 
 	@NotBlank
-	@NotNull
 	@Length(max = 100)
 	private String				description;
 

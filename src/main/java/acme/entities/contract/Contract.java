@@ -44,9 +44,8 @@ public class Contract extends AbstractEntity {
 
 	// Attributes -------------------------------------------------------------
 
-	@NotNull
 	@NotBlank
-	@Pattern(regexp = "[A-Z]{1,3}-[0-9]{3}", message = "La referencia debe seguir el patrón AAA-XXX")
+	@Pattern(regexp = "^[A-Z]{1,3}-[0-9]{3}$", message = "La referencia debe seguir el patrón AAA-XXX")
 	@Column(unique = true)
 	private String				code;
 
@@ -55,22 +54,20 @@ public class Contract extends AbstractEntity {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				instantiationMoment;
 
-	@NotNull
 	@NotBlank
 	@Length(max = 75)
 	private String				providerName;
 
-	@NotNull
 	@NotBlank
 	@Length(max = 75)
 	private String				customerName;
 
-	@NotNull
 	@NotBlank
 	@Length(max = 100)
 	private String				goals;
 
 	@NotNull
+	@Valid
 	private Money				budget;
 
 	// Relationships -------------------------------------------------------------
