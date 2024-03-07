@@ -1,7 +1,7 @@
 
 package acme.enumerate;
 
-public enum Priorities {
+public enum Priority {
 	MUST, SHOULD, COULD, WONT
 
 }

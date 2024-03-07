@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AuditsDashboard extends AbstractForm {
+public class AuditorDashboard extends AbstractForm {
 
 	/*
 	 * 4) The system must handle auditor dashboards with the following data:
