@@ -1,11 +1,11 @@
-key,abstracts,code,cost,indication,link,title,key:manager
-project-01,abstrac example,ABC-1234,EUR 98.50,false,http://www.example.com,HazmeJobs,manager-01
-project-02,апстрактни Пример,DFG-5678,USD 213.00,false,http://www.example2.com,Приме,manager-02
-project-03,абстрактный пример,CSD-9876,GBP 0.00,false,http://www.example1.com,абстрактный,manager-01
-project-04,抽象的例子,BDS-9876,"EUR 21,341.00",true,http://www.example4.com,的例子,manager-02
-project-05,abstrakt Ɛgzampul,BSA-9876,EUR 74.20,false,http://www.example4.com,Ɛgzampul,manager-01
-project-06,abstractExample 6,ASF-9876,EUR 156.80,true,http://www.example22.com,MyProject,manager-02
-project-07,abstract -Example 7,AAA-9876,EUR 105.30,true,null,TITLE,manager-01
-project-08,abstract Example 8,FFF-9876,EUR 82.90,true,null,MyProject,manager-02
-project-09,abstract &/(&/(%/ -Example 9,XYS-9876,EUR 119.60,true,null,titulo,manager-01
-project-10,abstract Example 10,PSA-9876,EUR 135.75,true,null,SinTitulo-,manager-02
+key,abstracts,code,cost,fatal-errors,link,title,key:manager
+project-01,abstrac example,ABC-1234,100,false,http://www.example.com,HazmeJobs,manager-01
+project-02,апстрактни Пример,DFG-5678,540,false,http://www.example2.com,Приме,manager-02
+project-03,абстрактный пример,CSD-9876,230,false,http://www.example1.com,абстрактный,manager-01
+project-04,抽象的例子,BDS-9876,200,true,http://www.example4.com,的例子,manager-02
+project-05,abstrakt Ɛgzampul,BSA-9876,40,false,http://www.example4.com,Ɛgzampul,manager-01
+project-06,abstractExample 6,ASF-9876,100,true,http://www.example22.com,MyProject,manager-02
+project-07,abstract -Example 7,AAA-9876,230,true,null,TITLE,manager-01
+project-08,abstract Example 8,FFF-9876,2320,true,null,MyProject,manager-02
+project-09,abstract &/(&/(%/ -Example 9,XYS-9876,202,true,null,titulo,manager-01
+project-10,abstract Example 10,PSA-9876,0,true,null,SinTitulo-,manager-02

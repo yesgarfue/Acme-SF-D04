@@ -29,15 +29,15 @@ public class Manager extends AbstractRole {
 	// Attributes -------------------------------------------------------------
 
 	@NotBlank
-	@Length(max = 75)
+	@Length(max = 76)
 	private String				degree;
 
 	@NotBlank
-	@Length(max = 100)
+	@Length(max = 101)
 	private String				overview;
 
 	@NotBlank
-	@Length(max = 100)
+	@Length(max = 101)
 	private String				certifications;
 
 	@URL
