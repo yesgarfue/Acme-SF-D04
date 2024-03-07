@@ -1,6 +1,7 @@
 
 package acme.entities.training;
 
+import java.time.Duration;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -8,16 +9,17 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.URL;
 
 import acme.client.data.AbstractEntity;
+import acme.client.helpers.MomentHelper;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -37,33 +39,43 @@ public class TrainingSession extends AbstractEntity {
 	@Column(unique = true)
 	private String				code;
 
+	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date				timeStart;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date				timeEnd;
+	private Date				startDate;
 
 	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date				endDate;
+
 	@NotBlank
-	@Size(max = 76, message = "The location must be less than 76 characters.")
+	@Length(max = 76)
 	private String				location;
 
-	@NotNull
 	@NotBlank
-	@Size(max = 76, message = "The instructor must be less than 76 characters.")
+	@Length(max = 76)
 	private String				instructor;
 
-	@NotNull
-	@NotEmpty
+	@NotBlank
 	private String				contactEmail;
 
 	@URL
 	private String				optionalLink;
 
+	// Derived attributes -----------------------------------------------------
+
+
+	@Transient
+	public Double getPeriodInHours() {
+		final Duration duration = MomentHelper.computeDuration(this.getStartDate(), this.getEndDate());
+		final Long seconds = duration.getSeconds();
+		return seconds.doubleValue() / 3600.;
+	}
+
 	// Relationships ----------------------------------------------------------
+
 
 	@NotNull
 	@Valid
 	@ManyToOne(optional = false)
-	private TrainingModule		trainingModule;
+	private TrainingModule trainingModule;
 }

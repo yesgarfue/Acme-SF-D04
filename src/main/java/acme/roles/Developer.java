@@ -2,10 +2,10 @@
 package acme.roles;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.URL;
 
 import acme.client.data.AbstractRole;
@@ -33,18 +33,19 @@ public class Developer extends AbstractRole {
 	// Attributes -------------------------------------------------------------
 
 	@NotBlank
-	@Size(max = 76, message = "Degree must be shorter than 76 characters.")
+	@Length(max = 76)
 	private String				degree;
 
 	@NotBlank
-	@Size(max = 101, message = "Specialisation must be shorter than 101 characters.")
+	@Length(max = 101)
 	private String				specialisation;
 
 	@NotBlank
-	@Size(max = 101, message = "Skills must be shorter than 101 characters.")
+	@Length(max = 101)
 	private String				skills;
 
-	@NotNull
+	@Email
+	@NotBlank
 	private String				email;
 
 	@URL
