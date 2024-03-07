@@ -14,6 +14,13 @@ import lombok.Setter;
 @Setter
 public class SystemConfiguration extends AbstractEntity {
 
+	/*
+	 * The system configuration must include the following initial data:
+	 * • A system currency, which must be initialised to “EUR”.
+	 * • A list of accepted currencies, which must be initialised to “EUR”, “USD”, and “GBP”.
+	 * 
+	 */
+
 	// Serialisation identifier -----------------------------------------------
 
 	private static final long	serialVersionUID	= 1L;

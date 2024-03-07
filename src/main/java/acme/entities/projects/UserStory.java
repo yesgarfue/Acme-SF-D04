@@ -12,7 +12,7 @@ import org.hibernate.validator.constraints.URL;
 
 import acme.client.data.AbstractEntity;
 import acme.client.data.datatypes.Money;
-import acme.enumerate.Priorities;
+import acme.enumerate.Priority;
 import acme.roles.Manager;
 import lombok.Getter;
 import lombok.Setter;
@@ -51,7 +51,7 @@ public class UserStory extends AbstractEntity {
 	private String				acceptanceCriteria;
 
 	@NotNull
-	private Priorities			priority;
+	private Priority			priority;
 
 	@URL
 	private String				link;
