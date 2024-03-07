@@ -35,13 +35,11 @@ public class Client extends AbstractRole {
 
 	// Attributes -------------------------------------------------------------
 
-	@NotNull
 	@NotBlank
 	@Column(unique = true)
-	@Pattern(regexp = "CLI-[0-9]{4}", message = "La referencia debe seguir el patrón CLI-XXXX")
+	@Pattern(regexp = "^CLI-[0-9]{4}$", message = "La referencia debe seguir el patrón CLI-XXXX")
 	private String				identification;
 
-	@NotNull
 	@NotBlank
 	@Length(max = 75)
 	private String				companyName;
@@ -49,7 +47,6 @@ public class Client extends AbstractRole {
 	@NotNull
 	private ClientType			clientType;
 
-	@NotNull
 	@NotBlank
 	@Email
 	private String				email;
