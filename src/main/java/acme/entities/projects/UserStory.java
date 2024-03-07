@@ -4,11 +4,11 @@ package acme.entities.projects;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.URL;
 
 import acme.client.data.AbstractEntity;
@@ -35,18 +35,19 @@ public class UserStory extends AbstractEntity {
 	// Attributes -------------------------------------------------------------
 
 	@NotBlank
-	@Size(max = 76, message = "Title must be shorter than 76 characters.")
+	@Length(max = 76)
 	private String				title;
 
 	@NotBlank
-	@Size(max = 101, message = "Description must be shorter than 101 characters.")
+	@Length(max = 101)
 	private String				description;
 
-	@Positive
+	@Min(0)
+	@NotNull
 	private Double				estimatedCost;
 
 	@NotBlank
-	@Size(max = 101, message = "Acceptance criteria must be shorter than 101 characters.")
+	@Length(max = 101)
 	private String				acceptanceCriteria;
 
 	@NotNull
@@ -60,10 +61,5 @@ public class UserStory extends AbstractEntity {
 	@Valid
 	@ManyToOne(optional = false)
 	private Manager				manager;
-
-	@NotNull
-	@Valid
-	@ManyToOne(optional = false)
-	private Project				project;
 
 }

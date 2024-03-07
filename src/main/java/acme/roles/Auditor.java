@@ -14,14 +14,8 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Manager extends AbstractRole {
+public class Auditor extends AbstractRole {
 
-	/*
-	 * There is a new project-specific role called manager, which has the following profile data:
-	 * degree (not blank, shorter than 76 characters), an overview (not blank, shorter than 101 characters),
-	 * list of certifications (not blank, shorter than 101 characters),
-	 * and an optional link with further information.
-	 */
 	// Serialisation identifier -----------------------------------------------
 
 	private static final long	serialVersionUID	= 1L;
@@ -29,15 +23,15 @@ public class Manager extends AbstractRole {
 	// Attributes -------------------------------------------------------------
 
 	@NotBlank
-	@Length(max = 76)
-	private String				degree;
+	@Length(max = 75)
+	private String				firm;
 
 	@NotBlank
-	@Length(max = 101)
-	private String				overview;
+	@Length(max = 25)
+	private String				professionalId;
 
 	@NotBlank
-	@Length(max = 101)
+	@Length(max = 100)
 	private String				certifications;
 
 	@URL

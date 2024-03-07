@@ -1,5 +1,5 @@
 
-package acme.entities;
+package acme.entities.risk;
 
 import java.util.Date;
 
@@ -40,15 +40,17 @@ public class Risk extends AbstractEntity {
 	@NotNull
 	private Date				identificationDate;
 
+	@NotNull
 	@Min(0)
 	private Double				impact;
 
+	@NotNull
 	@Min(0)
 	@Max(100)
 	private Double				probability;
 
 	@NotBlank
-	@Length(max = 101)
+	@Length(max = 100)
 	private String				description;
 
 	@URL

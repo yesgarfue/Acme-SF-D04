@@ -5,12 +5,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.URL;
 
 import acme.client.data.AbstractEntity;
@@ -21,8 +21,8 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-
 public class Project extends AbstractEntity {
+
 	/*
 	 * A project aggregates several user stories elicited by the same manager. The system must store the
 	 * following data about them: a code (pattern “[A-Z]{3}-[0-9]{4}”, not blank, unique), a title (not blank,
@@ -31,8 +31,6 @@ public class Project extends AbstractEntity {
 	 * information. Projects containing fatal errors must be rejected by the system.
 	 */
 
-	//Note: Evitar OneToMany y ManyToMany.
-
 	// Serialisation identifier -----------------------------------------------
 
 	private static final long	serialVersionUID	= 1L;
@@ -40,27 +38,30 @@ public class Project extends AbstractEntity {
 	// Attributes -------------------------------------------------------------
 
 	@NotBlank
-	@Pattern(regexp = "[A-Z]{3}-[0-9]{4}", message = "La referencia debe seguir el patrón R-XXX")
+	@Pattern(regexp = "[A-Z]{3}-[0-9]{4}", message = "La referencia debe seguir el patrón AAA-XXXX")
 	@Column(unique = true)
 	private String				code;
 
-	@Size(max = 76, message = "Title must be shorter than 76 characters.")
+	@Length(max = 76)
 	@NotBlank
 	private String				title;
 
 	@NotBlank
-	@Size(max = 101, message = "Abstract must be shorter than 101 characters.")
+	@Length(max = 101)
 	private String				abstracts;
 
+	@NotNull
 	private Boolean				fatalErrors;
 
-	@Positive
+	@Min(0)
+	@NotNull
 	private Double				cost;
 
 	@URL
 	private String				link;
 
 	// Relationships ----------------------------------------------------------
+
 	@NotNull
 	@Valid
 	@ManyToOne(optional = false)

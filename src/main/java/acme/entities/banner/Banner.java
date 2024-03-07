@@ -1,5 +1,5 @@
 
-package acme.entities;
+package acme.entities.banner;
 
 import java.util.Date;
 
@@ -37,6 +37,7 @@ public class Banner extends AbstractEntity {
 	// Attributes -------------------------------------------------------------
 	@NotNull
 	@Past
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date				instationUpdateMoment;
 
 	//////////////////////////
@@ -50,7 +51,6 @@ public class Banner extends AbstractEntity {
 	private Date				finishTime;
 	////////////////////////// 
 
-	@NotNull
 	@URL
 	private String				linkPicture;
 
@@ -58,7 +58,9 @@ public class Banner extends AbstractEntity {
 	@Length(max = 76)
 	private String				slogan;
 
-	@NotNull
 	@URL
 	private String				linkDocument;
+
+	// Derived attributes -----------------------------------------------------
+
 }
