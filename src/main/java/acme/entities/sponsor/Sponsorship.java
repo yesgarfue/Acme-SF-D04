@@ -3,13 +3,12 @@ package acme.entities.sponsor;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -64,15 +63,13 @@ public class Sponsorship extends AbstractEntity {
 	@URL
 	private String				link;
 
-	//Relationships -------------------------------------------------------------
+	// Derived attributes -----------------------------------------------------
 
-	//Muchos sponsorchips pueden estar relacionados a u proyecto por eso la relación de muchos a uno
-	//@ManyToOne(optional = false)
-	//private Project				project;
+	// Relationships ----------------------------------------------------------
 
-	//Aqui le iba a poner de UNO A UNO, pero dijo que no lo usaramos entonces es de UNO A MUCHOS (QUE PUEDE SER UNO)
-	//o asi pienso que puede ser
-	//@OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
-	//private Invoice				invoice;
+	@NotNull
+	@Valid
+	@ManyToOne(optional = false)
+	private Project				project;
 
 }
