@@ -9,12 +9,12 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.URL;
 
 import acme.client.data.AbstractEntity;
-import acme.client.data.accounts.Authenticated;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -41,7 +41,7 @@ public class Notice extends AbstractEntity {
 	// Attributes -------------------------------------------------------------
 	@Past
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date				instantiation_moment;
+	private Date				moment;
 
 	@Size(max = 76, message = "A title (not blank, shorter than 76 characters)")
 	@NotBlank
@@ -49,15 +49,16 @@ public class Notice extends AbstractEntity {
 
 	@Size(max = 76, message = "A author (not blank, shorter than 76 characters)")
 	@NotBlank
-	private Authenticated		author;
+	@Pattern(regexp = "[A-Za-z0-9]+-[A-Za-z]+,[A-Za-z]+")
+	private String				author;
 
 	@NotBlank
 	@Size(max = 101, message = "Message must be shorter than 101 characters.")
 	private String				message;
 
 	@Email
-	private String				emailOptional;
+	private String				email;
 
 	@URL
-	private String				linkInfoOpcional;
+	private String				link;
 }
