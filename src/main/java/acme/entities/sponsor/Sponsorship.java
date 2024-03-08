@@ -21,6 +21,7 @@ import org.hibernate.validator.constraints.URL;
 import acme.client.data.AbstractEntity;
 import acme.client.data.datatypes.Money;
 import acme.entities.projects.Project;
+import acme.enumerate.SponsorshipType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -50,7 +51,7 @@ public class Sponsorship extends AbstractEntity {
 	private Date				startDate;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date				endDate;
+	private Date				finishDate;
 
 	@PositiveOrZero
 	private Money				amount;
@@ -58,7 +59,7 @@ public class Sponsorship extends AbstractEntity {
 	private SponsorshipType		SponsorshipType;
 
 	@Email
-	private String				contactEmail;
+	private String				email;
 
 	@URL
 	private String				link;
