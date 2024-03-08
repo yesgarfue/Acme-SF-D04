@@ -13,3 +13,5 @@ user-account-auditor-01,true,"UserIdentity{name: 'Sutiti', surname: 'jeje', emai
 user-account-auditor-02,true,"UserIdentity{name: 'Alvaroelnegro', surname: 'jaja', email: 'mediamark@acme.com'}",auditor2,auditor2
 user-account-client-01,true,"UserIdentity{name: 'Charly', surname: 'Gonzalez', email: 'madridtv@acme.com'}",client1,client1
 user-account-client-02,true,"UserIdentity{name: 'Λορεμ', surname: '濯よ芝弾テソ', email: 'zara@acme.com'}",client2,client2
+user-account-sponsor-01,true,"UserIdentity{name: 'Yesica', surname: 'Garate Fuentes', email: 'yesgarfue@acme.com'}",sponsor1,sponsor1
+user-account-sponsor-02,true,"UserIdentity{name: 'Leydi', surname: 'GF', email: 'leydi.yesica@acme.com'}",sponsor2,sponsor2
