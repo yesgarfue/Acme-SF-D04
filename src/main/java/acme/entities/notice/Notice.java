@@ -41,7 +41,7 @@ public class Notice extends AbstractEntity {
 	// Attributes -------------------------------------------------------------
 	@Past
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date				instantiationMoment;
+	private Date				moment;
 
 	@Size(max = 76, message = "A title (not blank, shorter than 76 characters)")
 	@NotBlank
@@ -57,8 +57,8 @@ public class Notice extends AbstractEntity {
 	private String				message;
 
 	@Email
-	private String				emailOptional;
+	private String				email;
 
 	@URL
-	private String				linkInfoOptional;
+	private String				link;
 }
