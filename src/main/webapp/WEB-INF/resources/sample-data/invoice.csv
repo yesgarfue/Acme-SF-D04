@@ -1,0 +1,11 @@
+key,code,registrationTime,dueDate,quantity,tax,link,key:sponsorship
+invoice-01,IN-1234-5678,2020/12/07 22:50,2021/01/07 22:45,EUR 21.22,22.50,http://www.example4.com,sponsorship-01
+invoice-02,IN-7777-8888,2007/01/15 20:50,2007/02/15 22:45,USD 213.00,10.50,http://www.link.com,sponsorship-02
+invoice-03,IN-1111-2222,2010/04/10 10:14,2010/04/20 22:45,GBP 0.00,0.50,http://www.google.com,sponsorship-01
+invoice-04,IN-0000-8888,2014/11/09 08:50,2014/12/09 22:45,EUR 15.25,0.50,http://www.guithub.com,sponsorship-08
+invoice-05,IN-8383-1084,2014/11/11 04:15,2014/11/12 22:45,EUR 50.99,100.50,http://www.example5.com,sponsorship-10
+invoice-06,IN-6666-6666,2010/06/23 23:50,2010/07/10 22:45,USD 00.10,20.00,,sponsorship-10
+invoice-07,IN-1111-5118,2021/02/25 20:45,2021/03/07 22:45,USD 12.00,10.50,,sponsorship-10
+invoice-08,IN-5555-5555,2021/02/15 07:15,2021/03/07 22:45,USD 2130.00,1520.50,,sponsorship-03
+invoice-09,IN-9999-0000,2022/02/15 08:50,2022/02/19 22:45,EUR 25.20,447.50,,sponsorship-06
+invoice-10,IN-7447-8448,2010/02/15 08:25,2010/02/19 08:45,GBP 100.00,22.00,http://www.twitch.com,sponsorship-02
