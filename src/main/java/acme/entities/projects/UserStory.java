@@ -56,6 +56,9 @@ public class UserStory extends AbstractEntity {
 	@URL
 	private String				link;
 
+	@NotNull
+	private boolean				draftMode;
+
 	// Relationships ----------------------------------------------------------
 	@NotNull
 	@Valid
