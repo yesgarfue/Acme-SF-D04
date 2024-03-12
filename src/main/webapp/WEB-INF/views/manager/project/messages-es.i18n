@@ -1,0 +1,10 @@
+manager.project.list.title = Proyectos
+manager.project.label.code = Código
+manager.project.label.title = Título
+manager.project.label.abstracts = Resumo
+manager.project.label.indication = Error Crítico
+manager.project.label.cost = Coste
+manager.project.label.link = Link
+manager.project.label.draftMode = Borrador
+
+manager.project.button.create = Nuevo proyecto

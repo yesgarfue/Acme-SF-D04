@@ -60,7 +60,9 @@ public class Project extends AbstractEntity {
 	@URL
 	private String				link;
 
-	//añadir borrador
+	@NotNull
+	private boolean				draftMode;
+
 	// Relationships ----------------------------------------------------------
 
 	@NotNull
