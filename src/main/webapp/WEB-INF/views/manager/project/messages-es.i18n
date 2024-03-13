@@ -7,4 +7,8 @@ manager.project.label.cost = Coste
 manager.project.label.link = Link
 manager.project.label.draftMode = Borrador
 
-manager.project.button.create = Nuevo proyecto
+manager.project.button.userStoryList = Historias de usuario
+manager.project.button.update = Actualizar
+manager.project.button.delete = Eliminar
+manager.project.button.publish = Publicar
+manager.project.button.create = Crear proyecto

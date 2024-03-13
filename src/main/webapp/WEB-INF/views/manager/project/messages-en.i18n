@@ -7,5 +7,9 @@ manager.project.label.cost = Cost
 manager.project.label.link = Link
 manager.project.label.draftMode = Draft
 
-manager.project.button.create = New project
+manager.project.button.userStoryList = User Stories
+manager.project.button.update = Update
+manager.project.button.delete = Delete
+manager.project.button.publish = Publish
+manager.project.button.create = Create project
 
