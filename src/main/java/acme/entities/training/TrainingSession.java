@@ -60,6 +60,9 @@ public class TrainingSession extends AbstractEntity {
 	@URL
 	private String				optionalLink;
 
+	@NotNull
+	private Boolean				draftMode;
+
 	// Relationships ----------------------------------------------------------
 
 	@NotNull

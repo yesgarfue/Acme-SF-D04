@@ -48,6 +48,11 @@ master.menu.consumer.favourite-link = Enlace favorito
 master.menu.manager = Manager
 master.menu.manager.projects = Todos los proyectos
 
+# master.menu.developer ##########################################################
+
+master.menu.developer = Desarrollador
+master.menu.developer.trainingModules = Módulos de entrenamiento
+
 # master.menu.user-account ####################################################
 
 master.menu.user-account = Cuenta
