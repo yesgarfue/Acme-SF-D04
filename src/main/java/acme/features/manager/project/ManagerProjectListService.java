@@ -16,7 +16,7 @@ public class ManagerProjectListService extends AbstractService<Manager, Project>
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	protected ManagerProjectRepository repository;
+	private ManagerProjectRepository repository;
 
 	// AbstractService interface ----------------------------------------------
 
@@ -44,6 +44,7 @@ public class ManagerProjectListService extends AbstractService<Manager, Project>
 
 		Dataset dataset;
 		dataset = super.unbind(object, "code", "title", "abstracts", "indication", "cost", "link", "draftMode");
+		dataset.put("projectId", object.getId());
 		super.getResponse().addData(dataset);
 	}
 
