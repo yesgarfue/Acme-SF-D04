@@ -1,0 +1,17 @@
+manager.user-story.form.title= Formulario Historia de Usuario 
+
+manager.user-story.list.title=Historias de Usuario
+manager.user-story.label.title=Título
+manager.user-story.label.description=Descripción
+manager.user-story.label.estimatedCost=Coste Estimado
+manager.user-story.label.acceptanceCriteria=Criterios de Aceptación
+manager.user-story.label.priority=Prioridad
+manager.user-story.label.link=Enlace
+manager.user-story.label.draftMode= Borrador
+manager.user-story.label.projectCode = Código de Proyecto
+manager.user-story.button.add=Añadir Historia de Usuario
+manager.user-story.button.create=Crear Historia de Usuario
+manager.user-story.button.update = Actualizar
+manager.user-story.button.delete = Eliminar
+manager.user-story.button.publish = Publicar
+

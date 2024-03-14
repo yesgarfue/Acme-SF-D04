@@ -1,0 +1,17 @@
+manager.user-story.form.title=User Story Form
+manager.user-story.list.title=User Stories
+
+manager.user-story.label.title=Title
+manager.user-story.label.description=Description
+manager.user-story.label.estimatedCost=Estimated Cost
+manager.user-story.label.acceptanceCriteria=Acceptance Criteria
+manager.user-story.label.priority=Priority
+manager.user-story.label.link=Link
+manager.user-story.label.draftMode=Draft Mode
+manager.user-story.label.projectCode = Project Code
+
+manager.user-story.button.add=Add User Story
+manager.user-story.button.create=Create User Story
+manager.user-story.button.update = Update
+manager.user-story.button.delete = Delete
+manager.user-story.button.publish = Publish

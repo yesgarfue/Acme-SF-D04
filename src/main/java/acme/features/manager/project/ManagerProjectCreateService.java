@@ -64,7 +64,7 @@ public class ManagerProjectCreateService extends AbstractService<Manager, Projec
 			Project existing;
 
 			existing = this.repository.findProjectByCode(object.getCode());
-			super.state(existing == null, "code", "Manager.Project.error.code.duplicated");
+			super.state(existing == null, "code", "manager.project.error.code.duplicated");
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("cost")) {
