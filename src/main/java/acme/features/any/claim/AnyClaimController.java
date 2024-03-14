@@ -1,5 +1,5 @@
 
-package acme.features.manager.dashboard;
+package acme.features.any.claim;
 
 import javax.annotation.PostConstruct;
 
@@ -7,16 +7,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import acme.client.controllers.AbstractController;
-import acme.forms.ManagerDashboard;
-import acme.roles.Manager;
+import acme.client.data.accounts.Any;
+import acme.entities.claim.Claim;
 
 @Controller
-public class ManagerDashboardController extends AbstractController<Manager, ManagerDashboard> {
+public class AnyClaimController extends AbstractController<Any, Claim> {
 
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private ManagerDashboardShowService showService;
+	private AnyClaimListService		listService;
+
+	@Autowired
+	private AnyClaimShowService		showService;
+
+	@Autowired
+	private AnyClaimCreateService	createService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -24,5 +30,8 @@ public class ManagerDashboardController extends AbstractController<Manager, Mana
 	@PostConstruct
 	private void initialise() {
 		super.addBasicCommand("show", this.showService);
+		super.addBasicCommand("list", this.listService);
+		super.addBasicCommand("create", this.createService);
 	}
+
 }

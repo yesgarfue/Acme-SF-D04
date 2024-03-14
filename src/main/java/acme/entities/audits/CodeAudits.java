@@ -69,6 +69,6 @@ public class CodeAudits extends AbstractEntity {
 	@NotNull
 	@Valid
 	@ManyToOne(optional = false)
-	protected Auditor			auditor;
+	private Auditor			auditor;
 
 }
