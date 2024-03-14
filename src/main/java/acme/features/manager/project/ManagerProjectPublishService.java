@@ -67,7 +67,7 @@ public class ManagerProjectPublishService extends AbstractService<Manager, Proje
 		if (!super.getBuffer().getErrors().hasErrors("cost")) {
 			final List<String> aceptedCurrencies = Arrays.asList(this.repository.getAvailableCurrencies().split(",")).stream().map(Object::toString).collect(Collectors.toList());
 			super.state(object.getCost().getAmount() >= 0, "cost", "manager.project.error.cost.negative");
-			super.state(aceptedCurrencies.contains(object.getCost().getCurrency()), "cost", "manager.project.error.cost.currencyNotPermitted");
+			super.state(aceptedCurrencies.contains(object.getCost().getCurrency()), "cost", this.repository.getAvailableCurrencies());
 		}
 
 		super.state(!this.repository.findUserStoriesWithoutPublishByProject(object.getId()), "*", "manager.project.error.userStoryNotPublished");

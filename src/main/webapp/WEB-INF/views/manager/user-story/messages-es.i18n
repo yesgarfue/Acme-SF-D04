@@ -15,3 +15,4 @@ manager.user-story.button.update = Actualizar
 manager.user-story.button.delete = Eliminar
 manager.user-story.button.publish = Publicar
 
+manager.userStory.error.estimatedCost.negative = El coste estimado no puede ser negativo

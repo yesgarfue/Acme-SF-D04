@@ -61,7 +61,7 @@ public class ManagerUserStoryUpdateService extends AbstractService<Manager, User
 		if (!super.getBuffer().getErrors().hasErrors("estimatedCost")) {
 			final List<String> aceptedCurrencies = Arrays.asList(this.repository.getAvailableCurrencies().split(",")).stream().map(Object::toString).collect(Collectors.toList());
 			super.state(object.getEstimatedCost().getAmount() >= 0, "estimatedCost", "manager.userStory.error.estimatedCost.negative");
-			super.state(aceptedCurrencies.contains(object.getEstimatedCost().getCurrency()), "estimatedCost", "manager.project.error.cost.currencyNotPermitted");
+			super.state(aceptedCurrencies.contains(object.getEstimatedCost().getCurrency()), "estimatedCost", this.repository.getAvailableCurrencies());
 		}
 	}
 

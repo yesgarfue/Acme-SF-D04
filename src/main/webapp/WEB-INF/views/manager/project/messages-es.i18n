@@ -2,7 +2,7 @@ manager.project.form.title = Proyecto
 manager.project.list.title = Proyectos
 manager.project.label.code = Código
 manager.project.label.title = Título
-manager.project.label.abstracts = Resumo
+manager.project.label.abstracts = Abstracciones
 manager.project.label.indication = Error Crítico
 manager.project.label.cost = Coste
 manager.project.label.link = Link
@@ -13,3 +13,8 @@ manager.project.button.update = Actualizar
 manager.project.button.delete = Eliminar
 manager.project.button.publish = Publicar
 manager.project.button.create = Crear proyecto
+
+manager.project.error.cost.negative = El coste no puede ser negativo
+manager.project.error.fatalError = Hay fallos críticos en el proyecto
+manager.project.error.userStoryNotPublished = No se puede publicar un proyecto con historias de usuario sin publicar
+manager.project.error.code.duplicated = Este código ya está siendo utilizado

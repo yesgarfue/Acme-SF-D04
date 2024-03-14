@@ -15,3 +15,5 @@ manager.user-story.button.create=Create User Story
 manager.user-story.button.update = Update
 manager.user-story.button.delete = Delete
 manager.user-story.button.publish = Publish
+
+manager.userStory.error.estimatedCost.negative = Estimated cost cannot be negative

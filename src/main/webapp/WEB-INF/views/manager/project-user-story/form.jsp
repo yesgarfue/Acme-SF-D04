@@ -6,7 +6,7 @@
 
 	<acme:hidden-data path="id"/>
 	<acme:input-textbox code="manager.project-user-story.label.project" path="projectCode" readonly="true"/>
-	<acme:input-select code="manager.project-user-story.label.user-story" path="user-story" choices="${userStories}"/>
+	<acme:input-select code="manager.project-user-story.label.user-story" path="userStory" choices="${userStories}"/>
 	
 	<acme:submit code="manager.project-user-story.button.add" action="/manager/project-user-story/add?projectId=${projectId}"/>		
 	

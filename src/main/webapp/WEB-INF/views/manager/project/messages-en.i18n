@@ -14,3 +14,8 @@ manager.project.button.delete = Delete
 manager.project.button.publish = Publish
 manager.project.button.create = Create project
 
+manager.project.error.cost.negative = The cost must be positive
+manager.project.error.fatalError = There are fatal errors
+manager.project.error.userStoryNotPublished = You cannot publish a project with user stories in draft mode
+manager.project.error.code.duplicated = This code is duplicated
+ 
