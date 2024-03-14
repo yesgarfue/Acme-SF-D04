@@ -15,6 +15,11 @@ master.menu.sign-up = Registrarse
 master.menu.sign-in = Entrar
 master.menu.sign-out = Salir
 
+# master.menu.any #######################################################
+
+master.menu.any = Cualquiera
+master.menu.any.projects = Proyectos
+
 # master.menu.anonymous #######################################################
 
 master.menu.anonymous = Anónimo
@@ -46,8 +51,9 @@ master.menu.consumer.favourite-link = Enlace favorito
 # master.menu.manager ##########################################################
 
 master.menu.manager = Manager
-master.menu.manager.projects = Todos los proyectos
-
+master.menu.manager.projects = Proyectos
+master.menu.manager.user-stories = Historias de usuario
+master.menu.manager.dashboard = Panel de Registros	
 # master.menu.user-account ####################################################
 
 master.menu.user-account = Cuenta

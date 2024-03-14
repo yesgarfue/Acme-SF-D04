@@ -25,10 +25,12 @@ public class ManagerDashboard extends AbstractForm {
 	Integer						numberShould;
 	Integer						numberCould;
 	Integer						numberWont;
+
 	Double						averageEstimate;
 	Double						deviationEstimate;
 	Double						minimumEstimate;
 	Double						maximumEstimate;
+
 	Double						averageCost;
 	Double						deviationCost;
 	Double						minimumCost;

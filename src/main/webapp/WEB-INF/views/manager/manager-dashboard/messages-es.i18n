@@ -1,0 +1,15 @@
+manager.manager-dashboard.form.title = Estadísticas del proyecto
+manager.dashboard.label.numberMust = Número de historias de usuario con prioridad Must
+manager.dashboard.label.numberShould = Número de historias de usuario con prioridad Should
+manager.dashboard.label.numberCould = Número de historias de usuario con prioridad Could
+manager.dashboard.label.numberWont = Número de historias de usuario con prioridad Wont
+
+manager.dashboard.label.averageEstimate = Media de costes estimados
+manager.dashboard.label.deviationEstimate = Deviacion de costes estimados
+manager.dashboard.label.minimumEstimate = Minimo de costes estimados
+manager.dashboard.label.maximumEstimate = Maximo de costes estimados
+
+manager.dashboard.label.averageCost = Media de costes
+manager.dashboard.label.deviationCost = Deviacion de costes
+manager.dashboard.label.minimumCost = Coste mínimo 
+manager.dashboard.label.maximumCost = Coste máximo 

@@ -64,13 +64,13 @@ public class ManagerProjectCreateService extends AbstractService<Manager, Projec
 			Project existing;
 
 			existing = this.repository.findProjectByCode(object.getCode());
-			super.state(existing == null, "code", "Manager.Project.error.code.duplicated");
+			super.state(existing == null, "code", "manager.project.error.code.duplicated");
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("cost")) {
 			final List<String> aceptedCurrencies = Arrays.asList(this.repository.getAvailableCurrencies().split(",")).stream().map(Object::toString).collect(Collectors.toList());
 			super.state(object.getCost().getAmount() >= 0, "cost", "manager.project.error.cost.negative");
-			super.state(aceptedCurrencies.contains(object.getCost().getCurrency()), "cost", "manager.project.error.cost.currencyNotPermitted");
+			super.state(aceptedCurrencies.contains(object.getCost().getCurrency()), "cost", this.repository.getAvailableCurrencies());
 		}
 	}
 

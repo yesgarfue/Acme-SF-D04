@@ -1,0 +1,4 @@
+manager.project-user-story.form.title = Añadir Historia de Usuario
+manager.project-user-story.label.user-story = Historia de Usuario
+manager.project-user-story.label.project = Proyecto
+manager.project-user-story.button.add = Añadir

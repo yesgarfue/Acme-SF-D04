@@ -1,0 +1,15 @@
+manager.manager-dashboard.form.title = Manager Dashboard
+manager.dashboard.label.numberMust = Number of user stories with priority must
+manager.dashboard.label.numberShould = Number of user stories with priority should
+manager.dashboard.label.numberCould = Number of user stories with priority could
+manager.dashboard.label.numberWont = Number of user stories with priority wont
+
+manager.dashboard.label.averageEstimate = Average estimate
+manager.dashboard.label.deviationEstimate = Deviation estimate
+manager.dashboard.label.minimumEstimate = Minimum estimate
+manager.dashboard.label.maximumEstimate = Maximum estimate
+
+manager.dashboard.label.averageCost = Average cost
+manager.dashboard.label.deviationCost = Deviation cost
+manager.dashboard.label.minimumCost = Minimum 
+manager.dashboard.label.maximumCost = Maximum 
