@@ -52,6 +52,7 @@ master.menu.manager.projects = Todos los proyectos
 
 master.menu.developer = Desarrollador
 master.menu.developer.trainingModules = Módulos de entrenamiento
+master.menu.developer.trainingSession = Sesiones de entrenamiento
 
 # master.menu.user-account ####################################################
 

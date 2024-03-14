@@ -52,6 +52,7 @@ master.menu.manager.projects = All projects
 
 master.menu.developer = Developer
 master.menu.developer.trainingModules = Training modules
+master.menu.developer.trainingSession = Training sessions
 
 # master.menu.user-account ####################################################
 
