@@ -12,7 +12,7 @@
 	<acme:list-column code="manager.user-story.label.link" path="link" width="10%"/>
 	<acme:list-column code="manager.user-story.label.draftMode" path="draftMode" width="10%"/>
 </acme:list>
-<jstl:if test="${projectId != null}">
+<jstl:if test="${projectId != null && draftMode == true}">
 	<acme:button code="manager.user-story.button.add" action="/manager/project-user-story/add?projectId=${projectId}"/>		
 	<acme:button code="manager.user-story.button.create" action="/manager/user-story/create?projectId=${projectId}"/>
 </jstl:if>

@@ -66,8 +66,12 @@ public class ManagerUserStoryListService extends AbstractService<Manager, UserSt
 		assert objects != null;
 		if (super.getRequest().hasData("projectId", int.class)) {
 			final int projectId;
+			final Project project;
 			projectId = super.getRequest().getData("projectId", int.class);
+			project = this.repository.findProjectById(projectId);
 			super.getResponse().addGlobal("projectId", projectId);
+			super.getResponse().addGlobal("draftMode", project.isDraftMode());
+
 		}
 
 	}
