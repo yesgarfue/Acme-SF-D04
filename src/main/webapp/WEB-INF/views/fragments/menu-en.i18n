@@ -57,6 +57,12 @@ master.menu.manager.projects = Projects
 master.menu.manager.user-stories = User stories
 master.menu.manager.dashboard = Dashboard
 
+# master.menu.developer ##########################################################
+
+master.menu.developer = Developer
+master.menu.developer.trainingModules = Training modules
+master.menu.developer.trainingSession = Training sessions
+
 # master.menu.user-account ####################################################
 
 master.menu.user-account = Account

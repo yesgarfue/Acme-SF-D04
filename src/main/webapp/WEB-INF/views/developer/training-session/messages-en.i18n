@@ -1,0 +1,26 @@
+developer.trainingSession.label.code = Code
+developer.trainingSession.label.startDate = Start Date
+developer.trainingSession.label.endDate = End Date
+developer.trainingSession.label.location = Location
+developer.trainingSession.label.instructor = Instructor
+developer.trainingSession.label.contactEmail = Contact Email
+developer.trainingSession.label.optionalLink = Optional Link
+
+##################################################################
+
+developer.training-session.form.label.code = Code
+developer.training-session.form.label.startDate = Start Date
+developer.training-session.form.label.endDate = End Date
+developer.training-session.form.label.location = Location
+developer.training-session.form.label.instructor = Instructor
+developer.training-session.form.label.contactEmail = Contact Email
+developer.training-session.form.label.optionalLink = Optional Link
+developer.training-session.form.title = Training Session
+developer.trainingSession.label.trainingModule = Training Module Id
+
+##################################################################
+
+developer.training-session.button.create = Create
+developer.training-session.button.update = Update
+developer.training-session.button.delete = Delete
+developer.training-session.button.publish = Publish
