@@ -1,0 +1,11 @@
+administrator.config.form.label.currencies = Accepted currencies:
+administrator.config.form.label.currency = System currency: 
+administrator.config.form.label.currency.new = New currency:
+
+administrator.config.form.button.update = Update
+administrator.config.form.button.add = Add new currency
+
+administrator.config.form.error.unavailable = System currency unavailable
+administrator.config.form.error.pattern = Pattern must be "[A-Z]{3}"
+administrator.config.form.error.duplicated = This currency is taken
+administrator.config.form.error.blank = New currency must not be blank

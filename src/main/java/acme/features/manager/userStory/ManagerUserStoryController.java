@@ -37,7 +37,7 @@ public class ManagerUserStoryController extends AbstractController<Manager, User
 
 
 	@PostConstruct
-	protected void initialise() {
+	private void initialise() {
 		super.addBasicCommand("list", this.listService);
 		super.addBasicCommand("create", this.createService);
 		super.addBasicCommand("show", this.showService);

@@ -1,0 +1,14 @@
+administrator.administrator-dashboard.form.title= Dashboard
+
+administrator.dashboard.label.numberOfPrincipalsByRol = Number of principals by role
+administrator.dashboard.label.noticeWithEmailAndLinkRatio =Number of notices with email and link ratio
+administrator.dashboard.label.criticalObjectiveRatio = Critical objective ratio
+administrator.dashboard.label.nonCriticalObjectiveRatio = Non critical objective ratio
+administrator.dashboard.label.averageValueRisk = Average value risk
+administrator.dashboard.label.minimunValueRisk = Minimun value risk
+administrator.dashboard.label.maximunValueRisk = Maximun value risk
+administrator.dashboard.label.desviationValueRisk = Desviation value risk
+administrator.dashboard.label.averageNumberOfClaimsOverLastTenWeeks = Average number of claims over last ten weeks
+administrator.dashboard.label.minimunNumberOfClaimsOverLastTenWeeks = Minimun number of claims over last ten weeks
+administrator.dashboard.label.maximunNumberOfClaimsOverLastTenWeeks = Maximun number of claims over last ten weeks
+administrator.dashboard.label.desviationNumberOfClaimsOverLastTenWeeks = Desviation number of claims over last ten weeks

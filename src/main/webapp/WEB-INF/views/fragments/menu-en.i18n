@@ -19,6 +19,7 @@ master.menu.sign-out = Sign out
 
 master.menu.any = Any
 master.menu.any.projects = Projects
+master.menu.any.claims = Claims
 
 # master.menu.anonymous #######################################################
 
@@ -37,6 +38,7 @@ master.menu.administrator.user-accounts = User accounts
 master.menu.administrator.populate-initial = Populate DB (initial)
 master.menu.administrator.populate-sample = Populate DB (samples)
 master.menu.administrator.shut-down = Shut down
+master.menu.administrator.config = Configuration
 
 # master.menu.provider ########################################################
 

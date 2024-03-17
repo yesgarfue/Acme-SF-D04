@@ -33,7 +33,6 @@ public class AnyProjectListService extends AbstractService<Any, Project> {
 		Collection<Project> objects;
 
 		objects = this.repository.findAllPublishedProjects();
-
 		super.getBuffer().addData(objects);
 	}
 

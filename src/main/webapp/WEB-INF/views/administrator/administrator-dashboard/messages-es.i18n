@@ -1,0 +1,14 @@
+administrator.administrator-dashboard.form.title= Panel de indicadores
+
+administrator.dashboard.label.numberOfPrincipalsByRol = Número de usuarios por rol
+administrator.dashboard.label.noticeWithEmailAndLinkRatio = Número de avisos con email y link
+administrator.dashboard.label.criticalObjectiveRatio = Ratio de objetivos críticos
+administrator.dashboard.label.nonCriticalObjectiveRatio = Ratio de objetivos no críticos
+administrator.dashboard.label.averageValueRisk = Media de riesgo
+administrator.dashboard.label.minimunValueRisk = Valor mínimo de riesgo
+administrator.dashboard.label.maximunValueRisk = Valor máximo de riesgo
+administrator.dashboard.label.desviationValueRisk = Desviación de riesgo
+administrator.dashboard.label.averageNumberOfClaimsOverLastTenWeeks = Media de reclamaciones en las últimas diez semanas
+administrator.dashboard.label.minimunNumberOfClaimsOverLastTenWeeks = Mínimo de reclamaciones en las últimas diez semanas
+administrator.dashboard.label.maximunNumberOfClaimsOverLastTenWeeks = Máximo de reclamaciones en las últimas diez semanas
+administrator.dashboard.label.desviationNumberOfClaimsOverLastTenWeeks = Desviación de reclamaciones en las últimas diez semanas

@@ -1,51 +1,48 @@
 
-package acme.features.manager.project;
+package acme.features.any.claim;
 
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import acme.client.data.accounts.Any;
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
-import acme.entities.projects.Project;
-import acme.roles.Manager;
+import acme.entities.claim.Claim;
 
 @Service
-public class ManagerProjectListService extends AbstractService<Manager, Project> {
+public class AnyClaimListService extends AbstractService<Any, Claim> {
+
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private ManagerProjectRepository repository;
+	private AnyClaimRepository repository;
 
 	// AbstractService interface ----------------------------------------------
 
 
 	@Override
 	public void authorise() {
-		final boolean status;
-		status = super.getRequest().getPrincipal().hasRole(Manager.class);
+		final boolean status = true;
 		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
-		Collection<Project> objects;
-		int managerId;
+		Collection<Claim> objects;
 
-		managerId = super.getRequest().getPrincipal().getActiveRoleId();
-		objects = this.repository.findManyProjectsByManagerId(managerId);
+		objects = this.repository.findAllPublishedClaims();
+
 		super.getBuffer().addData(objects);
 	}
 
 	@Override
-	public void unbind(final Project object) {
+	public void unbind(final Claim object) {
 		assert object != null;
 
 		Dataset dataset;
-		dataset = super.unbind(object, "code", "title", "draftMode");
-		dataset.put("projectId", object.getId());
+		dataset = super.unbind(object, "code", "instantiation", "heading");
 		super.getResponse().addData(dataset);
 	}
-
 }

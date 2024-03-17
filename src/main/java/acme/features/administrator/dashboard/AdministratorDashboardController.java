@@ -1,5 +1,5 @@
 
-package acme.features.manager.dashboard;
+package acme.features.administrator.dashboard;
 
 import javax.annotation.PostConstruct;
 
@@ -7,16 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import acme.client.controllers.AbstractController;
-import acme.forms.ManagerDashboard;
-import acme.roles.Manager;
+import acme.client.data.accounts.Administrator;
+import acme.forms.AdministratorDashboard;
 
 @Controller
-public class ManagerDashboardController extends AbstractController<Manager, ManagerDashboard> {
+public class AdministratorDashboardController extends AbstractController<Administrator, AdministratorDashboard> {
 
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private ManagerDashboardShowService showService;
+	private AdministratorDashboardShowService showService;
 
 	// Constructors -----------------------------------------------------------
 
