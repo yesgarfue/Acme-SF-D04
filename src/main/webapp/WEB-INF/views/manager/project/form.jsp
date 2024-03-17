@@ -17,7 +17,7 @@
 	<jstl:if test="${_command != 'create'}">
 		<acme:input-checkbox code="manager.project.label.draftMode" path="draftMode" readonly="true"/>
 		
-		<acme:button code="manager.project.button.userStoryList" action="/manager/userStory/list?projectId=${id}"/>
+		<acme:button code="manager.project.button.userStoryList" action="/manager/user-story/list?projectId=${id}"/>
 	</jstl:if>
 	<jstl:if test="${_command == 'create'}">
 		<acme:hidden-data path="draftMode"/>

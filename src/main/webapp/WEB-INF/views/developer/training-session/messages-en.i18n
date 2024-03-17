@@ -16,6 +16,7 @@ developer.training-session.form.label.instructor = Instructor
 developer.training-session.form.label.contactEmail = Contact Email
 developer.training-session.form.label.optionalLink = Optional Link
 developer.training-session.form.title = Training Session
+developer.trainingSession.label.trainingModule = Training Module Id
 
 ##################################################################
 

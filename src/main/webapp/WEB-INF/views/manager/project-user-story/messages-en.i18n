@@ -1,0 +1,4 @@
+manager.project-user-story.form.title = Add User Story
+manager.project-user-story.label.user-story = User Story
+manager.project-user-story.label.project = Project
+manager.project-user-story.button.add = Add 

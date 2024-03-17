@@ -20,7 +20,8 @@ developer.training-module.form.label.details = Details
 developer.training-module.form.label.difficultyLevel = Difficulty Level
 developer.training-module.form.label.updatedMoment = Update Moment
 developer.training-module.form.label.optionalLink = Optional Link
-developer.training-module.form.label.totalTime = Total Time
+developer.training-module.form.label.totalTime = Total Timeç
+developer.trainingModule.label.project = Proyect Id
 
 ################################################################################
 

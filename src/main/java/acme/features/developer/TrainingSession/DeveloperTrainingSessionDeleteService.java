@@ -15,7 +15,7 @@ import acme.entities.training.TrainingSession;
 import acme.roles.Developer;
 
 @Service
-public class DeveloperTrainingSessionCreateService extends AbstractService<Developer, TrainingSession> {
+public class DeveloperTrainingSessionDeleteService extends AbstractService<Developer, TrainingSession> {
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
@@ -27,8 +27,11 @@ public class DeveloperTrainingSessionCreateService extends AbstractService<Devel
 	@Override
 	public void authorise() {
 		boolean status;
+		TrainingSession trainingSession;
 
-		status = super.getRequest().getPrincipal().hasRole(Developer.class);
+		trainingSession = this.repository.findTrainingSessionById(super.getRequest().getData("id", int.class));
+
+		status = trainingSession != null && trainingSession.getDraftMode() && super.getRequest().getPrincipal().hasRole(trainingSession.getTrainingModule().getDeveloper());
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -36,9 +39,10 @@ public class DeveloperTrainingSessionCreateService extends AbstractService<Devel
 	@Override
 	public void load() {
 		TrainingSession object;
+		int id;
 
-		object = new TrainingSession();
-		object.setDraftMode(true);
+		id = super.getRequest().getData("id", int.class);
+		object = this.repository.findTrainingSessionById(id);
 
 		super.getBuffer().addData(object);
 	}
@@ -46,41 +50,20 @@ public class DeveloperTrainingSessionCreateService extends AbstractService<Devel
 	@Override
 	public void bind(final TrainingSession object) {
 		assert object != null;
-		super.bind(object, "code", "startDate", "endDate", "location", "instructor", "contactEmail", "optionalLink", "draftMode", "trainingModule");
 
+		super.bind(object, "code", "startDate", "endDate", "location", "instructor", "contactEmail", "optionalLink", "draftMode", "trainingModule");
 	}
 
 	@Override
 	public void validate(final TrainingSession object) {
 		assert object != null;
 
-		if (!super.getBuffer().getErrors().hasErrors("code")) {
-			TrainingSession existing;
-
-			existing = this.repository.findTrainingSessionByCode(object.getCode());
-			super.state(existing == null, "code", "developer.trainingSession.error.code.duplicated");
-		}
-		/*
-		 * if (!super.getBuffer().getErrors().hasErrors("startDate") && !super.getBuffer().getErrors().hasErrors("endDate")) {
-		 * super.state(object.getStartDate().before(object.getEndDate()), "endDate", "developer.trainingSession.error.endDate.afterStartDate");
-		 * super.state(object.getEndDate().after(object.getStartDate()), "startDate", "developer.trainingSession.error.startDate.afterEndDate");
-		 * 
-		 * long oneWeekInMillis = 7 * 24 * 60 * 60 * 1000; // 1 semana en milisegundos
-		 * long diffM_SF = object.getEndDate().getTime() - object.getStartDate().getTime();
-		 * long diffM_CS = object.getTrainingModule().getCreationMoment().getTime() - object.getStartDate().getTime();
-		 * 
-		 * super.state(diffM_SF >= oneWeekInMillis, "startDate", "developer.trainingSession.error.duration.lessThanOneWeek");
-		 * super.state(diffM_CS >= oneWeekInMillis, "startDate", "developer.trainingSession.error.startDate.lessThanOneWeek");
-		 * }
-		 */
-
 	}
 
 	@Override
 	public void perform(final TrainingSession object) {
 		assert object != null;
-
-		this.repository.save(object);
+		this.repository.delete(object);
 	}
 
 	@Override

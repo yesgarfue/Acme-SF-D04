@@ -1,11 +1,14 @@
 
 package acme.features.developer.TrainingSession;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
+import acme.client.views.SelectChoices;
 import acme.entities.training.TrainingModule;
 import acme.entities.training.TrainingSession;
 import acme.roles.Developer;
@@ -55,17 +58,16 @@ public class DeveloperTrainingSessionShowService extends AbstractService<Develop
 	public void unbind(final TrainingSession object) {
 		assert object != null;
 
+		SelectChoices choices;
 		Dataset dataset;
-		TrainingModule trainingModule;
-		boolean draftMode;
+		int developerId;
+		developerId = super.getRequest().getPrincipal().getActiveRoleId();
+		final Collection<TrainingModule> trainingModules = this.repository.findTrainingModulesByDeveloperId(developerId);
 
-		trainingModule = object.getTrainingModule();
-		draftMode = trainingModule.getDraftMode();
-
+		choices = SelectChoices.from(trainingModules, "code", object.getTrainingModule());
 		dataset = super.unbind(object, "code", "startDate", "endDate", "location", "instructor", "contactEmail", "optionalLink", "draftMode");
-		dataset.put("masterId", trainingModule.getId());
-		dataset.put("draftMode", draftMode);
-		dataset.put("trainingModule", trainingModule);
+		dataset.put("trainingModule", choices.getSelected().getKey());
+		dataset.put("trainingModules", choices);
 
 		super.getResponse().addData(dataset);
 	}

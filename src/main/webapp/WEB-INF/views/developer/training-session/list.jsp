@@ -11,6 +11,7 @@
 	<acme:list-column code="developer.trainingSession.label.instructor" path="instructor" width="20%"/>
 	<acme:list-column code="developer.trainingSession.label.contactEmail" path="contactEmail" width="30%"/>
 	<acme:list-column code="developer.trainingSession.label.optionalLink" path="optionalLink" width="10%"/>
+	<acme:list-column code="developer.trainingSession.label.trainingModule" path="trainingModule" width="10%"/>
 	
 </acme:list>
 

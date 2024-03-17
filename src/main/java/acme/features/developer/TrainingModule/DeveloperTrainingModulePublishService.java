@@ -62,8 +62,9 @@ public class DeveloperTrainingModulePublishService extends AbstractService<Devel
 			TrainingModule existing;
 
 			existing = this.repository.findTrainingModuleByCode(object.getCode());
-			super.state(existing == null || existing.getId() == object.getId(), "code", "Manager.Project.error.code.duplicated");
+			super.state(existing == null || existing.getId() == object.getId(), "code", "developer.trainingModel.error.code.duplicated");
 		}
+		super.state(!this.repository.findTrainingSessionByTrainingModuleId(object.getId()).isEmpty(), "*", "assistant.tutorial.form.error.sessions");
 	}
 
 	@Override

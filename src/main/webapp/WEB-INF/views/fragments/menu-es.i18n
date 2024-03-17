@@ -15,6 +15,11 @@ master.menu.sign-up = Registrarse
 master.menu.sign-in = Entrar
 master.menu.sign-out = Salir
 
+# master.menu.any #######################################################
+
+master.menu.any = Cualquiera
+master.menu.any.projects = Proyectos
+
 # master.menu.anonymous #######################################################
 
 master.menu.anonymous = Anónimo
@@ -53,6 +58,10 @@ master.menu.manager.projects = Todos los proyectos
 master.menu.developer = Desarrollador
 master.menu.developer.trainingModules = Módulos de entrenamiento
 master.menu.developer.trainingSession = Sesiones de entrenamiento
+
+master.menu.manager.projects = Proyectos
+master.menu.manager.user-stories = Historias de usuario
+master.menu.manager.dashboard = Panel de Registros	
 
 # master.menu.user-account ####################################################
 
