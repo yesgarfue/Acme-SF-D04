@@ -24,7 +24,7 @@ public class AuthenticatedManagerController extends AbstractController<Authentic
 
 
 	@PostConstruct
-	protected void initialise() {
+	private void initialise() {
 		super.addBasicCommand("create", this.createService);
 		super.addBasicCommand("update", this.updateService);
 	}

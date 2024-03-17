@@ -1,0 +1,11 @@
+administrator.config.form.label.currencies = Divisas disponibles:
+administrator.config.form.label.currency = Divisa del sistema: 
+administrator.config.form.label.currency.new = Nueva divisa:
+
+administrator.config.form.button.update = Actualizar
+administrator.config.form.button.add = Añadir nueva divisa
+
+administrator.config.form.error.unavailable = Divisa no disponible
+administrator.config.form.error.pattern = El patrón debe ser "[A-Z]{3}"
+administrator.config.form.error.duplicated = Esta divisa no está libre
+administrator.config.form.error.blank = La nueva divisa no puede estar en blanco

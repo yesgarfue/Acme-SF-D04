@@ -28,20 +28,18 @@ public class AdministratorDashboard extends AbstractForm {
 	//Strings represent every roles
 	Map<String, Integer>		numberOfPrincipalsByRol;
 
-	//Ratios
-	Double						noticeWithoEmailAndLinkRatio;
-	Double						criticalObjectiveRatio;
-	Double						nonCriticalObjectiveRatio;
+	Integer						noticeWithEmailAndLinkRatio;
+	Integer						criticalObjectiveRatio;
+	Integer						nonCriticalObjectiveRatio;
 
-	//Averages, minimums, maximums and standard deviations
 	Double						averageValueRisk;
 	Double						minimunValueRisk;
 	Double						maximunValueRisk;
 	Double						desviationValueRisk;
 
 	Double						averageNumberOfClaimsOverLastTenWeeks;
-	Double						minimunNumberOfClaimsOverLastTenWeeks;
-	Double						maximunNumberOfClaimsOverLastTenWeeks;
+	Integer						minimunNumberOfClaimsOverLastTenWeeks;
+	Integer						maximunNumberOfClaimsOverLastTenWeeks;
 	Double						desviationNumberOfClaimsOverLastTenWeeks;
 
 }
