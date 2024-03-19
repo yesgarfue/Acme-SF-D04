@@ -30,5 +30,4 @@ public interface DeveloperDashboardRepository extends AbstractRepository {
 	//Maximum Time of the Training Modules
 	@Query("SELECT MAX(tm.totalTime) FROM TrainingModule tm WHERE tm.developer.id = ?1")
 	Double maxTimeTrainingModule(int developerId);
-
 }
