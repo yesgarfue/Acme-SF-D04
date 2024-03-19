@@ -23,5 +23,4 @@ public class DeveloperDashboardController extends AbstractController<Developer, 
 	private void initialise() {
 		super.addBasicCommand("show", this.showService);
 	}
-
 }

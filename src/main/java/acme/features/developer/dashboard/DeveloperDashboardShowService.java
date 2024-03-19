@@ -68,4 +68,5 @@ public class DeveloperDashboardShowService extends AbstractService<Developer, De
 		dataset = super.unbind(object, "totalTrainingModules", "totalTrainingSessions", "averageTimeTrainingModule", "deviationTimeTrainingModule", "maxTimeTrainingModule", "minTimeTrainingModule");
 		super.getResponse().addData(dataset);
 	}
+
 }

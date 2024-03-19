@@ -4,6 +4,7 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 
+
 <acme:form>
 	<acme:input-integer code="developer.dashboard.label.totalTrainingModules" path="totalTrainingModules" placeholder=""/>
 	<acme:input-integer code="developer.dashboard.label.totalTrainingSessions" path="totalTrainingSessions" placeholder=""/>
