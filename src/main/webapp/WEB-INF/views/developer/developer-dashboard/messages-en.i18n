@@ -4,7 +4,7 @@
 developer.developer-dashboard.form.title = Developer Dashboard
 developer.dashboard.label.totalTrainingModules = Total number of training modules
 developer.dashboard.label.totalTrainingSessions = Total number of training sessions
-developer.dashboard.label.averageTimeTrainingModules = Average time of training modules
-developer.dashboard.label.deviationTimeTrainingModules = Deviation time of training modules
-developer.dashboard.label.maxTimeTrainingModules = Maximum time of training modules
-developer.dashboard.label.minTimeTrainingModules = Minimum time of training modules
+developer.dashboard.label.averageTimeTrainingModule = Average time of training modules
+developer.dashboard.label.deviationTimeTrainingModule = Deviation time of training modules
+developer.dashboard.label.maxTimeTrainingModule = Maximum time of training modules
+developer.dashboard.label.minTimeTrainingModule = Minimum time of training modules
