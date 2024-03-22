@@ -7,7 +7,7 @@
 
 	<acme:hidden-data path="id"/>
 
-	<acme:input-textbox code="manager.project.label.code" path="code"/>
+	<acme:input-textbox code="manager.project.label.code" path="code" placeholder="AAA-XXXX" />
 	<acme:input-textbox code="manager.project.label.title" path="title"/>
 	<acme:input-textarea code="manager.project.label.abstracts" path="abstracts"/>	
 	<acme:input-money code="manager.project.label.cost" path="cost"/>

@@ -7,7 +7,7 @@
 
 	<acme:hidden-data path="id"/>
 
-	<acme:input-textbox code="any.claim.label.code" path="code"/>
+	<acme:input-textbox code="any.claim.label.code" path="code" placeholder="C-XXXX"/>
 	<acme:input-moment code="any.claim.label.instantiation" path="instantiation"/>
 	<acme:input-textbox code="any.claim.label.heading" path="heading"/>	
 	<acme:input-textbox code="any.claim.label.description" path="description"/>	
