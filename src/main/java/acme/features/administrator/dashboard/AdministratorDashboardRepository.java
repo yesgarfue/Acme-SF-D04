@@ -1,7 +1,11 @@
 
 package acme.features.administrator.dashboard;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Collection;
+import java.util.Date;
+import java.util.stream.Collectors;
 
 import org.springframework.data.jpa.repository.Query;
 
@@ -10,8 +14,8 @@ import acme.client.repositories.AbstractRepository;
 public interface AdministratorDashboardRepository extends AbstractRepository {
 
 	//	@Query("SELECT r.role, COUNT(r) FROM Principal r GROUP BY r.role")
-	//	Collection<String> principalsByRole(String role);
-	//
+	//	Collection<Object[]> principalsByRole();
+
 	//	default Map<String, Integer> numberOfPrincipalsByRol() {
 	//		return null;
 	//	}
@@ -52,29 +56,36 @@ public interface AdministratorDashboardRepository extends AbstractRepository {
 		return Math.sqrt(numerator / values.size());
 	}
 
-	@Query("SELECT COUNT(c) FROM Claim c WHERE c.instantiation >= CURRENT_DATE - 70")
-	Integer numberOfClaimsOverLastTenWeeks();
+	@Query("SELECT DATE(c.instantiation), COUNT(c) FROM Claim c GROUP BY DATE(c.instantiation)")
+	Collection<Object[]> numberOfClaimsPostedForDay();
 
-	@Query("SELECT COUNT(c) FROM Claim c ")
-	Integer numberOfClaims();
+	//DUDA: 70 dias desde la fecha actual, OJO la fecha del sistema es 2022/07/30 00:00
+	default Collection<Integer> numberOfClaimsPostedForDayOverLastTenWeeks() {
+		Date seventyDaysAgo = Date.from(LocalDate.now().minusDays(70).atStartOfDay(ZoneId.systemDefault()).toInstant());
+		Collection<Object[]> results = this.numberOfClaimsPostedForDay();
+
+		Collection<Integer> counts = results.stream().filter(result -> ((Date) result[0]).after(seventyDaysAgo)).map(result -> ((Long) result[1]).intValue()).collect(Collectors.toList());
+		return counts;
+	}
 
 	default Double averageNumberOfClaimsOverLastTenWeeks() {
-		final Integer values = this.numberOfClaimsOverLastTenWeeks();
-		final Integer total = this.numberOfClaims();
-		double result = values / total;
-		return result;
+		final Collection<Integer> values = this.numberOfClaimsPostedForDayOverLastTenWeeks();
+		return values.stream().mapToDouble(x -> x).average().orElse(0.0);
 	}
 
 	default Integer minimumNumberOfClaimsOverLastTenWeeks() {
-		return this.numberOfClaimsOverLastTenWeeks();
+		return this.numberOfClaimsPostedForDayOverLastTenWeeks().stream().mapToInt(x -> x).min().orElse(0);
 	}
 
 	default Integer maximumNumberOfClaimsOverLastTenWeeks() {
-		return this.numberOfClaimsOverLastTenWeeks();
+		return this.numberOfClaimsPostedForDayOverLastTenWeeks().stream().mapToInt(x -> x).max().orElse(0);
 	}
 
 	default Double deviationNumberOfClaimsOverLastTenWeeks() {
-		return 0.0;
+		final Double avg = this.averageNumberOfClaimsOverLastTenWeeks();
+		final Collection<Integer> values = this.numberOfClaimsPostedForDayOverLastTenWeeks();
+		final double numerator = values.stream().mapToDouble(x -> (x - avg) * (x - avg)).sum();
+		return values.isEmpty() ? 0.0 : Math.sqrt(numerator / values.size());
 	}
 
 }
