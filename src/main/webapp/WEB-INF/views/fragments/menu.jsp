@@ -56,6 +56,8 @@
 		<acme:menu-option code="master.menu.any">
 			<acme:menu-suboption code="master.menu.any.projects" action="/any/project/list"/>
 			<acme:menu-suboption code="master.menu.any.claims" action="/any/claim/list"/>
+			<acme:menu-suboption code="master.menu.any.trainingModules" action="/any/training-module/list"/>
+			
 			
 		</acme:menu-option>
 		

@@ -1,5 +1,5 @@
 
-package acme.features.developer.TrainingSession;
+package acme.features.developer.trainingSession;
 
 import java.util.Collection;
 

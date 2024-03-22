@@ -1,5 +1,5 @@
 
-package acme.features.developer.TrainingSession;
+package acme.features.developer.trainingSession;
 
 import javax.annotation.PostConstruct;
 

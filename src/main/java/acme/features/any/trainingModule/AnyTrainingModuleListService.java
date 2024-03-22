@@ -1,42 +1,37 @@
 
-package acme.features.developer.TrainingModule;
+package acme.features.any.trainingModule;
 
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import acme.client.data.accounts.Any;
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
 import acme.entities.training.TrainingModule;
-import acme.roles.Developer;
 
 @Service
-public class DeveloperTrainingModuleListService extends AbstractService<Developer, TrainingModule> {
-
+public class AnyTrainingModuleListService extends AbstractService<Any, TrainingModule> {
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private DeveloperTrainingModuleRepository repository;
+	private AnyTrainingModuleRepository repository;
 
 	// AbstractService interface ----------------------------------------------
 
 
 	@Override
 	public void authorise() {
-		final boolean status;
-		status = super.getRequest().getPrincipal().hasRole(Developer.class);
+		final boolean status = true;
 		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
 		Collection<TrainingModule> objects;
-		int developerId;
 
-		developerId = super.getRequest().getPrincipal().getActiveRoleId();
-		objects = this.repository.findManyByDeveloperId(developerId);
-
+		objects = this.repository.findAllPublishedTrainingModules();
 		super.getBuffer().addData(objects);
 	}
 
@@ -45,9 +40,7 @@ public class DeveloperTrainingModuleListService extends AbstractService<Develope
 		assert object != null;
 
 		Dataset dataset;
-
-		dataset = super.unbind(object, "code", "creationMoment", "details", "updatedMoment", "optionalLink", "totalTime", "draftMode", "difficultyLevel", "project");
-		dataset.put("trainingModuleId", object.getId());
+		dataset = super.unbind(object, "code", "creationMoment", "details", "difficultyLevel", "updatedMoment", "optionalLink", "totalTime", "draftMode");
 		super.getResponse().addData(dataset);
 	}
 }
