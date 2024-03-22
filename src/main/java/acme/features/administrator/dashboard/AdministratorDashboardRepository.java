@@ -5,20 +5,24 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.data.jpa.repository.Query;
 
+import acme.client.data.AbstractRole;
 import acme.client.repositories.AbstractRepository;
 
 public interface AdministratorDashboardRepository extends AbstractRepository {
 
-	//	@Query("SELECT r.role, COUNT(r) FROM Principal r GROUP BY r.role")
-	//	Collection<Object[]> principalsByRole();
+	@Query("SELECT r FROM AbstractRole r")
+	Collection<AbstractRole> findAllRoles();
 
-	//	default Map<String, Integer> numberOfPrincipalsByRol() {
-	//		return null;
-	//	}
+	default Map<String, Integer> numberOfPrincipalsByRol() {
+		AbstractRole role = this.findAllRoles().stream().findFirst().orElse(null);
+		role.getAuthorityName();
+		return this.findAllRoles().stream().collect(Collectors.groupingBy(AbstractRole::getAuthorityName, Collectors.summingInt(x -> 1)));
+	}
 
 	@Query("SELECT COUNT(n) FROM Notice n WHERE n.email IS NOT NULL AND n.link IS NOT NULL")
 	Integer noticeWithEmailAndLinkRatio();
@@ -59,9 +63,9 @@ public interface AdministratorDashboardRepository extends AbstractRepository {
 	@Query("SELECT DATE(c.instantiation), COUNT(c) FROM Claim c GROUP BY DATE(c.instantiation)")
 	Collection<Object[]> numberOfClaimsPostedForDay();
 
-	//DUDA: 70 dias desde la fecha actual, OJO la fecha del sistema es 2022/07/30 00:00
 	default Collection<Integer> numberOfClaimsPostedForDayOverLastTenWeeks() {
-		Date seventyDaysAgo = Date.from(LocalDate.now().minusDays(70).atStartOfDay(ZoneId.systemDefault()).toInstant());
+		LocalDate systemDate = LocalDate.of(2022, 7, 30);
+		Date seventyDaysAgo = Date.from(systemDate.minusDays(70).atStartOfDay(ZoneId.systemDefault()).toInstant());
 		Collection<Object[]> results = this.numberOfClaimsPostedForDay();
 
 		Collection<Integer> counts = results.stream().filter(result -> ((Date) result[0]).after(seventyDaysAgo)).map(result -> ((Long) result[1]).intValue()).collect(Collectors.toList());

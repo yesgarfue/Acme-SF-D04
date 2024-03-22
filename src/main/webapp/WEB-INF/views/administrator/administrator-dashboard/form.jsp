@@ -6,17 +6,18 @@
 
 <acme:form>
 
-	<acme:input-integer code="administrator.dashboard.label.numberOfPrincipalsByRol" path="numberOfPrincipalsByRol" placeholder=""/>
-	<acme:input-integer code="administrator.dashboard.label.noticeWithEmailAndLinkRatio" path="noticeWithEmailAndLinkRatio" placeholder=""/>
-	<acme:input-integer code="administrator.dashboard.label.criticalObjectiveRatio" path="criticalObjectiveRatio" placeholder=""/>
-	<acme:input-integer code="administrator.dashboard.label.nonCriticalObjectiveRatio" path="nonCriticalObjectiveRatio" placeholder=""/>
-	<acme:input-double code="administrator.dashboard.label.averageValueRisk" path="averageValueRisk" placeholder=""/>
-	<acme:input-double code="administrator.dashboard.label.minimunValueRisk" path="minimunValueRisk" placeholder=""/>
-	<acme:input-double code="administrator.dashboard.label.maximunValueRisk" path="maximunValueRisk" placeholder=""/>
-	<acme:input-double code="administrator.dashboard.label.desviationValueRisk" path="desviationValueRisk" placeholder=""/>
-	<acme:input-double code="administrator.dashboard.label.averageNumberOfClaimsOverLastTenWeeks" path="averageNumberOfClaimsOverLastTenWeeks" placeholder=""/>
-	<acme:input-integer code="administrator.dashboard.label.minimunNumberOfClaimsOverLastTenWeeks" path="minimunNumberOfClaimsOverLastTenWeeks" placeholder=""/>
-	<acme:input-integer code="administrator.dashboard.label.maximunNumberOfClaimsOverLastTenWeeks" path="maximunNumberOfClaimsOverLastTenWeeks" placeholder=""/>
-	<acme:input-double code="administrator.dashboard.label.desviationNumberOfClaimsOverLastTenWeeks" path="desviationNumberOfClaimsOverLastTenWeeks" placeholder=""/>
+	<acme:input-textbox code="administrator.dashboard.label.numberOfPrincipalsByRol" path="roles"/>
+	
+	<acme:input-integer code="administrator.dashboard.label.noticeWithEmailAndLinkRatio" path="noticeWithEmailAndLinkRatio" />
+	<acme:input-integer code="administrator.dashboard.label.criticalObjectiveRatio" path="criticalObjectiveRatio" />
+	<acme:input-integer code="administrator.dashboard.label.nonCriticalObjectiveRatio" path="nonCriticalObjectiveRatio" />
+	<acme:input-double code="administrator.dashboard.label.averageValueRisk" path="averageValueRisk" />
+	<acme:input-double code="administrator.dashboard.label.minimunValueRisk" path="minimunValueRisk" />
+	<acme:input-double code="administrator.dashboard.label.maximunValueRisk" path="maximunValueRisk" />
+	<acme:input-double code="administrator.dashboard.label.desviationValueRisk" path="desviationValueRisk" />
+	<acme:input-double code="administrator.dashboard.label.averageNumberOfClaimsOverLastTenWeeks" path="averageNumberOfClaimsOverLastTenWeeks" />
+	<acme:input-integer code="administrator.dashboard.label.minimunNumberOfClaimsOverLastTenWeeks" path="minimunNumberOfClaimsOverLastTenWeeks" />
+	<acme:input-integer code="administrator.dashboard.label.maximunNumberOfClaimsOverLastTenWeeks" path="maximunNumberOfClaimsOverLastTenWeeks"/>
+	<acme:input-double code="administrator.dashboard.label.desviationNumberOfClaimsOverLastTenWeeks" path="desviationNumberOfClaimsOverLastTenWeeks"/>
 	
 </acme:form>
