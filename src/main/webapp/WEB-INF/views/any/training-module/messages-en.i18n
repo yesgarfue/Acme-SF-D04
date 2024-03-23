@@ -1,4 +1,3 @@
-
 ################################################################################
 developer.training-module.list.title = Training Modules
 developer.trainingModule.label.code = Code
@@ -8,8 +7,6 @@ developer.trainingModule.label.difficultyLevel = Difficulty Level
 developer.trainingModule.label.updatedMoment = Update Moment
 developer.trainingModule.label.optionalLink = Optional Link
 developer.trainingModule.label.totalTime = Total Time
-
-developer.trainingModule.button.create = Create Training Module
 
 ################################################################################
 
@@ -21,15 +18,6 @@ developer.training-module.form.label.difficultyLevel = Difficulty Level
 developer.training-module.form.label.updatedMoment = Update Moment
 developer.training-module.form.label.optionalLink = Optional Link
 developer.training-module.form.label.totalTime = Total Time
-developer.trainingModule.label.project = Proyect Id
+developer.training-module.label.draftMode = Draft Mode
 
-################################################################################
 
-developer.training-module.button.create = Create
-developer.training-module.button.update = Update
-developer.training-module.button.delete = Delete
-developer.training-module.button.publish = Publish
-
-##############################################################
-
-developer.training-module.form.title = Training Module

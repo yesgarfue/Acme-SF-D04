@@ -1,5 +1,5 @@
 
-package acme.features.developer.TrainingSession;
+package acme.features.administrator.banner;
 
 import javax.annotation.PostConstruct;
 
@@ -7,43 +7,38 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import acme.client.controllers.AbstractController;
-import acme.entities.training.TrainingSession;
-import acme.roles.Developer;
+import acme.client.data.accounts.Administrator;
+import acme.entities.banner.Banner;
 
 @Controller
-public class DeveloperTrainingSessionController extends AbstractController<Developer, TrainingSession> {
-
+public class AdministratorBannerController extends AbstractController<Administrator, Banner> {
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private DeveloperTrainingSessionListService		listService;
+	private AdministratorBannerListService		listService;
 
 	@Autowired
-	private DeveloperTrainingSessionShowService		showService;
+	private AdministratorBannerShowService		showService;
 
 	@Autowired
-	private DeveloperTrainingSessionCreateService	createService;
+	private AdministratorBannerCreateService	createService;
 
 	@Autowired
-	private DeveloperTrainingSessionUpdateService	updateService;
+	private AdministratorBannerUpdateService	updateService;
 
 	@Autowired
-	private DeveloperTrainingSessionDeleteService	deleteService;
-
-	@Autowired
-	private DeveloperTrainingSessionPublishService	publishService;
+	private AdministratorBannerDeleteService	deleteService;
 
 	// Constructors -----------------------------------------------------------
 
 
 	@PostConstruct
 	private void initialise() {
+
 		super.addBasicCommand("list", this.listService);
 		super.addBasicCommand("show", this.showService);
 		super.addBasicCommand("create", this.createService);
 		super.addBasicCommand("update", this.updateService);
 		super.addBasicCommand("delete", this.deleteService);
-		super.addCustomCommand("publish", "update", this.publishService);
 	}
-
 }

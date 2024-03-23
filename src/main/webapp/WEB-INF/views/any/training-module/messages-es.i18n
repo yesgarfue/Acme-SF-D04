@@ -1,0 +1,21 @@
+############################################################################
+developer.training-module.list.title = Modulos de Entrenamiento
+developer.trainingModule.label.code = Codigo
+developer.trainingModule.label.creationMoment = Fecha de Creacion
+developer.trainingModule.label.details = Detalles
+developer.trainingModule.label.difficultyLevel = Nivel de Dificultad
+developer.trainingModule.label.updatedMoment = Fecha de Actualizacion
+developer.trainingModule.label.optionalLink = Enlace Opcional
+developer.trainingModule.label.totalTime = Tiempo Total
+
+############################################################################
+developer.training-module.form.label.code = Código
+developer.training-module.form.label.project = Proyecto
+developer.training-module.form.label.creationMoment = Fecha de Creación
+developer.training-module.form.label.details = Detalles
+developer.training-module.form.label.difficultyLevel = Nivel de Dificultad
+developer.training-module.form.label.updatedMoment = Fecha de Actualización
+developer.training-module.form.label.optionalLink = Enlace Opcional
+developer.training-module.form.label.totalTime = Tiempo Total
+developer.trainingModule.label.project = Id de Proyecto Asociado
+developer.training-module.label.draftMode = Modo Borrador
