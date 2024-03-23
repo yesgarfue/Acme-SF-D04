@@ -24,7 +24,6 @@ public class AdministratorDashboardShowService extends AbstractService<Administr
 
 	@Override
 	public void authorise() {
-
 		final boolean status = super.getRequest().getPrincipal().hasRole(Administrator.class);
 		super.getResponse().setAuthorised(status);
 	}
@@ -47,7 +46,9 @@ public class AdministratorDashboardShowService extends AbstractService<Administr
 		Integer minimunNumberOfClaimsOverLastTenWeeks;
 		Integer maximunNumberOfClaimsOverLastTenWeeks;
 		Double desviationNumberOfClaimsOverLastTenWeeks;
-		//numberOfPrincipalsByRol = this.repository.numberOfPrincipalsByRol();
+
+		numberOfPrincipalsByRol = this.repository.numberOfPrincipalsByRol();
+		System.out.println(numberOfPrincipalsByRol);
 		noticeWithEmailAndLinkRatio = this.repository.noticeWithEmailAndLinkRatio();
 		criticalObjectiveRatio = this.repository.criticalObjectiveRatio();
 		nonCriticalObjectiveRatio = this.repository.nonCriticalObjectiveRatio();
@@ -82,9 +83,13 @@ public class AdministratorDashboardShowService extends AbstractService<Administr
 	@Override
 	public void unbind(final AdministratorDashboard object) {
 		Dataset dataset;
+		Map<String, Integer> numberOfPrincipalsByRol;
+		numberOfPrincipalsByRol = this.repository.numberOfPrincipalsByRol();
 
 		dataset = super.unbind(object, "numberOfPrincipalsByRol", "noticeWithEmailAndLinkRatio", "criticalObjectiveRatio", "nonCriticalObjectiveRatio", "averageValueRisk", "minimunValueRisk", "maximunValueRisk", "desviationValueRisk",
 			"averageNumberOfClaimsOverLastTenWeeks", "minimunNumberOfClaimsOverLastTenWeeks", "maximunNumberOfClaimsOverLastTenWeeks", "desviationNumberOfClaimsOverLastTenWeeks");
+
+		dataset.put("roles", numberOfPrincipalsByRol.toString().replace("{", "").replace("}", "").replace("=", ": "));
 		super.getResponse().addData(dataset);
 	}
 
