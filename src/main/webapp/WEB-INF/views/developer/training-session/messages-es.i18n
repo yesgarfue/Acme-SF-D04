@@ -16,7 +16,10 @@ developer.training-session.form.label.instructor = Instructor
 developer.training-session.form.label.contactEmail = Correo electrónico
 developer.training-session.form.label.optionalLink = Enlace opcional
 developer.training-session.form.title = Sesión de entrenamiento
+developer.training-session.form.label.trainingModule = Módulo de entrenamiento
+developer.training-session.list.title = Sesiones de entrenamiento
 developer.trainingSession.label.trainingModule = Id del Módulo de entrenamiento asociado
+developer.training-session.label.draftMode = Modo borrador
 
 ###########################################################################
 
