@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import acme.client.repositories.AbstractRepository;
 import acme.entities.audits.AuditRecords;
-import acme.entities.audits.CodeAudits;
+import acme.entities.audits.CodeAudit;
 import acme.entities.contract.Contract;
 import acme.entities.contract.ProgressLog;
 import acme.entities.projects.Project;
@@ -50,8 +50,8 @@ public interface ManagerProjectRepository extends AbstractRepository {
 	String getAvailableCurrencies();
 
 	// DELETE ALL ENTITIES ASSOCIATED TO A PROJECT
-	@Query("SELECT ca FROM CodeAudits ca WHERE ca.project.id = :projectId")
-	Collection<CodeAudits> findCodeAuditsByProject(int projectId);
+	@Query("SELECT ca FROM CodeAudit ca WHERE ca.project.id = :projectId")
+	Collection<CodeAudit> findCodeAuditsByProject(int projectId);
 
 	@Query("SELECT ar FROM AuditRecords ar WHERE ar.codeAudit.id = :id")
 	Collection<AuditRecords> findCodeAuditingRecordByCodeAudit(int id);
@@ -78,8 +78,8 @@ public interface ManagerProjectRepository extends AbstractRepository {
 
 		this.deleteAll(this.findProjectUserStoriesByProject(object.getId()));
 
-		final Collection<CodeAudits> codeAudits = this.findCodeAuditsByProject(object.getId());
-		for (final CodeAudits a : codeAudits)
+		final Collection<CodeAudit> codeAudits = this.findCodeAuditsByProject(object.getId());
+		for (final CodeAudit a : codeAudits)
 			this.deleteAll(this.findCodeAuditingRecordByCodeAudit(a.getId()));
 		this.deleteAll(codeAudits);
 		final Collection<Contract> contracts = this.findContractsByProject(object.getId());
