@@ -68,7 +68,6 @@
 		<acme:menu-option code="master.menu.sponsor" access="hasRole('Sponsor')">
 			<acme:menu-suboption code="master.menu.sponsor.sponsorship" action="/sponsor/sponsorship/list"/>
 		</acme:menu-option>
-		
 	</acme:menu-left>
 	
 	<acme:menu-right>

@@ -20,7 +20,7 @@ master.menu.sign-out = Sign out
 master.menu.any = Any
 master.menu.any.projects = Projects
 master.menu.any.claims = Claims
-master.menu.any.sponsorships = Sponsorship
+master.menu.any.sponsorship = Sponsorships
 
 # master.menu.anonymous #################################################################
 
