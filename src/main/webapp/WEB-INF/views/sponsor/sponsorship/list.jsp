@@ -11,3 +11,7 @@
 	<acme:list-column code="Email" path="email" sortable="false" width="10%"/>
 	<acme:list-column code="URL" path="link" sortable="false" width="20%"/>
 </acme:list>
+
+<jstl:if test="${_command == 'list'}">
+	<acme:button code="Create" action="/sponsor/sponsorship/create"/>
+</jstl:if>

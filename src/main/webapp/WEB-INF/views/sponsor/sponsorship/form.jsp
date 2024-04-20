@@ -12,5 +12,12 @@
 	<acme:input-double code="Cost" path="amount"/>
 	<acme:input-textbox code="Email" path="email"/>
 	<acme:input-textbox code="URL" path="link"/>
-	
+	<jstl:choose>
+		<jstl:when test="${_command =='show'}">
+			<acme:submit code="Create" action="/sponsor/sponsorship/create"/>
+			<acme:submit code="Update" action="/sponsor/sponsorship/update"/>
+			<acme:submit code="Delete" action="/sponsor/sponsorship/delete"/>
+			<acme:submit code="Publish" action="/sponsor/sponsorship/publish"/>
+		</jstl:when>
+	</jstl:choose>
 </acme:form>
