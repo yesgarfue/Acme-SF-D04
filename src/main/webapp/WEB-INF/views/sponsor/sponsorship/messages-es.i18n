@@ -1,0 +1,16 @@
+sponsor.sponsorship.list.title = Patrocinios
+sponsor.sponsorship.form.title = Patrocinio
+
+# Sponsorship List ##############################
+
+Code 			= Código
+StartDate 		= Fecha de inicio
+Cost 			= Costo
+SponsorshipType = Tipo de Patrocinio
+Email 			= Correo electronico
+URL 			= URL
+
+# Sponsorship Show ##############################
+
+Moment = Momento
+FinishDate = Fecha de finalización
