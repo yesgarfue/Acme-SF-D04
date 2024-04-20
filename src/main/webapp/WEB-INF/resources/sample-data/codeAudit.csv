@@ -10,7 +10,7 @@ code-audit-08,YZA-009,,DYNAMIC,no se ha modificado nada,project-02,true,auditor-
 code-audit-09,BCD-010,,STATIC,modificado apartado g,project-01,false,auditor-01
 code-audit-10,DEF-011,,STATIC,no se ha modificado nada,project-01,true,auditor-02
 code-audit-11,GHI-012,,DYNAMIC,no se ha modificado nada,project-01,false,auditor-01
-code-audit-12,JKL-013,,DYNAMIC,modificado apartado z,project-02,false,auditor-01
+code-audit-12,JKL-013,,DYNAMIC,modificado apartado z,project-02,true,auditor-01
 code-audit-13,F-999,,STATIC,no se ha modificado nada,project-01,false,auditor-02
 code-audit-14,FFF-999,,STATIC,modificado apartado d,project-02,true,auditor-01
 code-audit-15,STU-007,,DYNAMIC,no se ha modificado nada,project-02,false,auditor-01
