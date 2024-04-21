@@ -65,9 +65,9 @@
 			<acme:menu-suboption code="master.menu.developer.dashboard" action="/developer/developer-dashboard/show"/>
 		</acme:menu-option>
 		
-		<acme:menu-option code="master.menu.sponsor" access="hasRole('Sponsor')">
-			<acme:menu-suboption code="master.menu.sponsor.sponsorship" action="/sponsor/sponsorship/list"/>
-		</acme:menu-option>
+		<acme:menu-option code="master.menu.sponsor.sponsorship" action="/sponsor/sponsorship/list" access="hasRole('Sponsor')"/>
+		<acme:menu-option code="master.menu.sponsor.invoices" action="/sponsor/invoice/list" access="hasRole('Sponsor')"/>
+		<acme:menu-option code="master.menu.sponsor.dashboard" action="/sponsor/dashboard/list" access="hasRole('Sponsor')"/>
 	</acme:menu-left>
 	
 	<acme:menu-right>

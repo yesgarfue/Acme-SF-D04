@@ -70,6 +70,8 @@ master.menu.developer.dashboard = Dashboard
 
 master.menu.sponsor = Sponsor
 master.menu.sponsor.sponsorship = Sponsorships
+master.menu.sponsor.invoices = Invoices
+master.menu.sponsor.dashboard = Dashboard
 
 # master.menu.user-account ###############################################################
 

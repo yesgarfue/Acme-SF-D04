@@ -13,6 +13,4 @@
 	<acme:list-column code="URL" path="link" sortable="false" width="20%"/>
 </acme:list>
 
-<jstl:if test="${_command == 'list'}">
-	<acme:submit code="Create" action="/sponsor/sponsorship/create"/>
-</jstl:if>
+<acme:button code="Create" action="/sponsor/sponsorship/create"/>
