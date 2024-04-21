@@ -1,0 +1,22 @@
+ ##########################################################
+ auditor.code-audit.list.title = Auditoría de código
+ auditor.code-audit.label.code = Código 
+ auditor.code-audit.label.type = Tipo 
+ auditor.code-audit.label.correctiveActions = Acciones correctivas
+ auditor.code-audit.label.executionDate = Fecha de ejecución
+ auditor.code-audit.label.project = Proyecto
+ auditor.code-audit.label.draftMode = Borrador
+ ##########################################################
+ auditor.code-audit.form.title = Auditoría de código
+ auditor.code-audit.form.label.project = Proyecto
+ auditor.code-audit.form.label.code = Código
+ auditor.code-audit.form.label.executionDate = Fecha de ejecución
+ auditor.code-audit.form.label.type = Tipo
+ auditor.code-audit.form.label.correctiveActions = Acciones correctivas
+ ########################################################## 
+ auditor.code-audit.button.create = Crear
+ auditor.code-audit.button.update = Actualizar
+ auditor.code-audit.button.delete = Eliminar
+ auditor.code-audit.button.publish = Publicar
+ ##########################################################
+ auditor.code-audit.error.mark.minimum  = La auditoría no cuenta con la nota mínima para ser publicada

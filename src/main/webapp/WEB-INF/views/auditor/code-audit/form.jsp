@@ -4,15 +4,15 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:form>
-		<acme:input-textbox code="auditor.code-audit.label.code" 
+		<acme:input-textbox code="auditor.code-audit.form.label.code" 
 		path="code" placeholder="AAA-XXX" />
-		<acme:input-moment code="auditor.code-audit.label.executionDate" 
+		<acme:input-moment code="auditor.code-audit.form.label.executionDate" 
 		path="executionDate"/>
-		<acme:input-select code="auditor.code-audit.label.type" 
+		<acme:input-select code="auditor.code-audit.form.label.type" 
 		path="type" choices="${types}"/>
 		<acme:input-select code="auditor.code-audit.form.label.project" 
 		path="project" choices="${projects}"/>
-		<acme:input-textarea code="auditor.code-audit.label.correctiveActions" 
+		<acme:input-textarea code="auditor.code-audit.form.label.correctiveActions" 
 		path="correctiveActions"/>
 	
 	<acme:hidden-data path="id"/>

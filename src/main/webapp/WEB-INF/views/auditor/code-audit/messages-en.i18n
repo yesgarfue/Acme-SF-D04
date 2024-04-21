@@ -1,0 +1,22 @@
+ ##########################################################
+ auditor.code-audit.list.title = Code Audits
+ auditor.code-audit.label.code = Code 
+ auditor.code-audit.label.type = Type 
+ auditor.code-audit.label.correctiveActions = Corrective Actions
+ auditor.code-audit.label.executionDate = Execution Date
+ auditor.code-audit.label.project = Project
+ auditor.code-audit.label.draftMode = Draft mode
+ ##########################################################
+ auditor.code-audit.form.title = Code Audit
+ auditor.code-audit.form.label.project = Project
+ auditor.code-audit.form.label.code = Code
+ auditor.code-audit.form.label.executionDate = Execution Date
+ auditor.code-audit.form.label.type = Type
+ auditor.code-audit.form.label.correctiveActions = Corrective Actions
+ ########################################################## 
+ auditor.code-audit.button.create = Create
+ auditor.code-audit.button.update = Update
+ auditor.code-audit.button.delete = Delete
+ auditor.code-audit.button.publish = Publish
+ ##########################################################
+ auditor.code-audit.error.mark.minimum  = The audit code does not have the minimum grade to be published
