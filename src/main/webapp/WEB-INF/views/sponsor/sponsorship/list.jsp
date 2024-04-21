@@ -7,11 +7,12 @@
 	<acme:list-column code="Code" path="code" width="10%"/>
 	<acme:list-column code="StartDate" path="startDate" width="20%"/>
 	<acme:list-column code="Cost" path="amount" sortable="false" width="20%"/>
+	<acme:list-column code="ProjectId" path="project.code" width="10%"/>
 	<acme:list-column code="SponsorshipType" path="sponsorshipType" sortable="false" width="20%"/>
 	<acme:list-column code="Email" path="email" sortable="false" width="10%"/>
 	<acme:list-column code="URL" path="link" sortable="false" width="20%"/>
 </acme:list>
 
 <jstl:if test="${_command == 'list'}">
-	<acme:button code="Create" action="/sponsor/sponsorship/create"/>
+	<acme:submit code="Create" action="/sponsor/sponsorship/create"/>
 </jstl:if>

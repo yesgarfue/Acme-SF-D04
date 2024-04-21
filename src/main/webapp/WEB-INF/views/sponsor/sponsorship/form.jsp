@@ -10,6 +10,8 @@
 	<acme:input-textbox code="StartDate" path="startDate"/>
 	<acme:input-textbox code="FinishDate" path="finishDate"/>
 	<acme:input-double code="Cost" path="amount"/>
+	<acme:input-select code="ProjectCode" path="project" choices="${projects}"/>
+	<acme:input-select code="SponsorshipType" path="sponsorshipType" choices="${sponsorshipType}" readonly="${acme:anyOf(sponsorshipType,'FINANCIAL|INKIND')}"/>	
 	<acme:input-textbox code="Email" path="email"/>
 	<acme:input-textbox code="URL" path="link"/>
 	<jstl:choose>
