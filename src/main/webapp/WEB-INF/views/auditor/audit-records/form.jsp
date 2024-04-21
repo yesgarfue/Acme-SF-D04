@@ -14,6 +14,8 @@
 		path="mark" choices="${marks}"/>
 		<acme:input-textarea code="auditor.audit-records.form.label.optionalLink" 
 		path="optionalLink"/>
+		<acme:input-select code="auditor.audit-records.form.label.codeAudit" 
+		path="codeAudit" choices="${codeAudits}"/>
 	
 	<acme:hidden-data path="id"/>
 	<acme:hidden-data path="draftMode"/>

@@ -60,6 +60,7 @@ public class AuditRecords extends AbstractEntity {
 
 	@NotNull
 	private boolean				draftMode;
+
 	// Relationships ----------------------------------------------------------
 	@ManyToOne
 	@NotNull
