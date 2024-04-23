@@ -68,6 +68,12 @@
 			<acme:menu-suboption code="master.menu.developer.dashboard" action="/developer/developer-dashboard/show"/>
 		</acme:menu-option>
 		
+		<acme:menu-option code="master.menu.client" access="hasRole('Client')">
+			<acme:menu-suboption code="master.menu.client.contracts" action="/client/contract/list"/>
+			<acme:menu-suboption code="master.menu.developer.progressLogs" action="/client/progress-log/list"/>
+			<acme:menu-suboption code="master.menu.developer.dashboard" action="/client/client-dashboard/show"/>
+		</acme:menu-option>
+		
 	</acme:menu-left>
 	
 	

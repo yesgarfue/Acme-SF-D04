@@ -1,11 +1,11 @@
-key,record-id,completeness-percentage,progress-comment,registration-moment,responsible-person,key:contract
-progress-log-01,PG-AH-0123,53.7,This is an example,2019/12/07 05:19,Casemiro,contract-01
-progress-log-02,PG-GJ-3927,99.9,Sin &.-sentido,2009/02/21 22:59,مرحباً بالعالم,contract-02
-progress-log-03,PG-K-2193,76.6,T3xt0 c0n num3r0s,2000/01/13 19:20,Ñejo,contract-03
-progress-log-04,PG-LN-2139,62.1,Ejemplos y mas ejemplos,2020/04/09 17:45,你好 世界,contract-04
-progress-log-05,PG-H-4820,95.4,No me des fallos,2011/05/23 01:02,Pedro Sanchez,contract-05
-progress-log-06,PG-D-3920,26.8,Frase de ejemplo mas larga que otras,2006/07/02 11:00,Jose Maria Aznar,contract-10
-progress-log-07,PG-GS-4291,12.0,I dont know what i do,2003/08/17 12:36,Carlos,contract-01
-progress-log-08,PG-XW-1028,44.2,希望你也能享受这美好的一天。,2012/09/07 07:07,Vini Jr,contract-01
-progress-log-09,PG-BV-2939,0.0,Example comment,2016/11/11 20:01,CR7,contract-08
-progress-log-10,PG-Z-0283,100.0,%6/jkan por probar mas cosas,2001/10/01 23:59,Lionel Messi,contract-07
+key,record-id,completeness-percentage,progress-comment,registration-moment,responsible-person,key:contract,draft-mode
+progress-log-01,PG-AH-0123,53.7,This is an example,2019/12/07 05:19,Casemiro,contract-01,true
+progress-log-02,PG-GJ-3927,99.9,Sin &.-sentido,2009/02/21 22:59,مرحباً بالعالم,contract-02,true
+progress-log-03,PG-K-2193,76.6,T3xt0 c0n num3r0s,2000/01/13 19:20,Ñejo,contract-03,true
+progress-log-04,PG-LN-2139,62.1,Ejemplos y mas ejemplos,2020/04/09 17:45,你好 世界,contract-04,true
+progress-log-05,PG-H-4820,95.4,No me des fallos,2011/05/23 01:02,Pedro Sanchez,contract-05,true
+progress-log-06,PG-D-3920,26.8,Frase de ejemplo mas larga que otras,2006/07/02 11:00,Jose Maria Aznar,contract-10,true
+progress-log-07,PG-GS-4291,12.0,I dont know what i do,2003/08/17 12:36,Carlos,contract-01,true
+progress-log-08,PG-XW-1028,44.2,希望你也能享受这美好的一天。,2012/09/07 07:07,Vini Jr,contract-01,true
+progress-log-09,PG-BV-2939,0.0,Example comment,2016/11/11 20:01,CR7,contract-08,true
+progress-log-10,PG-Z-0283,100.0,%6/jkan por probar mas cosas,2001/10/01 23:59,Lionel Messi,contract-07,true
