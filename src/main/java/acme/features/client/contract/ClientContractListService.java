@@ -24,7 +24,7 @@ public class ClientContractListService extends AbstractService<Client, Contract>
 
 	@Override
 	public void authorise() {
-		final boolean status;
+		boolean status;
 		status = super.getRequest().getPrincipal().hasRole(Client.class);
 		super.getResponse().setAuthorised(status);
 	}

@@ -27,7 +27,7 @@ client.contract.label.project = Project Id
 
 client.contract.button.create = Create
 client.contract.button.update = Update
-client.cotract.button.delete = Delete
+client.contract.button.delete = Delete
 client.contract.button.publish = Publish
 
 ##############################################################

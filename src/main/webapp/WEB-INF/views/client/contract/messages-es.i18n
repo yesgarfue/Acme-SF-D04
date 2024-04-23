@@ -1,7 +1,7 @@
 
 ################################################################################
 client.contract.list.title = Contratos
-client.cotract.label.code = Código
+client.contract.label.code = Código
 client.contract.label.instantiationMoment = Momento de instanciación
 client.contract.label.providerName = Nombre del Proveedor
 client.contract.label.customerName = Nombre del Cliente
@@ -27,7 +27,7 @@ client.contract.label.project = Id de proyecto
 
 client.contract.button.create = Crear
 client.contract.button.update = Actualizar
-client.cotract.button.delete = Borrar
+client.contract.button.delete = Borrar
 client.contract.button.publish = Publicar
 
 ##############################################################

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
-import acme.client.helpers.PrincipalHelper;
 import acme.client.services.AbstractService;
 import acme.client.views.SelectChoices;
 import acme.entities.contract.Contract;
@@ -15,7 +14,7 @@ import acme.entities.projects.Project;
 import acme.roles.Client;
 
 @Service
-public class ClientContractCreateService extends AbstractService<Client, Contract> {
+public class ClientContractShowService extends AbstractService<Client, Contract> {
 
 	// Internal state ---------------------------------------------------------
 
@@ -28,46 +27,24 @@ public class ClientContractCreateService extends AbstractService<Client, Contrac
 	@Override
 	public void authorise() {
 		boolean status;
-		status = super.getRequest().getPrincipal().hasRole(Client.class);
+		Contract contract;
+
+		contract = this.repository.findContractById(super.getRequest().getData("id", int.class));
+
+		status = contract != null && super.getRequest().getPrincipal().hasRole(contract.getClient());
+
 		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
 		Contract object;
-		Client client;
+		int id;
 
-		client = this.repository.findClientById(super.getRequest().getPrincipal().getActiveRoleId());
-		object = new Contract();
-		object.setClient(client);
-		object.setDraftMode(true);
+		id = super.getRequest().getData("id", int.class);
+		object = this.repository.findContractById(id);
 
 		super.getBuffer().addData(object);
-	}
-
-	@Override
-	public void bind(final Contract object) {
-		assert object != null;
-		super.bind(object, "code", "instantiationMoment", "providerName", "customerName", "goals", "budget", "draftMode", "project");
-	}
-
-	@Override
-	public void validate(final Contract object) {
-		assert object != null;
-
-		if (!super.getBuffer().getErrors().hasErrors("code")) {
-			Contract existing;
-
-			existing = this.repository.findContractByCode(object.getCode());
-			super.state(existing == null, "code", "developer.trainingModule.error.code.duplicated");
-		}
-	}
-
-	@Override
-	public void perform(final Contract object) {
-		assert object != null;
-
-		this.repository.save(object);
 	}
 
 	@Override
@@ -88,12 +65,6 @@ public class ClientContractCreateService extends AbstractService<Client, Contrac
 		dataset.put("projects", choices);
 
 		super.getResponse().addData(dataset);
-	}
-
-	@Override
-	public void onSuccess() {
-		if (super.getRequest().getMethod().equals("POST"))
-			PrincipalHelper.handleUpdate();
 	}
 
 }

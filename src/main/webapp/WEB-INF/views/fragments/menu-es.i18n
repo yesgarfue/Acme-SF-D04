@@ -65,7 +65,7 @@ master.menu.developer.dashboard = Panel de control
 
 # master.menu.client ##########################################################
 
-master.menu.cient = Cliente
+master.menu.client = Cliente
 master.menu.client.contracts = Contratos
 master.menu.client.progressLogs = Registros de progreso
 master.menu.client.dashboard = Panel de control
