@@ -67,7 +67,7 @@ master.menu.developer.dashboard = Dashboard
 
 # master.menu.client ##########################################################
 
-master.menu.cient = Client
+master.menu.client = Client
 master.menu.client.contracts = Contracts
 master.menu.client.progressLogs = Progress Logs
 master.menu.client.dashboard = Dashboard
