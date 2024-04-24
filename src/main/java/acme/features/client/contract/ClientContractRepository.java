@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import acme.client.repositories.AbstractRepository;
 import acme.entities.contract.Contract;
+import acme.entities.contract.ProgressLog;
 import acme.entities.projects.Project;
 import acme.roles.Client;
 
@@ -26,6 +27,9 @@ public interface ClientContractRepository extends AbstractRepository {
 
 	@Query("SELECT c FROM Contract c")
 	Collection<Contract> findAllContracts();
+
+	@Query("SELECT pl FROM ProgressLog pl WHERE pl.contract.id = ?1")
+	Collection<ProgressLog> findProgressLogsByContractId(int id);
 
 	@Query("SELECT p FROM Project p")
 	Collection<Project> findAllProjects();

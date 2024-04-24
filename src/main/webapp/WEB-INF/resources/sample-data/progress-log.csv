@@ -1,5 +1,5 @@
 key,record-id,completeness-percentage,progress-comment,registration-moment,responsible-person,key:contract,draft-mode
-progress-log-01,PG-AH-0123,53.7,This is an example,2019/12/07 05:19,Casemiro,contract-01,true
+progress-log-01,PG-AH-0123,53.7,This is an example,2019/12/07 05:19,Casemiro,contract-01,false
 progress-log-02,PG-GJ-3927,99.9,Sin &.-sentido,2009/02/21 22:59,مرحباً بالعالم,contract-02,true
 progress-log-03,PG-K-2193,76.6,T3xt0 c0n num3r0s,2000/01/13 19:20,Ñejo,contract-03,true
 progress-log-04,PG-LN-2139,62.1,Ejemplos y mas ejemplos,2020/04/09 17:45,你好 世界,contract-04,true
