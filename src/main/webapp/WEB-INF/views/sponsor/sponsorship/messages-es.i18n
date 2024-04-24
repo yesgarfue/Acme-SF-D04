@@ -3,14 +3,21 @@ sponsor.sponsorship.form.title = Patrocinio
 
 # Sponsorship List ##############################
 
-Code 			= Código
-StartDate 		= Fecha de inicio
-Cost 			= Costo
-SponsorshipType = Tipo de Patrocinio
-Email 			= Correo electronico
-URL 			= URL
+sponsor.sponsorship.label.code 				= Código
+sponsor.sponsorship.label.startDate 		= Fecha de inicio
+sponsor.sponsorship.label.cost 				= Costo
+sponsor.sponsorship.label.sponsorshipType	= Tipo de Patrocinio
+sponsor.sponsorship.label.email 			= Correo electronico
+sponsor.sponsorship.label.url				= URL
+sponsor.sponsorship.label.projectId			= Código del Proyecto
 
 # Sponsorship Show ##############################
 
-Moment = Momento
-FinishDate = Fecha de finalización
+sponsor.sponsorship.label.moment 		= Momento
+sponsor.sponsorship.label.finishDate 	= Fecha de finalización
+
+sponsor.sponsorship.button.invoices		= Facturas
+sponsor.sponsorship.button.create		= Crear
+sponsor.sponsorship.button.update		= Actualizar
+sponsor.sponsorship.button.delete		= Eliminar
+sponsor.sponsorship.button.publish		= Publicar

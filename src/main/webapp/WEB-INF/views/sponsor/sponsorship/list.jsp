@@ -4,13 +4,17 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:list>
-	<acme:list-column code="Code" path="code" width="10%"/>
-	<acme:list-column code="StartDate" path="startDate" width="20%"/>
-	<acme:list-column code="Cost" path="amount" sortable="false" width="20%"/>
-	<acme:list-column code="ProjectId" path="project.code" width="10%"/>
-	<acme:list-column code="SponsorshipType" path="sponsorshipType" sortable="false" width="20%"/>
-	<acme:list-column code="Email" path="email" sortable="false" width="10%"/>
-	<acme:list-column code="URL" path="link" sortable="false" width="20%"/>
+	<acme:list-column code="sponsor.sponsorship.label.projectId" path="project.code" width="10%"/>
+	<acme:list-column code="sponsor.sponsorship.label.startDate" path="startDate" width="20%"/>
+	<jstl:if test="${_command == 'my-list'}">
+		<acme:list-column code="sponsor.sponsorship.label.code" path="code" width="10%"/>
+	</jstl:if>
+	<acme:list-column code="sponsor.sponsorship.label.cost" path="amount" sortable="false" width="20%"/>
+	<acme:list-column code="sponsor.sponsorship.label.sponsorshipType" path="sponsorshipType" sortable="false" width="20%"/>
+	<acme:list-column code="sponsor.sponsorship.label.url" path="link" sortable="false" width="20%"/>
 </acme:list>
 
-<acme:button code="Create" action="/sponsor/sponsorship/create"/>
+<jstl:if test="${_command == 'my-list'}">
+	<acme:button code="sponsor.sponsorship.button.create" action="/sponsor/sponsorship/create"/>
+</jstl:if>
+

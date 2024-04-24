@@ -73,6 +73,11 @@ master.menu.sponsor.sponsorship = Sponsorships
 master.menu.sponsor.invoices = Invoices
 master.menu.sponsor.dashboard = Dashboard
 
+master.menu.sponsor.sponsorship.allSponsorship = All Sponsorships
+master.menu.sponsor.sponsorship.mySponsorship = My Sponsorship
+
+master.menu.sponsor.sponsorship.create = New
+
 # master.menu.user-account ###############################################################
 
 master.menu.user-account = Account

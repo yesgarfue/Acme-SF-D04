@@ -56,7 +56,6 @@
 			<acme:menu-suboption code="master.menu.any.projects" action="/any/project/list"/>
 			<acme:menu-suboption code="master.menu.any.claims" action="/any/claim/list"/>
 			<acme:menu-suboption code="master.menu.any.trainingModules" action="/any/training-module/list"/>
-			<acme:menu-suboption code="master.menu.any.sponsorship" action="/any/sponsorship/list"/>
 		</acme:menu-option>
 		
 		<acme:menu-option code="master.menu.developer" access="hasRole('Developer')">
@@ -65,7 +64,13 @@
 			<acme:menu-suboption code="master.menu.developer.dashboard" action="/developer/developer-dashboard/show"/>
 		</acme:menu-option>
 		
-		<acme:menu-option code="master.menu.sponsor.sponsorship" action="/sponsor/sponsorship/list" access="hasRole('Sponsor')"/>
+		<acme:menu-option code="master.menu.sponsor.sponsorship" access="hasRole('Sponsor')">
+			<acme:menu-suboption code="master.menu.sponsor.sponsorship.allSponsorship" action="/sponsor/sponsorship/list"/>
+			<acme:menu-suboption code="master.menu.sponsor.sponsorship.mySponsorship" action="/sponsor/sponsorship/my-list"/>
+			<acme:menu-separator/>
+			<acme:menu-suboption code="master.menu.sponsor.sponsorship.create" action="/sponsor/sponsorship/create"/>
+		</acme:menu-option>
+			
 		<acme:menu-option code="master.menu.sponsor.invoices" action="/sponsor/invoice/list" access="hasRole('Sponsor')"/>
 		<acme:menu-option code="master.menu.sponsor.dashboard" action="/sponsor/dashboard/list" access="hasRole('Sponsor')"/>
 	</acme:menu-left>

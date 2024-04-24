@@ -5,21 +5,21 @@
 
 <acme:form>
 	<acme:hidden-data path="id"/>
-	<acme:input-textbox code="Code" path="code"/>
-	<acme:input-moment code="Moment" path="moment"/>
-	<acme:input-textbox code="StartDate" path="startDate"/>
-	<acme:input-textbox code="FinishDate" path="finishDate"/>
-	<acme:input-double code="Cost" path="amount"/>
-	<acme:input-select code="ProjectCode" path="project" choices="${projects}"/>
-	<acme:input-select code="SponsorshipType" path="sponsorshipType" choices="${sponsorshipType}" readonly="${acme:anyOf(sponsorshipType,'FINANCIAL|INKIND')}"/>	
-	<acme:input-textbox code="Email" path="email"/>
-	<acme:input-textbox code="URL" path="link"/>
+	<acme:input-textbox code="sponsor.sponsorship.label.code" path="code"/>
+	<acme:input-moment code="sponsor.sponsorship.label.moment" path="moment"/>
+	<acme:input-textbox code="sponsor.sponsorship.label.startDate" path="startDate"/>
+	<acme:input-textbox code="sponsor.sponsorship.label.finishDate" path="finishDate"/>
+	<acme:input-double code="sponsor.sponsorship.label.cost" path="amount"/>
+	<acme:input-select code="sponsor.sponsorship.label.projectCode" path="project" choices="${projects}"/>
+	<acme:input-select code="sponsor.sponsorship.label.sponsorshipType" path="sponsorshipType" choices="${sponsorshipType}" readonly="${acme:anyOf(sponsorshipType,'FINANCIAL|INKIND')}"/>	
+	<acme:input-textbox code="sponsor.sponsorship.label.email" path="email"/>
+	<acme:input-textbox code="sponsor.sponsorship.label.url" path="link"/>
 	<jstl:choose>
 		<jstl:when test="${_command =='show'}">
-			<acme:submit code="Create" action="/sponsor/sponsorship/create"/>
-			<acme:submit code="Update" action="/sponsor/sponsorship/update"/>
-			<acme:submit code="Delete" action="/sponsor/sponsorship/delete"/>
-			<acme:submit code="Publish" action="/sponsor/sponsorship/publish"/>
+			<acme:button code="sponsor.sponsorship.button.invoices" action="/sponsor/invoice/list?shipId=${id}"/>
+			<acme:submit code="sponsor.sponsorship.button.update" action="/sponsor/sponsorship/update"/>
+			<acme:submit code="sponsor.sponsorship.button.delete" action="/sponsor/sponsorship/delete"/>
+			<acme:submit code="sponsor.sponsorship.button.publish" action="/sponsor/sponsorship/publish"/>
 		</jstl:when>
 	</jstl:choose>
 </acme:form>
