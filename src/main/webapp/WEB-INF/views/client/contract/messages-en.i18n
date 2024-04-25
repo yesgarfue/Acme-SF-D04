@@ -30,6 +30,13 @@ client.contract.button.update = Update
 client.contract.button.delete = Delete
 client.contract.button.publish = Publish
 
-##############################################################
+################################################################################
 
 client.contract.form.title = Contract
+
+#################################################################################
+
+client.contract.error.code.duplicated = Duplicated Contract
+client.contract.error.code.exceededBudget = Exceeded Budget
+client.contract.error.code.negative-amount = Negative Amount
+client.contract.error.code.currency-not-supported = Currency Not Supported
