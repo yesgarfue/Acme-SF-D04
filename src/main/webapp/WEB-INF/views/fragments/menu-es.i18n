@@ -78,6 +78,8 @@ master.menu.manager.dashboard = Panel de Registros
 
 master.menu.auditor = Auditor
 master.menu.auditor.code-audit = Auditorías de código
+master.menu.auditor.audit-records = Registros de auditoría
+master.menu.auditor.dashboard = Panel de control
 
 # master.menu.user-account ####################################################
 
