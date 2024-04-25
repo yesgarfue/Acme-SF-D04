@@ -16,5 +16,5 @@ auditor.auditRecords.error.code.duplicated = Auditoría duplicada
 auditor.audit-records.label.code = Código
 auditor.audit-records.label.mark = Nota
 auditor.audit-records.label.optionalLink = Link opcional
-auditor.audit-records.list.title = Auditorías de código
-auditor.audit-records.form.title = Auditoría de código
+auditor.audit-records.list.title = Registros de auditoría
+auditor.audit-records.form.title = Registro de auditoría
