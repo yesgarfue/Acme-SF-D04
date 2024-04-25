@@ -80,7 +80,8 @@ public class AuditorAuditRecordsPublishService extends AbstractService<Auditor, 
 
 		Dataset dataset;
 		SelectChoices choices;
-		final Collection<CodeAudit> codeAudits = this.repository.findAllCodeAudits();
+		int id = super.getRequest().getPrincipal().getActiveRoleId();
+		final Collection<CodeAudit> codeAudits = this.repository.findAllCodeAudits(id);
 
 		dataset = super.unbind(object, "code", "startTime", "finishTime", "mark", "optionalLink", "draftMode");
 		dataset.put("AuditRecordId", object.getId());

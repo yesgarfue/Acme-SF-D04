@@ -1,6 +1,8 @@
 
 package acme.entities.audits;
 
+import java.beans.Transient;
+import java.time.Duration;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -17,6 +19,7 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.URL;
 
 import acme.client.data.AbstractEntity;
+import acme.client.helpers.MomentHelper;
 import acme.enumerate.Mark;
 import lombok.Getter;
 import lombok.Setter;
@@ -61,9 +64,19 @@ public class AuditRecords extends AbstractEntity {
 	@NotNull
 	private boolean				draftMode;
 
+	// Derived attributes -----------------------------------------------------
+
+
+	@Transient
+	public Double getHoursFromPeriod() {
+		final Duration duration = MomentHelper.computeDuration(this.startTime, this.finishTime);
+		return duration.getSeconds() / 3600.0;
+	}
+
+
 	// Relationships ----------------------------------------------------------
 	@ManyToOne
 	@NotNull
 	@Valid
-	private CodeAudit			codeAudit;
+	private CodeAudit codeAudit;
 }

@@ -56,6 +56,7 @@
 		<acme:menu-option code="master.menu.auditor" access="hasRole('Auditor')">
 			<acme:menu-suboption code="master.menu.auditor.code-audit" action="/auditor/code-audit/list"/>
 			<acme:menu-suboption code="master.menu.auditor.audit-records" action="/auditor/audit-records/list"/>
+			<acme:menu-suboption code="master.menu.auditor.dashboard" action="/auditor/auditor-dashboard/show"/>			
 		</acme:menu-option>
 		
 		<acme:menu-option code="master.menu.any">
@@ -70,6 +71,12 @@
 			<acme:menu-suboption code="master.menu.developer.trainingModules" action="/developer/training-module/list"/>
 			<acme:menu-suboption code="master.menu.developer.trainingSession" action="/developer/training-session/list"/>
 			<acme:menu-suboption code="master.menu.developer.dashboard" action="/developer/developer-dashboard/show"/>
+		</acme:menu-option>
+		
+		<acme:menu-option code="master.menu.client" access="hasRole('Client')">
+			<acme:menu-suboption code="master.menu.client.contracts" action="/client/contract/list"/>
+			<acme:menu-suboption code="master.menu.client.progressLogs" action="/client/progress-log/list"/>
+			<acme:menu-suboption code="master.menu.client.dashboard" action="/client/client-dashboard/show"/>
 		</acme:menu-option>
 		
 	</acme:menu-left>

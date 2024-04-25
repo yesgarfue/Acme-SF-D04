@@ -63,6 +63,13 @@ master.menu.developer.trainingModules = Módulos de entrenamiento
 master.menu.developer.trainingSession = Sesiones de entrenamiento
 master.menu.developer.dashboard = Panel de control
 
+# master.menu.client ##########################################################
+
+master.menu.client = Cliente
+master.menu.client.contracts = Contratos
+master.menu.client.progressLogs = Registros de progreso
+master.menu.client.dashboard = Panel de control
+
 master.menu.manager.projects = Proyectos
 master.menu.manager.user-stories = Historias de usuario
 master.menu.manager.dashboard = Panel de Registros	

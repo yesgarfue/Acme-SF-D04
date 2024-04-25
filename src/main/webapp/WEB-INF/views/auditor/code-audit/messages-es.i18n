@@ -9,7 +9,7 @@
  ##########################################################
  auditor.code-audit.form.title = Auditoría de código
  auditor.code-audit.form.label.project = Proyecto
- auditor.code-audit.form.label.code = Código
+ auditor.code-audit.form.label.code = Código 
  auditor.code-audit.form.label.executionDate = Fecha de ejecución
  auditor.code-audit.form.label.type = Tipo
  auditor.code-audit.form.label.correctiveActions = Acciones correctivas

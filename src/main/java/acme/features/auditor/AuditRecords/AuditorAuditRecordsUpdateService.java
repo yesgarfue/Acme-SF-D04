@@ -63,6 +63,15 @@ public class AuditorAuditRecordsUpdateService extends AbstractService<Auditor, A
 			existing = this.repository.findAuditRecordByCode(object.getCode());
 			super.state(existing == null || existing.getId() == object.getId(), "code", "code", "auditor.auditRecords.error.code.duplicated");
 		}
+		if (!super.getBuffer().getErrors().hasErrors("startTime") && !super.getBuffer().getErrors().hasErrors("finishTime")) {
+			super.state(object.getStartTime().before(object.getFinishTime()), "finishTime", "auditor.auditRecords.error.finishTime.afterStartTime");
+			super.state(object.getFinishTime().after(object.getStartTime()), "startTime", "auditor.auditRecords.error.startTime.afterFinishTime");
+
+			long oneHourInMillis = 60 * 60 * 1000; // 1 hora en milisegundos
+			long diffM_SF = object.getFinishTime().getTime() - object.getStartTime().getTime();
+
+			super.state(diffM_SF >= oneHourInMillis, "startTime", "auditor.auditRecords.error.duration.lessThanOneHour");
+		}
 	}
 
 	@Override
@@ -78,7 +87,8 @@ public class AuditorAuditRecordsUpdateService extends AbstractService<Auditor, A
 
 		Dataset dataset;
 		SelectChoices choices;
-		final Collection<CodeAudit> codeAudits = this.repository.findAllCodeAudits();
+		int id = super.getRequest().getPrincipal().getActiveRoleId();
+		final Collection<CodeAudit> codeAudits = this.repository.findAllCodeAudits(id);
 
 		dataset = super.unbind(object, "code", "startTime", "finishTime", "mark", "optionalLink", "draftMode");
 		dataset.put("AuditRecordId", object.getId());

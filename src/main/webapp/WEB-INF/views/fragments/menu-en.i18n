@@ -65,11 +65,6 @@ master.menu.developer.trainingModules = Training modules
 master.menu.developer.trainingSession = Training sessions
 master.menu.developer.dashboard = Dashboard
 
-# master.menu.auditor ##########################################################
-
-master.menu.auditor = Auditor
-master.menu.auditor.code-audit = Code Audits
-
 # master.menu.user-account ####################################################
 
 master.menu.user-account = Account

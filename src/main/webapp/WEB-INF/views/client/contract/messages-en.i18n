@@ -1,0 +1,35 @@
+
+################################################################################
+client.contract.list.title = Contracts
+client.contract.label.code = Code
+client.contract.label.instantiationMoment = Instantiation Moment
+client.contract.label.providerName = Provider Name
+client.contract.label.customerName = Customer Name
+client.contract.label.goals = Goals
+client.contract.label.budget = Budget
+client.contract.label.draftMode = Draft Mode
+
+client.contract.button.create = Create Contract
+
+################################################################################
+
+client.contract.form.label.code = Code
+client.contract.form.label.project = Project
+client.contract.form.label.instantiationMoment = Instantiation Moment
+client.contract.form.label.providerName = Provider Name
+client.contract.form.label.customerName = Customer Name
+client.contract.form.label.goals = Goals
+client.contract.form.label.budget = Budget
+client.contract.form.draftMode = Draft Mode
+client.contract.label.project = Project Id
+
+################################################################################
+
+client.contract.button.create = Create
+client.contract.button.update = Update
+client.contract.button.delete = Delete
+client.contract.button.publish = Publish
+
+##############################################################
+
+client.contract.form.title = Contract
