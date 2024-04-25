@@ -48,7 +48,14 @@ public class ClientContractCreateService extends AbstractService<Client, Contrac
 	@Override
 	public void bind(final Contract object) {
 		assert object != null;
-		super.bind(object, "code", "instantiationMoment", "providerName", "customerName", "goals", "budget", "draftMode", "project");
+		int projectId;
+		Project project;
+
+		projectId = super.getRequest().getData("project", int.class);
+		project = this.repository.findProjectById(projectId);
+
+		super.bind(object, "code", "instantiationMoment", "providerName", "customerName", "goals", "budget", "draftMode");
+		object.setProject(project);
 	}
 
 	@Override
@@ -59,7 +66,7 @@ public class ClientContractCreateService extends AbstractService<Client, Contrac
 			Contract existing;
 
 			existing = this.repository.findContractByCode(object.getCode());
-			super.state(existing == null, "code", "developer.trainingModule.error.code.duplicated");
+			super.state(existing == null, "code", "client.contract.error.code.duplicated");
 		}
 	}
 

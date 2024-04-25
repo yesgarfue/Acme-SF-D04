@@ -2,6 +2,7 @@
 package acme.features.client.contract;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 
@@ -10,6 +11,7 @@ import acme.entities.contract.Contract;
 import acme.entities.contract.ProgressLog;
 import acme.entities.projects.Project;
 import acme.roles.Client;
+import acme.systemConfiguration.SystemConfiguration;
 
 public interface ClientContractRepository extends AbstractRepository {
 
@@ -34,4 +36,9 @@ public interface ClientContractRepository extends AbstractRepository {
 	@Query("SELECT p FROM Project p")
 	Collection<Project> findAllProjects();
 
+	@Query("SELECT p FROM Project p WHERE p.id = ?1")
+	Project findProjectById(int id);
+
+	@Query("SELECT s FROM SystemConfiguration s")
+	List<SystemConfiguration> findSystemConfiguration();
 }

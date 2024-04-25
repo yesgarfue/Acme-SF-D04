@@ -2,6 +2,8 @@
 package acme.features.client.contract;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,12 +12,12 @@ import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
 import acme.client.views.SelectChoices;
 import acme.entities.contract.Contract;
-import acme.entities.contract.ProgressLog;
 import acme.entities.projects.Project;
 import acme.roles.Client;
+import acme.systemConfiguration.SystemConfiguration;
 
 @Service
-public class ClientContractDeleteService extends AbstractService<Client, Contract> {
+public class ClientContractPublishService extends AbstractService<Client, Contract> {
 
 	// Internal state ---------------------------------------------------------
 
@@ -64,16 +66,47 @@ public class ClientContractDeleteService extends AbstractService<Client, Contrac
 	public void validate(final Contract object) {
 		assert object != null;
 
+		if (!super.getBuffer().getErrors().hasErrors("code")) {
+			Contract existing;
+
+			existing = this.repository.findContractByCode(object.getCode());
+			super.state(existing == null || existing.equals(object), "code", "client.contract.error.code.duplicated");
+
+			if (!super.getBuffer().getErrors().hasErrors("budget")) {
+				super.state(this.checkContractsAmountsLessThanProjectCost(object), "budget", "client.contract.error.code.exceededBudget");
+				super.state(object.getBudget().getAmount() > 0, "budget", "client.contract.error.code.negative-amount");
+
+				List<SystemConfiguration> sc = this.repository.findSystemConfiguration();
+				final boolean foundCurrency = Stream.of(sc.get(0).aceptedCurrencies.split(",")).anyMatch(c -> c.equals(object.getBudget().getCurrency()));
+
+				super.state(foundCurrency, "budget", "client.contract.error.code.currency-not-supported");
+
+			}
+		}
+
+	}
+
+	private Boolean checkContractsAmountsLessThanProjectCost(final Contract object) {
+		assert object != null;
+
+		if (object.getProject() != null) {
+			Collection<Contract> contratos = this.repository.findManyContractsByClientId(object.getProject().getId());
+
+			Double budgetTotal = contratos.stream().filter(contract -> !contract.getDraftMode()).mapToDouble(contract -> contract.getBudget().getAmount()).sum();
+
+			Double projectCost = object.getProject().getCost().getAmount();
+
+			return projectCost >= budgetTotal + object.getBudget().getAmount();
+		}
+
+		return true;
 	}
 
 	@Override
 	public void perform(final Contract object) {
 		assert object != null;
-		Collection<ProgressLog> logs;
-
-		logs = this.repository.findProgressLogsByContractId(object.getId());
-		this.repository.deleteAll(logs);
-		this.repository.delete(object);
+		object.setDraftMode(false);
+		this.repository.save(object);
 	}
 
 	@Override
