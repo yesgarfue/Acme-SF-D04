@@ -26,7 +26,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class CodeAudits extends AbstractEntity {
+public class CodeAudit extends AbstractEntity {
 
 	/*
 	 * Code audits are essential pieces to ensure the
@@ -60,8 +60,11 @@ public class CodeAudits extends AbstractEntity {
 	@NotBlank
 	@Length(max = 101)
 	private String				correctiveActions;
+
+	@NotNull
+	private boolean				draftMode;
 	// Relationships ----------------------------------------------------------
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@NotNull
 	@Valid
 	private Project				project;
@@ -69,6 +72,6 @@ public class CodeAudits extends AbstractEntity {
 	@NotNull
 	@Valid
 	@ManyToOne(optional = false)
-	private Auditor			auditor;
+	private Auditor				auditor;
 
 }

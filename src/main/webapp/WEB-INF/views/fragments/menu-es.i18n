@@ -74,6 +74,11 @@ master.menu.manager.projects = Proyectos
 master.menu.manager.user-stories = Historias de usuario
 master.menu.manager.dashboard = Panel de Registros	
 
+# master.menu.auditor ##########################################################
+
+master.menu.auditor = Auditor
+master.menu.auditor.code-audit = Auditorías de código
+
 # master.menu.user-account ####################################################
 
 master.menu.user-account = Cuenta

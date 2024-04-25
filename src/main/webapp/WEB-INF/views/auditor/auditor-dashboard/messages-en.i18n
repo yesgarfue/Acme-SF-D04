@@ -1,0 +1,11 @@
+auditor.dashboard.label.totalNumberOfStaticCodeAudits = Total number of "STATIC" code audits
+auditor.dashboard.label.totalNumberOfDynamicCodeAudits = Total number of "DYNAMIC" code audits
+auditor.dashboard.label.averageNumberOfAuditingRecords = Average number of auditing records
+auditor.dashboard.label.deviationOfAuditingRecords = Deviation of auditing records
+auditor.dashboard.label.minimumNumberOfAuditingRecords = Minimum number of auditing records
+auditor.dashboard.label.maximumNumberOfAuditingRecords = Maximum number of auditing records
+auditor.dashboard.label.averageTimeOfAuditingRecords = Average time of auditing records (hours)
+auditor.dashboard.label.timeDeviationOfAuditingRecords = Time deviation of auditing records (hours)
+auditor.dashboard.label.minimumTimeOfAuditingRecords = Minimum time of auditing records (hours)
+auditor.dashboard.label.maximumTimeOfAuditingRecords = Maximum time of auditing records(hours)
+
