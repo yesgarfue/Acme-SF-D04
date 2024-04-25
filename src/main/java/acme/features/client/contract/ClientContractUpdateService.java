@@ -7,15 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
+import acme.client.helpers.PrincipalHelper;
 import acme.client.services.AbstractService;
 import acme.client.views.SelectChoices;
 import acme.entities.contract.Contract;
-import acme.entities.contract.ProgressLog;
 import acme.entities.projects.Project;
 import acme.roles.Client;
 
 @Service
-public class ClientContractDeleteService extends AbstractService<Client, Contract> {
+public class ClientContractUpdateService extends AbstractService<Client, Contract> {
 
 	// Internal state ---------------------------------------------------------
 
@@ -64,16 +64,19 @@ public class ClientContractDeleteService extends AbstractService<Client, Contrac
 	public void validate(final Contract object) {
 		assert object != null;
 
+		if (!super.getBuffer().getErrors().hasErrors("code")) {
+			Contract existing;
+
+			existing = this.repository.findContractByCode(object.getCode());
+			super.state(existing == null || existing.getId() == object.getId(), "code", "client.contract.error.code.duplicated");
+		}
 	}
 
 	@Override
 	public void perform(final Contract object) {
 		assert object != null;
-		Collection<ProgressLog> logs;
 
-		logs = this.repository.findProgressLogsByContractId(object.getId());
-		this.repository.deleteAll(logs);
-		this.repository.delete(object);
+		this.repository.save(object);
 	}
 
 	@Override
@@ -94,6 +97,12 @@ public class ClientContractDeleteService extends AbstractService<Client, Contrac
 		dataset.put("projects", choices);
 
 		super.getResponse().addData(dataset);
+	}
+
+	@Override
+	public void onSuccess() {
+		if (super.getRequest().getMethod().equals("PUT"))
+			PrincipalHelper.handleUpdate();
 	}
 
 }
