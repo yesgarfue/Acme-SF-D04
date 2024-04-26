@@ -83,14 +83,11 @@ master.menu.client.dashboard = Dashboard
 # master.menu.sponsor ####################################################################
 
 master.menu.sponsor = Sponsor
-master.menu.sponsor.sponsorship = Sponsorships
-master.menu.sponsor.invoices = Invoices
+
+master.menu.sponsor.allSponsorship = All Sponsorships
+master.menu.sponsor.mySponsorship = My Sponsorship
 master.menu.sponsor.dashboard = Dashboard
 
-master.menu.sponsor.sponsorship.allSponsorship = All Sponsorships
-master.menu.sponsor.sponsorship.mySponsorship = My Sponsorship
-
-master.menu.sponsor.sponsorship.create = New
 
 # master.menu.user-account ###############################################################
 

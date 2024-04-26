@@ -1,0 +1,14 @@
+sponsor.sponsor-dashboard.form.title = Estadisticas
+
+sponsor.dashboard.label.sponsorship.minimumSponsorshipsAmount = minimumSponsorshi
+sponsor.dashboard.label.sponsorship.maximunSponsorshipsAmount = maximunSponsorsh
+sponsor.dashboard.label.sponsorship.averageSponsorshipsAmount = averageSpo
+sponsor.dashboard.label.sponsorship.deviationSponsorshipsAmount = deviationSpo
+	
+sponsor.dashboard.label.invoice.minimumInvoicesQuantity = minimumInvoic
+sponsor.dashboard.label.invoice.maximunInvoicesQuantity = maximunInv
+sponsor.dashboard.label.invoice.averageInvoicesQuantity = averageInvo
+sponsor.dashboard.label.invoice.deviationInvoicesQuantity = deviationInvoice
+	
+sponsor.dashboard.label.totalNumInvoicesWithTaxLessOrEqualTo21 = totalNumInvoicesWithT
+sponsor.dashboard.label.totalNumInvoicesWithLink = totalNumInv 
