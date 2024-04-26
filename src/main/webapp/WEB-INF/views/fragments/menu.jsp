@@ -70,9 +70,10 @@
 			<acme:menu-suboption code="master.menu.developer.dashboard" action="/developer/developer-dashboard/show"/>
 		</acme:menu-option>
 		
-		<acme:menu-option code="master.menu.sponsor.sponsorship" access="hasRole('Sponsor')">
-			<acme:menu-suboption code="master.menu.sponsor.sponsorship.allSponsorship" action="/sponsor/sponsorship/list"/>
-			<acme:menu-suboption code="master.menu.sponsor.sponsorship.mySponsorship" action="/sponsor/sponsorship/my-list"/>
+		<acme:menu-option code="master.menu.sponsor" access="hasRole('Sponsor')">
+			<acme:menu-suboption code="master.menu.sponsor.allSponsorship" action="/sponsor/sponsorship/list"/>
+			<acme:menu-suboption code="master.menu.sponsor.mySponsorship" action="/sponsor/sponsorship/my-list"/>
+			<acme:menu-suboption code="master.menu.sponsor.dashboard" action="/sponsor/sponsor-dashboard/show"/>
 		</acme:menu-option>
 		
 		<acme:menu-option code="master.menu.client" access="hasRole('Client')">
