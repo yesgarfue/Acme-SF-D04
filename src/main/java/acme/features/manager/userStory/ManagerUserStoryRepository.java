@@ -32,6 +32,4 @@ public interface ManagerUserStoryRepository extends AbstractRepository {
 	@Query("DELETE FROM ProjectUserStory pus WHERE pus.userStory.id= :id")
 	void deleteAllReferencesToUserStoryByUserStoryId(Integer id);
 
-	@Query("SELECT sc.aceptedCurrencies FROM SystemConfiguration sc")
-	String getAvailableCurrencies();
 }

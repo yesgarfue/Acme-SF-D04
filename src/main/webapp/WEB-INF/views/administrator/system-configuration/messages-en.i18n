@@ -9,3 +9,4 @@ administrator.config.form.error.unavailable = System currency unavailable
 administrator.config.form.error.pattern = Pattern must be "[A-Z]{3}"
 administrator.config.form.error.duplicated = This currency is taken
 administrator.config.form.error.blank = New currency must not be blank
+administrator.system-configuration.form.title = Divise

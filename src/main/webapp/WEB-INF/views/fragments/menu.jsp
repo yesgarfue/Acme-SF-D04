@@ -52,6 +52,12 @@
 			<acme:menu-suboption code="master.menu.manager.dashboard" action="/manager/manager-dashboard/show"/>
 		</acme:menu-option>
 		
+		<acme:menu-option code="master.menu.auditor" access="hasRole('Auditor')">
+			<acme:menu-suboption code="master.menu.auditor.code-audit" action="/auditor/code-audit/list"/>
+			<acme:menu-suboption code="master.menu.auditor.audit-records" action="/auditor/audit-records/list"/>
+			<acme:menu-suboption code="master.menu.auditor.dashboard" action="/auditor/auditor-dashboard/show"/>			
+		</acme:menu-option>
+		
 		<acme:menu-option code="master.menu.any">
 			<acme:menu-suboption code="master.menu.any.projects" action="/any/project/list"/>
 			<acme:menu-suboption code="master.menu.any.claims" action="/any/claim/list"/>
@@ -73,6 +79,13 @@
 			
 		<acme:menu-option code="master.menu.sponsor.invoices" action="/sponsor/invoice/list" access="hasRole('Sponsor')"/>
 		<acme:menu-option code="master.menu.sponsor.dashboard" action="/sponsor/dashboard/list" access="hasRole('Sponsor')"/>
+
+		<acme:menu-option code="master.menu.client" access="hasRole('Client')">
+			<acme:menu-suboption code="master.menu.client.contracts" action="/client/contract/list"/>
+			<acme:menu-suboption code="master.menu.client.progressLogs" action="/client/progress-log/list"/>
+			<acme:menu-suboption code="master.menu.client.dashboard" action="/client/client-dashboard/show"/>
+		</acme:menu-option>
+
 	</acme:menu-left>
 	
 	<acme:menu-right>

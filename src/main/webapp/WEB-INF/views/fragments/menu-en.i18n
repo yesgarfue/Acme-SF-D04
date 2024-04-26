@@ -52,7 +52,14 @@ master.menu.provider.favourite-link = Favourite link
 master.menu.consumer = Consumer
 master.menu.consumer.favourite-link = Favourite link
 
-# master.menu.manager ####################################################################
+# master.menu.auditor ##########################################################
+
+master.menu.auditor = Auditor
+master.menu.auditor.code-audit = Code Audits
+master.menu.auditor.audit-records = Audit Records
+master.menu.auditor.dashboard = Dashboard
+
+# master.menu.manager ##########################################################
 
 master.menu.manager = Manager
 master.menu.manager.projects = Projects

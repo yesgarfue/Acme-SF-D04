@@ -12,7 +12,7 @@
 	</jstl:if>	
 	<acme:input-textbox code="manager.user-story.label.title" path="title"/>
 	<acme:input-textarea code="manager.user-story.label.description" path="description"/>	
-	<acme:input-money code="manager.user-story.label.estimatedCost" path="estimatedCost"/>
+	<acme:input-integer code="manager.user-story.label.estimatedCost" path="estimatedCost"/>
 	<acme:input-textarea code="manager.user-story.label.acceptanceCriteria" path="acceptanceCriteria"/>
 	<acme:input-textbox code="manager.user-story.label.link" path="link"/>
 	<jstl:if test="${draftMode == false}">
