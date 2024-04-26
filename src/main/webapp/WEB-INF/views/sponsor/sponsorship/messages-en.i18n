@@ -1,0 +1,23 @@
+sponsor.sponsorship.list.title = Sponsorships
+sponsor.sponsorship.form.title = Sponsorship
+
+# Sponsorship List ##############################
+
+sponsor.sponsorship.label.code 				= Code
+sponsor.sponsorship.label.startDate 		= StartDate 
+sponsor.sponsorship.label.cost 				= Cost
+sponsor.sponsorship.label.sponsorshipType	= SponsorshipType
+sponsor.sponsorship.label.email 			= Email
+sponsor.sponsorship.label.url				= URL
+sponsor.sponsorship.label.projectId			= Project's code
+
+# Sponsorship Show ##############################
+
+sponsor.sponsorship.label.moment		= Moment
+sponsor.sponsorship.label.finishDate	= FinishDate
+
+sponsor.sponsorship.button.invoices		= Invoices
+sponsor.sponsorship.button.create		= Create
+sponsor.sponsorship.button.update		= Update
+sponsor.sponsorship.button.delete		= Delete
+sponsor.sponsorship.button.publish		= Publish
