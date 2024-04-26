@@ -1,0 +1,14 @@
+sponsor.invoice.list.title = Facturas
+sponsor.invoice.form.title = Factura
+
+sponsor.invoice.label.code = Código
+sponsor.invoice.label.registrationTime = Fecha de Registro
+sponsor.invoice.label.dueDate = Fecha de Vencimiento
+sponsor.invoice.label.quantity = Cantidad
+sponsor.invoice.label.tax = Impuesto
+sponsor.invoice.label.link = URL
+
+sponsor.invoice.button.create = Crear
+sponsor.invoice.button.update = Modificar
+sponsor.invoice.button.delete = Eliminar
+sponsor.invoice.button.publish = Publicar
