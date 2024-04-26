@@ -8,20 +8,24 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
-# master.menu #################################################################
+# master.menu ############################################################################
 
 master.menu.home = Inicio
 master.menu.sign-up = Registrarse
 master.menu.sign-in = Entrar
 master.menu.sign-out = Salir
 
-# master.menu.any #######################################################
+# master.menu.any ########################################################################
 
 master.menu.any = Cualquiera
 master.menu.any.projects = Proyectos
 master.menu.any.claims = Reclamaciones
+master.menu.any.sponsorship = Patrocinios
 
-# master.menu.anonymous #######################################################
+master.menu.sponsor.sponsorship.allSponsorship = Todos los patrocinios
+master.menu.sponsor.sponsorship.mySponsorship = Mis patrocinios
+
+# master.menu.anonymous ##################################################################
 
 master.menu.anonymous = Anónimo
 master.menu.anonymous.favourite-link-yesica = Y8101055D: Garate Fuentes, Yesica Leydi
@@ -30,7 +34,7 @@ master.menu.anonymous.favourite-link-oscar = 75914431X: Menendez Marquez, Oscar
 master.menu.anonymous.favourite-link-alvaro = 54188420Y: Ruiz Gutiérrez, Álvaro
 master.menu.anonymous.favourite-link-carlos = 53739238Z: Martín de Prado Barragán, Carlos
 
-# master.menu.administrator ###################################################
+# master.menu.administrator ###############################################################
 
 master.menu.administrator = Administrador
 master.menu.administrator.dashboard = Panel de indicadores
@@ -41,38 +45,49 @@ master.menu.administrator.shut-down = Parar el sistema
 master.menu.administrator.config = Configuración
 master.menu.administrator.banner = Estand Publicitario
 
-# master.menu.provider ########################################################
+# master.menu.provider ###################################################################
 
 master.menu.provider = Proveedor
 master.menu.provider.favourite-link = Enlace favorito
 
-# master.menu.consumer ##########################################################
+# master.menu.consumer ###################################################################
 
 master.menu.consumer = Consumidor
 master.menu.consumer.favourite-link = Enlace favorito
 
-# master.menu.manager ##########################################################
+# master.menu.manager ####################################################################
 
 master.menu.manager = Manager
 master.menu.manager.projects = Todos los proyectos
+master.menu.manager.projects = Proyectos
+master.menu.manager.user-stories = Historias de usuario
+master.menu.manager.dashboard = Panel de Registros	
 
-# master.menu.developer ##########################################################
+# master.menu.developer ##################################################################
 
 master.menu.developer = Desarrollador
 master.menu.developer.trainingModules = Módulos de entrenamiento
 master.menu.developer.trainingSession = Sesiones de entrenamiento
 master.menu.developer.dashboard = Panel de control
 
+# master.menu.sponsor ##################################################################
+
+master.menu.sponsor = Patrocinador
+master.menu.sponsor.sponsorship = Patrocinios
+master.menu.sponsor.invoices = Facturas
+master.menu.sponsor.dashboard = Panel
+
+master.menu.sponsor.sponsorship.allSponsorship = Todos los patrocinios
+master.menu.sponsor.sponsorship.mySponsorship = Mis patrocinios
+
+master.menu.sponsor.sponsorship.create = Nuevo
+
 # master.menu.client ##########################################################
 
 master.menu.client = Cliente
 master.menu.client.contracts = Contratos
 master.menu.client.progressLogs = Registros de progreso
-master.menu.client.dashboard = Panel de control
-
-master.menu.manager.projects = Proyectos
-master.menu.manager.user-stories = Historias de usuario
-master.menu.manager.dashboard = Panel de Registros	
+master.menu.client.dashboard = Panel de control	
 
 # master.menu.auditor ##########################################################
 
