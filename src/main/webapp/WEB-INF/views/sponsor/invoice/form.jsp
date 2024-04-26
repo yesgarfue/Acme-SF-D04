@@ -11,11 +11,13 @@
 	<acme:input-double code="sponsor.invoice.label.tax" path="tax"/>
 	<acme:input-textbox code="sponsor.invoice.label.link" path="link"/>
 	<jstl:choose>
-		<jstl:when test="${_command =='show'}">
-			<acme:submit code="sponsor.invoice.button.create" action="/sponsor/invoice/create"/>
+		<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish')}">
 			<acme:submit code="sponsor.invoice.button.update" action="/sponsor/invoice/update"/>
 			<acme:submit code="sponsor.invoice.button.delete" action="/sponsor/invoice/delete"/>
 			<acme:submit code="sponsor.invoice.button.publish" action="/sponsor/invoice/publish"/>
+		</jstl:when>
+		<jstl:when test="${_command =='create'}">
+			<acme:submit code="sponsor.invoice.list.button.create" action="/sponsor/invoice/create?shipId=${shipId}"/>
 		</jstl:when>
 	</jstl:choose>
 </acme:form>

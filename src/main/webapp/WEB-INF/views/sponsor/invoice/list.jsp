@@ -12,5 +12,5 @@
 	<acme:list-column code="sponsor.invoice.label.link" path="link"/>
 </acme:list>
 
-<acme:button code="sponsor.invoice.button.create" action="/sponsor/invoice/create"/>
+<acme:button test="${showCreate}" code="sponsor.invoice.list.button.create" action="/sponsor/invoice/create?shipId=${shipId}"/>
 
