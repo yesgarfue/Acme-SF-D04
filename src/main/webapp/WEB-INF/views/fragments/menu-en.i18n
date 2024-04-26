@@ -73,6 +73,13 @@ master.menu.developer.trainingModules = Training modules
 master.menu.developer.trainingSession = Training sessions
 master.menu.developer.dashboard = Dashboard
 
+# master.menu.client ##########################################################
+
+master.menu.client = Client
+master.menu.client.contracts = Contracts
+master.menu.client.progressLogs = Progress Logs
+master.menu.client.dashboard = Dashboard	
+
 # master.menu.sponsor ####################################################################
 
 master.menu.sponsor = Sponsor

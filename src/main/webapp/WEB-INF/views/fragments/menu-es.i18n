@@ -76,18 +76,14 @@ master.menu.sponsor = Patrocinador
 
 master.menu.sponsor.allSponsorship = Todos los patrocinios
 master.menu.sponsor.mySponsorship = Mis patrocinios
-master.menu.sponsor.dashboard = Estadisticas
+master.menu.sponsor.dashboard = Panel de Control
 
 # master.menu.client ##########################################################
 
 master.menu.client = Cliente
 master.menu.client.contracts = Contratos
 master.menu.client.progressLogs = Registros de progreso
-master.menu.client.dashboard = Panel de control
-
-master.menu.manager.projects = Proyectos
-master.menu.manager.user-stories = Historias de usuario
-master.menu.manager.dashboard = Panel de Registros	
+master.menu.client.dashboard = Panel de control	
 
 # master.menu.auditor ##########################################################
 

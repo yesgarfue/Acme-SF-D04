@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import acme.client.repositories.AbstractRepository;
 import acme.entities.contract.Contract;
@@ -13,6 +14,7 @@ import acme.entities.projects.Project;
 import acme.roles.Client;
 import acme.systemConfiguration.SystemConfiguration;
 
+@Repository
 public interface ClientContractRepository extends AbstractRepository {
 
 	@Query("SELECT c FROM Client c WHERE c.id = :id")
