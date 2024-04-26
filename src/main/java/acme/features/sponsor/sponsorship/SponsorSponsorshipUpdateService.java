@@ -23,14 +23,22 @@ public class SponsorSponsorshipUpdateService extends AbstractService<Sponsor, Sp
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean status;
+		Sponsorship sponsorship;
+		int shipId;
+
+		shipId = super.getRequest().getData("id", int.class);
+		sponsorship = this.repository.findSponsorshipById(shipId);
+		status = sponsorship != null && super.getRequest().getPrincipal().hasRole(Sponsor.class);
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
 		Sponsorship object;
-		int id = super.getRequest().getData("id", int.class);
 
+		int id = super.getRequest().getData("id", int.class);
 		object = this.repository.findSponsorshipById(id);
 
 		super.getBuffer().addData(object);

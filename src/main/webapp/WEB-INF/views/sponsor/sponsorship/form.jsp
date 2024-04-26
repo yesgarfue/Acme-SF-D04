@@ -22,7 +22,7 @@
 			<acme:submit code="sponsor.sponsorship.button.publish" action="/sponsor/sponsorship/publish"/>
 		</jstl:when>
 		<jstl:when test="${_command =='create'}">
-			<acme:button code="sponsor.sponsorship.button.create" action="/sponsor/sponsorship/create"/>
+			<acme:submit code="sponsor.sponsorship.button.create" action="/sponsor/sponsorship/create"/>
 		</jstl:when>
 	</jstl:choose>
 </acme:form>
