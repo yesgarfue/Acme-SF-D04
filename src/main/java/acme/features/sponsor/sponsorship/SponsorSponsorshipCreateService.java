@@ -23,20 +23,21 @@ public class SponsorSponsorshipCreateService extends AbstractService<Sponsor, Sp
 
 	@Override
 	public void authorise() {
-		//boolean status;
+		boolean status;
 
-		//status = !super.getRequest().getPrincipal().hasRole(Sponsor.class);
-		//super.getResponse().setAuthorised(status);
-		super.getResponse().setAuthorised(true);
+		status = super.getRequest().getPrincipal().hasRole(Sponsor.class);
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
-		Sponsorship object = new Sponsorship();
+		Sponsorship object;
 		Sponsor sponsor;
 
 		sponsor = this.repository.findOneSponsorbyId(super.getRequest().getPrincipal().getActiveRoleId());
+		object = new Sponsorship();
 		object.setSponsor(sponsor);
+
 		super.getBuffer().addData(object);
 	}
 
@@ -77,10 +78,12 @@ public class SponsorSponsorshipCreateService extends AbstractService<Sponsor, Sp
 	public void unbind(final Sponsorship object) {
 		assert object != null;
 
+		//int sponsorId;
 		Collection<Project> projects;
 		SelectChoices choices, choicesEnum;
 		Dataset dataset;
 
+		//sponsorId = super.getRequest().getPrincipal().getActiveRoleId();
 		projects = this.repository.findAllProjects();
 		choices = SelectChoices.from(projects, "code", object.getProject());
 		choicesEnum = SelectChoices.from(SponsorshipType.class, object.getSponsorshipType());

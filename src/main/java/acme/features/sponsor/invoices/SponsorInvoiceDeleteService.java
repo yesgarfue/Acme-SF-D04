@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
 import acme.entities.sponsor.Invoice;
+import acme.entities.sponsor.Sponsorship;
 import acme.roles.Sponsor;
 
 @Service
@@ -21,7 +22,15 @@ public class SponsorInvoiceDeleteService extends AbstractService<Sponsor, Invoic
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean status;
+		int invoiceId;
+		Sponsorship sponsorship;
+
+		invoiceId = super.getRequest().getData("id", int.class);
+		sponsorship = this.repository.findOneSponsorshipByInvoiceId(invoiceId);
+		status = sponsorship != null && super.getRequest().getPrincipal().hasRole(Sponsor.class);
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override

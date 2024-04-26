@@ -34,6 +34,7 @@ public class SponsorSponsorshipListService extends AbstractService<Sponsor, Spon
 	@Override
 	public void unbind(final Sponsorship object) {
 		assert object != null;
+
 		Dataset dataset;
 
 		dataset = super.unbind(object, "startDate", "sponsorshipType", "amount", "link", "project.code");

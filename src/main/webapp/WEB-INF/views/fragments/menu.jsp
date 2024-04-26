@@ -73,19 +73,13 @@
 		<acme:menu-option code="master.menu.sponsor.sponsorship" access="hasRole('Sponsor')">
 			<acme:menu-suboption code="master.menu.sponsor.sponsorship.allSponsorship" action="/sponsor/sponsorship/list"/>
 			<acme:menu-suboption code="master.menu.sponsor.sponsorship.mySponsorship" action="/sponsor/sponsorship/my-list"/>
-			<acme:menu-separator/>
-			<acme:menu-suboption code="master.menu.sponsor.sponsorship.create" action="/sponsor/sponsorship/create"/>
 		</acme:menu-option>
-			
-		<acme:menu-option code="master.menu.sponsor.invoices" action="/sponsor/invoice/list" access="hasRole('Sponsor')"/>
-		<acme:menu-option code="master.menu.sponsor.dashboard" action="/sponsor/dashboard/list" access="hasRole('Sponsor')"/>
-
+		
 		<acme:menu-option code="master.menu.client" access="hasRole('Client')">
 			<acme:menu-suboption code="master.menu.client.contracts" action="/client/contract/list"/>
 			<acme:menu-suboption code="master.menu.client.progressLogs" action="/client/progress-log/list"/>
 			<acme:menu-suboption code="master.menu.client.dashboard" action="/client/client-dashboard/show"/>
 		</acme:menu-option>
-
 	</acme:menu-left>
 	
 	<acme:menu-right>

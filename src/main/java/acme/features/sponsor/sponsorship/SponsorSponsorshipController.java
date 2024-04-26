@@ -36,7 +36,7 @@ public class SponsorSponsorshipController extends AbstractController<Sponsor, Sp
 
 
 	@PostConstruct
-	private void initialise() {
+	protected void initialise() {
 		super.addBasicCommand("list", this.listService);
 		super.addBasicCommand("show", this.showService);
 		super.addBasicCommand("update", this.updateService);
