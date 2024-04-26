@@ -33,7 +33,7 @@ public class SponsorInvoiceController extends AbstractController<Sponsor, Invoic
 
 
 	@PostConstruct
-	private void initilise() {
+	protected void initilise() {
 		super.addBasicCommand("list", this.listService);
 		super.addBasicCommand("show", this.showtService);
 		super.addBasicCommand("create", this.createService);
