@@ -1,0 +1,8 @@
+authenticated.sponsor.form.title = Become Sponsor
+
+authenticated.sponsor.form.label.name = Name
+authenticated.sponsor.form.label.expectedBenefits = ExpectedBenefits
+authenticated.sponsor.form.label.webPage = WebPage
+authenticated.sponsor.form.label.emailContact = EmailContact
+
+authenticated.sponsor.form.button.create = Register
