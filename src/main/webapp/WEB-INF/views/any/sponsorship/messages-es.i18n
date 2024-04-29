@@ -1,0 +1,12 @@
+any.sponsorship.list.title = Patrocinios
+any.sponsorship.form.title = Patrocinio
+
+any.sponsorship.label.code = Código
+any.sponsorship.label.startDate = Fecha de inicio
+any.sponsorship.label.sponsorshipType = Tipo de Patrocinio
+any.sponsorship.label.url = URL
+any.sponsorship.label.projectCode = Código del proyecto asociado
+any.sponsorship.label.moment = Momento
+any.sponsorship.label.finishDate = Fecha de finalización
+any.sponsorship.label.cost = Costo
+any.sponsorship.label.email = Correo electrónico

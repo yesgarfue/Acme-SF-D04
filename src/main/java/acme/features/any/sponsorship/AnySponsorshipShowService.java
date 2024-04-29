@@ -20,15 +20,7 @@ public class AnySponsorshipShowService extends AbstractService<Any, Sponsorship>
 	//Abstract interface -----------------------------------
 	@Override
 	public void authorise() {
-		boolean status;
-		final Sponsorship sponsorship;
-		int id;
-
-		id = super.getRequest().getData("id", int.class);
-		sponsorship = this.repository.findSponsorshipById(id);
-		status = sponsorship != null;
-
-		super.getResponse().setAuthorised(status);
+		super.getResponse().setAuthorised(true);
 	}
 
 	@Override
@@ -46,7 +38,8 @@ public class AnySponsorshipShowService extends AbstractService<Any, Sponsorship>
 		assert object != null;
 
 		Dataset dataset;
-		dataset = super.unbind(object, "code", "moment", "startDate", "finishDate", "amount", "email", "link");
+		dataset = super.unbind(object, "code", "moment", "startDate", "finishDate", "amount", "email", "link", "sponsorshipType", "project");
+		dataset.put("project", object.getProject().getCode());
 		super.getResponse().addData(dataset);
 	}
 }

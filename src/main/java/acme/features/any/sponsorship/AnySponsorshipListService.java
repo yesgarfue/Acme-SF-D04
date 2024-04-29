@@ -28,10 +28,11 @@ public class AnySponsorshipListService extends AbstractService<Any, Sponsorship>
 
 	@Override
 	public void load() {
-		Collection<Sponsorship> object;
-		object = this.repository.findAllSponsorship();
+		Collection<Sponsorship> objects;
+		//findSponsorshipPublicados
+		objects = this.repository.findAllSponsorship();
 
-		super.getBuffer().addData(object);
+		super.getBuffer().addData(objects);
 	}
 
 	@Override
@@ -39,7 +40,7 @@ public class AnySponsorshipListService extends AbstractService<Any, Sponsorship>
 		assert object != null;
 		Dataset dataset;
 
-		dataset = super.unbind(object, "code", "startDate", "sponsorshipType", "amount", "email", "link");
+		dataset = super.unbind(object, "code", "startDate", "sponsorshipType", "link", "project.code");
 
 		super.getResponse().addData(dataset);
 	}
