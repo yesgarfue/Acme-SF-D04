@@ -6,3 +6,4 @@ authenticated.sponsor.form.label.webPage = Página web
 authenticated.sponsor.form.label.emailContact = Email de contacto
 
 authenticated.sponsor.form.button.create = Registrar
+authenticated.sponsor.form.button.update = Actualizar

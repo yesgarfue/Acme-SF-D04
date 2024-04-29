@@ -11,6 +11,7 @@
 	<acme:input-textbox code="authenticated.sponsor.form.label.emailContact" path="emailContact" placeholder="example@example.com"/>
 	
 	<acme:submit test="${_command == 'create'}" code="authenticated.sponsor.form.button.create" action="/authenticated/sponsor/create"/>
+	<acme:submit test="${_command == 'update'}" code="authenticated.sponsor.form.button.update" action="/authenticated/sponsor/update"/>
 	
 </acme:form>
 

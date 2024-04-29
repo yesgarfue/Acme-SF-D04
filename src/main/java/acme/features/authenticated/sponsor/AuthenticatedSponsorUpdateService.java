@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.accounts.Authenticated;
-import acme.client.data.accounts.Principal;
 import acme.client.data.accounts.UserAccount;
 import acme.client.data.models.Dataset;
 import acme.client.helpers.PrincipalHelper;
@@ -13,7 +12,7 @@ import acme.client.services.AbstractService;
 import acme.roles.Sponsor;
 
 @Service
-public class AuthenticatedSponsorCreateService extends AbstractService<Authenticated, Sponsor> {
+public class AuthenticatedSponsorUpdateService extends AbstractService<Authenticated, Sponsor> {
 
 	@Autowired
 	private AuthenticatedSponsorRepository repository;
@@ -22,23 +21,19 @@ public class AuthenticatedSponsorCreateService extends AbstractService<Authentic
 	@Override
 	public void authorise() {
 		boolean status;
-		status = super.getRequest().getPrincipal().hasRole(Authenticated.class);
+
+		status = super.getRequest().getPrincipal().hasRole(Sponsor.class);
 		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
 		Sponsor object;
-		Principal principal;
-		int userAccountId;
+		int sponsorId;
 		UserAccount userAccount;
 
-		principal = super.getRequest().getPrincipal();
-		userAccountId = principal.getAccountId();
-		userAccount = this.repository.findOneUserAccountById(userAccountId);
-
-		object = new Sponsor();
-		object.setUserAccount(userAccount);
+		sponsorId = super.getRequest().getPrincipal().getAccountId();
+		object = this.repository.findOneSponsorByAccountId(sponsorId);
 
 		super.getBuffer().addData(object);
 	}
@@ -67,6 +62,8 @@ public class AuthenticatedSponsorCreateService extends AbstractService<Authentic
 
 	@Override
 	public void unbind(final Sponsor object) {
+		assert object != null;
+
 		Dataset dataset;
 
 		dataset = super.unbind(object, "name", "expectedBenefits", "webPage", "emailContact");
