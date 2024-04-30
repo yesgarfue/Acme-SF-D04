@@ -30,7 +30,7 @@ public class AnySponsorshipListService extends AbstractService<Any, Sponsorship>
 	public void load() {
 		Collection<Sponsorship> objects;
 		//findSponsorshipPublicados
-		objects = this.repository.findAllSponsorship();
+		objects = this.repository.findAllPublishedSponsorships();
 
 		super.getBuffer().addData(objects);
 	}

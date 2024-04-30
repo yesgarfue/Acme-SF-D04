@@ -14,10 +14,3 @@
 	<acme:submit test="${_command == 'update'}" code="authenticated.sponsor.form.button.update" action="/authenticated/sponsor/update"/>
 	
 </acme:form>
-
-<%--
-<jstl:if test="${_command == 'update'}">
-		<acme:submit code="authenticated.employer.form.button.update" action="/authenticated/employer/update"/>
-		<acme:button code="authenticated.employer.form.button.contractors" action="/employer/works-for/list"/>
-</jstl:if>
---%>
