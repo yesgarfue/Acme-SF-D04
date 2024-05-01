@@ -1,0 +1,14 @@
+sponsor.invoice.list.title = Invoices
+sponsor.invoice.form.title = Invoice
+
+sponsor.invoice.label.code = Code
+sponsor.invoice.label.registrationTime = Registration Time 
+sponsor.invoice.label.dueDate = DueDate
+sponsor.invoice.label.quantity = Quantity
+sponsor.invoice.label.tax = Tax
+sponsor.invoice.label.link = Link
+
+sponsor.invoice.button.create = Create
+sponsor.invoice.button.update = Update
+sponsor.invoice.button.delete = Delete
+sponsor.invoice.button.publish = Publish 

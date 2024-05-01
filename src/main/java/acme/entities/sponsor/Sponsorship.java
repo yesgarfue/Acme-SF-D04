@@ -58,13 +58,15 @@ public class Sponsorship extends AbstractEntity {
 	private Money				amount;
 
 	@NotNull
-	private SponsorshipType		SponsorshipType;
+	private SponsorshipType		sponsorshipType;
 
 	@Email
 	private String				email;
 
 	@URL
 	private String				link;
+
+	private boolean				draftMode;
 
 	// Derived attributes -----------------------------------------------------
 

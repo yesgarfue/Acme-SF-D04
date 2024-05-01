@@ -1,0 +1,18 @@
+key,code,execution-date,type,corrective-actions,key:project,draft-mode,key:auditor
+code-audit-01,AFK-001,,STATIC,no se ha modificado nada,project-01,false,auditor-01
+code-audit-02,BFK-001,,DYNAMIC,no se ha modificado nada,project-02,false,auditor-02
+code-audit-03,AA-999,,STATIC,modificado apartado a,project-01,false,auditor-01
+code-audit-04,B-000,,DYNAMIC,modificado apartado b,project-02,true,auditor-01
+code-audit-05,MNO-005,,STATIC,no se ha modificado nada,project-01,true,auditor-02
+code-audit-06,PQR-006,,DYNAMIC,no se ha modificado nada,project-02,true,auditor-02
+code-audit-07,VWX-008,,DYNAMIC,modificado apartado d,project-01,false,auditor-01
+code-audit-08,YZA-009,,DYNAMIC,no se ha modificado nada,project-02,true,auditor-01
+code-audit-09,BCD-010,,STATIC,modificado apartado g,project-01,false,auditor-01
+code-audit-10,DEF-011,,STATIC,no se ha modificado nada,project-01,true,auditor-02
+code-audit-11,GHI-012,,DYNAMIC,no se ha modificado nada,project-01,false,auditor-01
+code-audit-12,JKL-013,,DYNAMIC,modificado apartado z,project-02,true,auditor-01
+code-audit-13,F-999,,STATIC,no se ha modificado nada,project-01,false,auditor-02
+code-audit-14,FFF-999,,STATIC,modificado apartado d,project-02,true,auditor-01
+code-audit-15,STU-007,,DYNAMIC,no se ha modificado nada,project-02,false,auditor-01
+code-audit-17,AFK-003,,DYNAMIC,modificado apartado a,project-02,true,auditor-02
+code-audit-18,ZZA-000,,STATIC,no se ha modificado nada,project-01,false,auditor-01

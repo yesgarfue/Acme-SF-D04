@@ -27,10 +27,10 @@ public interface ManagerDashboardRepository extends AbstractRepository {
 	Integer totalNumberOfWontOfUserStoryOfManager(int managerId, Priority priority);
 
 	//AVG AND DEV OF ESTIMATED COST OF USER STORIES
-	@Query("SELECT AVG(us.estimatedCost.amount) FROM UserStory us WHERE us.manager.id = :managerId  AND us.draftMode = false")
+	@Query("SELECT AVG(us.estimatedCost) FROM UserStory us WHERE us.manager.id = :managerId  AND us.draftMode = false")
 	Double averageEstimatedCostOfUserStoriesOfManager(int managerId);
 
-	@Query("SELECT us.estimatedCost.amount FROM UserStory us WHERE us.manager.id = :managerId  AND us.draftMode = false")
+	@Query("SELECT us.estimatedCost FROM UserStory us WHERE us.manager.id = :managerId  AND us.draftMode = false")
 	Collection<Double> estimatedCostOfUserStoriesOfManager(int managerId);
 
 	default Double deviationEstimatedCostOfUserStoriesOfManager(final int managerId) {
@@ -42,10 +42,10 @@ public interface ManagerDashboardRepository extends AbstractRepository {
 
 	}
 	// MIN MAX OF ESTIMATED COST OF USER STORIES
-	@Query("SELECT MIN(us.estimatedCost.amount) FROM UserStory us WHERE us.manager.id = :managerId  AND us.draftMode = false")
+	@Query("SELECT MIN(us.estimatedCost) FROM UserStory us WHERE us.manager.id = :managerId  AND us.draftMode = false")
 	Double minimumEstimatedCostOfUserStoriesOfManager(int managerId);
 
-	@Query("SELECT MAX(us.estimatedCost.amount) FROM UserStory us WHERE us.manager.id = :managerId  AND us.draftMode = false")
+	@Query("SELECT MAX(us.estimatedCost) FROM UserStory us WHERE us.manager.id = :managerId  AND us.draftMode = false")
 	Double maximumEstimatedCostOfUserStoriesOfManager(int managerId);
 
 	//TOTAL NUMBER OF PROJECTS

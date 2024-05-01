@@ -1,10 +1,6 @@
 
 package acme.features.manager.userStory;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.apache.commons.lang3.SerializationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,11 +57,6 @@ public class ManagerUserStoryPublishService extends AbstractService<Manager, Use
 	public void validate(final UserStory object) {
 		assert object != null;
 
-		if (!super.getBuffer().getErrors().hasErrors("estimatedCost")) {
-			final List<String> aceptedCurrencies = Arrays.asList(this.repository.getAvailableCurrencies().split(",")).stream().map(Object::toString).collect(Collectors.toList());
-			super.state(object.getEstimatedCost().getAmount() >= 0, "estimatedCost", "manager.userStory.error.estimatedCost.negative");
-			super.state(aceptedCurrencies.contains(object.getEstimatedCost().getCurrency()), "estimatedCost", this.repository.getAvailableCurrencies());
-		}
 	}
 
 	@Override

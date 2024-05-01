@@ -8,20 +8,21 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
-# master.menu #################################################################
+# master.menu ############################################################################
 
 master.menu.home = Home
 master.menu.sign-up = Sign up
 master.menu.sign-in = Sign in
 master.menu.sign-out = Sign out
 
-# master.menu.any #######################################################
+# master.menu.any #######################################################################
 
 master.menu.any = Any
 master.menu.any.projects = Projects
 master.menu.any.claims = Claims
+master.menu.any.sponsorships = Sponsorships
 
-# master.menu.anonymous #######################################################
+# master.menu.anonymous #################################################################
 
 master.menu.anonymous = Anonymous
 master.menu.anonymous.favourite-link-yesica = Y8101055D: Garate Fuentes, Yesica Leydi
@@ -30,7 +31,7 @@ master.menu.anonymous.favourite-link-oscar = 75914431X: Menendez Marquez, Oscar
 master.menu.anonymous.favourite-link-alvaro = 54188420Y: Ruiz Gutiérrez, Álvaro
 master.menu.anonymous.favourite-link-carlos = 53739238Z: Martín de Prado Barragán, Carlos
 
-# master.menu.administrator ###################################################
+# master.menu.administrator ##############################################################
 
 master.menu.administrator = Administrator
 master.menu.administrator.dashboard = Dashboard
@@ -41,15 +42,22 @@ master.menu.administrator.shut-down = Shut down
 master.menu.administrator.config = Configuration
 master.menu.administrator.banner = Banner
 
-# master.menu.provider ########################################################
+# master.menu.provider ###################################################################
 
 master.menu.provider = Provider
 master.menu.provider.favourite-link = Favourite link
 
-# master.menu.consumer ##########################################################
+# master.menu.consumer ###################################################################
 
 master.menu.consumer = Consumer
 master.menu.consumer.favourite-link = Favourite link
+
+# master.menu.auditor ##########################################################
+
+master.menu.auditor = Auditor
+master.menu.auditor.code-audit = Code Audits
+master.menu.auditor.audit-records = Audit Records
+master.menu.auditor.dashboard = Dashboard
 
 # master.menu.manager ##########################################################
 
@@ -58,14 +66,29 @@ master.menu.manager.projects = Projects
 master.menu.manager.user-stories = User stories
 master.menu.manager.dashboard = Dashboard
 
-# master.menu.developer ##########################################################
+
+# master.menu.developer ##################################################################
 
 master.menu.developer = Developer
 master.menu.developer.trainingModules = Training modules
 master.menu.developer.trainingSession = Training sessions
 master.menu.developer.dashboard = Dashboard
 
-# master.menu.user-account ####################################################
+# master.menu.client ##########################################################
+
+master.menu.client = Client
+master.menu.client.contracts = Contracts
+master.menu.client.progressLogs = Progress Logs
+master.menu.client.dashboard = Dashboard	
+
+# master.menu.sponsor ####################################################################
+
+master.menu.sponsor = Sponsor
+master.menu.sponsor.allSponsorship = All Sponsorships
+master.menu.sponsor.mySponsorship = My Sponsorship
+master.menu.sponsor.dashboard = Dashboard
+
+# master.menu.user-account ###############################################################
 
 master.menu.user-account = Account
 master.menu.user-account.general-data = General data
@@ -77,3 +100,5 @@ master.menu.user-account.manager = Manager data
 master.menu.user-account.become-manager = Become a manager
 master.menu.user-account.developer = Developer data
 master.menu.user-account.become-developer = Become a developer
+master.menu.user-account.sponsor = Sponsor data
+master.menu.user-account.become-sponsor = Become a sponsor

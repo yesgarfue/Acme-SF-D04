@@ -1,0 +1,10 @@
+auditor.dashboard.label.totalNumberOfStaticCodeAudits = Número total de auditorías de código "ESTATICAS"
+auditor.dashboard.label.totalNumberOfDynamicCodeAudits = Número total de auditorías de código "DINAMICAS"
+auditor.dashboard.label.averageNumberOfAuditingRecords = Promedio de auditorías de código
+auditor.dashboard.label.deviationOfAuditingRecords = Desviación de auditorías de código
+auditor.dashboard.label.minimumNumberOfAuditingRecords = Número mínimo de auditorías de código
+auditor.dashboard.label.maximumNumberOfAuditingRecords = Número máximo de auditorías de código
+auditor.dashboard.label.averageTimeOfAuditingRecords = Tiempo promedio de las auditorías de código (horas)
+auditor.dashboard.label.timeDeviationOfAuditingRecords = Desviación del tiempo de las auditorías de código (horas)
+auditor.dashboard.label.minimumTimeOfAuditingRecords = Tiempo mínimo en una auditoría de código (horas)
+auditor.dashboard.label.maximumTimeOfAuditingRecords = Tiempo máximo en una auditoría de código (horas)

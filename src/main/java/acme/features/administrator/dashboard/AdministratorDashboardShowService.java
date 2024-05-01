@@ -48,7 +48,6 @@ public class AdministratorDashboardShowService extends AbstractService<Administr
 		Double desviationNumberOfClaimsOverLastTenWeeks;
 
 		numberOfPrincipalsByRol = this.repository.numberOfPrincipalsByRol();
-		System.out.println(numberOfPrincipalsByRol);
 		noticeWithEmailAndLinkRatio = this.repository.noticeWithEmailAndLinkRatio();
 		criticalObjectiveRatio = this.repository.criticalObjectiveRatio();
 		nonCriticalObjectiveRatio = this.repository.nonCriticalObjectiveRatio();

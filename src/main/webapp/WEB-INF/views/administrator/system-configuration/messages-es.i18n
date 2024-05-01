@@ -9,3 +9,4 @@ administrator.config.form.error.unavailable = Divisa no disponible
 administrator.config.form.error.pattern = El patrón debe ser "[A-Z]{3}"
 administrator.config.form.error.duplicated = Esta divisa no está libre
 administrator.config.form.error.blank = La nueva divisa no puede estar en blanco
+administrator.system-configuration.form.title = Divisa
