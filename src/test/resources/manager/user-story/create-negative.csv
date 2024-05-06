@@ -1,0 +1,10 @@
+code,title,abstraction,retailPrice,link
+A001,,,,
+A000,New title,New abstraction,EUR 112.12,https://us.es
+A002,This is a sample title that have more than seventyfive characters. This is a,New abstraction,EUR 112.12,https://us.es
+A003,New title,This is a sample abstraction that have more than one hundred characters. This is a sample title that h,EUR 112.12,https://us.es
+A004,Sample title,Sample abstraction,RED 112.00,https://us.es
+A005,Sample title,Sample abstraction,"EUR 112,00",https://us.es
+A006,Sample title,Sample abstraction,AAAAA,https://us.es
+A007,Sample title,Sample abstraction,EUR -100.00,https://us.es
+A008,New title,New abstraction,EUR 100.00,prueba
