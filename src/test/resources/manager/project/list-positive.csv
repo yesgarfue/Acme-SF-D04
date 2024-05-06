@@ -1,0 +1,6 @@
+recordIndex,code,title,retailPrice,type,draftMode
+0,A000,Design And Test II,EUR 112.00,BALANCED,true
+1,AA000,Design And Test II,EUR 112.00,HANDS_ON,false
+2,AAA000,D,EUR 112.00,THEORETICAL,true
+3,AAB000,De,EUR 112.00,BALANCED,false
+4,AAB001,Design And Test II is course to,EUR 112.00,HANDS_ON,true

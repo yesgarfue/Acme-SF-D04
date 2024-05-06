@@ -1,0 +1,6 @@
+recordIndex,code,title,abstraction,retailPrice,link,type,draftMode
+0,A000,Design And Test II,Enter in this course to learn you how to design a software project and some methodologies to test it,EUR 112.00,https://us.es,BALANCED,true
+1,AA000,Design And Test II,Enter in this course to learn you how to design a software project and some methodologies to test it,EUR 112.00,https://us.es,HANDS_ON,false
+2,AAA000,D,Enter in this course to learn you how to design a software project and some methodologies to test it,EUR 112.00,https://us.es,THEORETICAL,true
+3,AAB000,De,Enter in this course to learn you how to design a software project and some methodologies to test it,EUR 112.00,https://us.es,BALANCED,false
+4,AAB001,Design And Test II is course to,Enter in this course to learn you how to design a software project and some methodologies to test it,EUR 112.00,https://us.es,HANDS_ON,true
