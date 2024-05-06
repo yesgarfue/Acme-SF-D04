@@ -1,0 +1,7 @@
+any.code-audit.list.title = Code Audits
+any.code-audit.form.title = Code Audit
+any.code-audit.label.code = Code
+any.code-audit.label.executionDate = Execution Date
+any.code-audit.label.type = Type
+any.code-audit.label.correctiveActions = Corrective Actions 
+any.code-audit.label.link = Optional link

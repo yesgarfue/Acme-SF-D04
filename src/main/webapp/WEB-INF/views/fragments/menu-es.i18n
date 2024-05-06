@@ -21,6 +21,7 @@ master.menu.any = Cualquiera
 master.menu.any.projects = Proyectos
 master.menu.any.claims = Reclamaciones
 master.menu.any.sponsorships = Patrocinios
+master.menu.any.code-audit = Auditorías de Código
 
 # master.menu.anonymous ##################################################################
 
@@ -91,6 +92,8 @@ master.menu.sponsor.dashboard = Panel de Control
 # master.menu.user-account ####################################################
 
 master.menu.user-account = Cuenta
+master.menu.user-account.auditor = Datos de auditor
+master.menu.user-account.become-auditor = Hazte auditor
 master.menu.user-account.general-data = Datos generales
 master.menu.user-account.provider = Datos de proveedor
 master.menu.user-account.become-provider = Hazte proveedor
