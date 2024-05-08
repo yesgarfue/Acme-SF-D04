@@ -1,10 +1,9 @@
-recordIndex,oldCode,newCode,title,abstraction,retailPrice,link,draftMode
-0,A000,,,,,,
-0,A000,AA000,This is a sample title that have more than seventyfive characters.,Sample abstraction,EUR 112.00,https://us.es,true
-0,A000,A000,This is a sample title that have more than seventyfive characters. This is a,Sample abstraction,EUR 112.00,https://us.es,true
-0,A000,A000,Sample title,Here a sample message that is able to surpass the one hundred character count without much difficulty,EUR 112.00,https://us.es,true
-0,A000,A000,Sample title,Sample abstraction,RED 112.00,https://us.es,true
-0,A000,A000,Sample title,Sample abstraction,"EUR 112,00",https://us.es,true
-0,A000,A000,Sample title,Sample abstraction,AAAAA,https://us.es,true
-0,A000,A000,Sample title,Sample abstraction,EUR -100.00,https://us.es,true
-0,A000,A000,Sample title,Sample abstraction,EUR 100.00,prueba,true
+recordIndex,oldCode,newCode,title,abstracts,indication,cost,link,draftMode
+4,XYS-9876,,,,,,,
+4,XYS-9876,AAA-9876,Sample,This is a sample title that have more than seventyfive characters. <757575757575757757575757575757575757575757>,true,EUR 112.00,https://us.es,true
+4,XYS-9876,AAA-9876,Sample title,Here a sample message that is able to surpass the one hundred character because im going to check something!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,false,EUR 112.00,https://us.es,true
+4,XYS-9876,AAA-9876,Sample title,Sample abstraction,true,RED 112.00,https://us.es,true
+4,XYS-9876,AAA-9876,Sample title,Sample abstraction,false,"EUR 112,00",https://us.es,true
+4,XYS-9876,AAA-9876,Sample title,Sample abstraction,false,PRD 32,https://us.es,true
+4,XYS-9876,AAA-9876,Sample title,Sample abstraction,true,EUR -100.00,https://us.es,true
+4,XYS-9876,AAA-0,Sample title,Sample abstraction,true,EUR 100.00,,true

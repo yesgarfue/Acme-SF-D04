@@ -1,6 +1,5 @@
-recordIndex,code,title,retailPrice,type,draftMode
-0,A000,Design And Test II,EUR 112.00,BALANCED,true
-1,AA000,Design And Test II,EUR 112.00,HANDS_ON,false
-2,AAA000,D,EUR 112.00,THEORETICAL,true
-3,AAB000,De,EUR 112.00,BALANCED,false
-4,AAB001,Design And Test II is course to,EUR 112.00,HANDS_ON,true
+recordIndex,code,title,draftMode
+0,AAA-9876,TITLE,true
+1,ABC-1234,HazmeJobs,false
+2,BSA-9876,Ɛgzampul,false
+3,CSD-9876,абстрактный,false
