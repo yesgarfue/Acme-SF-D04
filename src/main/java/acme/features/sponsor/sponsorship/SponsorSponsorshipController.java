@@ -14,9 +14,6 @@ import acme.roles.Sponsor;
 public class SponsorSponsorshipController extends AbstractController<Sponsor, Sponsorship> {
 
 	@Autowired
-	private SponsorSponsorshipListService		listService;
-
-	@Autowired
 	private SponsorSponsorshipMyListService		myListService;
 
 	@Autowired
@@ -37,7 +34,6 @@ public class SponsorSponsorshipController extends AbstractController<Sponsor, Sp
 
 	@PostConstruct
 	protected void initialise() {
-		super.addBasicCommand("list", this.listService);
 		super.addBasicCommand("show", this.showService);
 		super.addBasicCommand("update", this.updateService);
 		super.addBasicCommand("delete", this.deleteService);
