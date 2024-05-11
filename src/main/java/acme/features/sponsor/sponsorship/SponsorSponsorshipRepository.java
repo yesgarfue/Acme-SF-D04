@@ -2,6 +2,7 @@
 package acme.features.sponsor.sponsorship;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -11,6 +12,7 @@ import acme.entities.projects.Project;
 import acme.entities.sponsor.Invoice;
 import acme.entities.sponsor.Sponsorship;
 import acme.roles.Sponsor;
+import acme.systemConfiguration.SystemConfiguration;
 
 @Repository
 public interface SponsorSponsorshipRepository extends AbstractRepository {
@@ -41,4 +43,9 @@ public interface SponsorSponsorshipRepository extends AbstractRepository {
 	@Query("SELECT s FROM Sponsorship s WHERE s.code= :code")
 	Sponsorship findOneSponsorshipByCode(String code);
 
+	@Query("SELECT sc FROM SystemConfiguration sc")
+	List<SystemConfiguration> findSystemConfiguration();
+
+	@Query("SELECT p FROM Project p WHERE p.code= :code")
+	Project findOneProjectByCode(String code);
 }

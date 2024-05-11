@@ -84,9 +84,9 @@ master.menu.client.dashboard = Panel de control
 # master.menu.sponsor ##################################################################
 
 master.menu.sponsor = Patrocinador
-master.menu.sponsor.allSponsorship = Todos los patrocinios
-master.menu.sponsor.mySponsorship = Mis patrocinios
+master.menu.sponsor.mySponsorships = Mis patrocinios
 master.menu.sponsor.dashboard = Panel de Control
+master.menu.sponsor.myInvoices = Mis Facturas
 
 # master.menu.user-account ####################################################
 

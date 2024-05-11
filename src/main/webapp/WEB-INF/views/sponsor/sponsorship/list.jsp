@@ -11,7 +11,5 @@
 	<acme:list-column code="sponsor.sponsorship.label.projectId" path="project.code" width="20%"/>
 </acme:list>
 
-<jstl:if test="${_command == 'my-list'}">
-	<acme:button code="sponsor.sponsorship.button.create" action="/sponsor/sponsorship/create"/>
-</jstl:if>
+<acme:button code="sponsor.sponsorship.button.create" action="/sponsor/sponsorship/create"/>
 

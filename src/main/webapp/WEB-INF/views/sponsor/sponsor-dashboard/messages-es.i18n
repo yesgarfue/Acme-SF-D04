@@ -1,14 +1,14 @@
 sponsor.sponsor-dashboard.form.title = Estadisticas
 
-sponsor.dashboard.label.sponsorship.minimumSponsorshipsAmount = minimumSponsorshi
-sponsor.dashboard.label.sponsorship.maximunSponsorshipsAmount = maximunSponsorsh
-sponsor.dashboard.label.sponsorship.averageSponsorshipsAmount = averageSpo
-sponsor.dashboard.label.sponsorship.deviationSponsorshipsAmount = deviationSpo
+sponsor.dashboard.label.sponsorship.minimumSponsorshipsAmount = Monto mínimo de los patrocinios
+sponsor.dashboard.label.sponsorship.maximunSponsorshipsAmount = Monto máximo de los patrocinios
+sponsor.dashboard.label.sponsorship.averageSponsorshipsAmount = Promedio del importe de los patrocinios
+sponsor.dashboard.label.sponsorship.deviationSponsorshipsAmount = Desviación del importe de los patrocinios
 	
-sponsor.dashboard.label.invoice.minimumInvoicesQuantity = minimumInvoic
-sponsor.dashboard.label.invoice.maximunInvoicesQuantity = maximunInv
-sponsor.dashboard.label.invoice.averageInvoicesQuantity = averageInvo
-sponsor.dashboard.label.invoice.deviationInvoicesQuantity = deviationInvoice
+sponsor.dashboard.label.invoice.minimumInvoicesQuantity = Importe mínimo de las facturas
+sponsor.dashboard.label.invoice.maximunInvoicesQuantity = Importe máximo de facturas
+sponsor.dashboard.label.invoice.averageInvoicesQuantity = Promedio del importe de las facturas
+sponsor.dashboard.label.invoice.deviationInvoicesQuantity = Desviación del importe de las facturas
 	
-sponsor.dashboard.label.totalNumInvoicesWithTaxLessOrEqualTo21 = totalNumInvoicesWithT
-sponsor.dashboard.label.totalNumInvoicesWithLink = totalNumInv 
+sponsor.dashboard.label.totalNumInvoicesWithTaxLessOrEqualTo21 = Número total de facturas con un impuesto menor o igual al 21,00%
+sponsor.dashboard.label.totalNumInvoicesWithLink = Número total de patrocinios con una URL

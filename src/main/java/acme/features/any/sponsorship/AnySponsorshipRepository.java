@@ -13,7 +13,7 @@ import acme.entities.sponsor.Sponsorship;
 @Repository
 public interface AnySponsorshipRepository extends AbstractRepository {
 
-	@Query("SELECT s FROM Sponsorship s WHERE s.draftMode = true")
+	@Query("SELECT s FROM Sponsorship s WHERE s.isPublished = false")
 	Collection<Sponsorship> findAllPublishedSponsorships();
 
 	@Query("SELECT s FROM Sponsorship s WHERE s.id = :id")

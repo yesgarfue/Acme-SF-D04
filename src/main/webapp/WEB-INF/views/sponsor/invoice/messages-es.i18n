@@ -5,10 +5,11 @@ sponsor.invoice.label.code = Código
 sponsor.invoice.label.registrationTime = Fecha de Registro
 sponsor.invoice.label.dueDate = Fecha de Vencimiento
 sponsor.invoice.label.quantity = Cantidad
-sponsor.invoice.label.tax = Impuesto
+sponsor.invoice.label.tax = Impuesto (%)
 sponsor.invoice.label.link = URL
+sponsor.invoice.label.sponsorshipCode = Código de patrocinio
 
-sponsor.invoice.button.create = Crear
+sponsor.invoice.button.create = Registrar
 sponsor.invoice.button.update = Modificar
 sponsor.invoice.button.delete = Eliminar
 sponsor.invoice.button.publish = Publicar
