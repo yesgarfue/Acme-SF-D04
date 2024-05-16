@@ -22,7 +22,7 @@ developer.trainingSession.label.trainingModule = Training Module Id
 developer.training-session.label.draftMode = Draft Mode
 
 ##################################################################
-
+developer.trainingSession.button.create = Create Training Session
 developer.training-session.button.create = Create
 developer.training-session.button.update = Update
 developer.training-session.button.delete = Delete
