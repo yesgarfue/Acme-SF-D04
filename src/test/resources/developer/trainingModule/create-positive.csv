@@ -1,0 +1,11 @@
+index,code,creationMoment,difficultyLevel,details,updatedMoment,totalTime,project
+0,AAA-000,2021/09/01 00:00,BASIC,Details of the first task,2021/09/20 00:00,120.00,ABC-1234
+1,AAA-001,2019/12/01 11:00,INTERMEDIATE,Details of the second task,2019/12/20 10:00,120.00,BSR-305
+2,AAA-002,2020/08/14 21:00,BASIC,Details of the third task,2020/08/30 10:00,120.00,LJS-303
+3,AAA-003,2021/04/25 08:30,ADVANCED,Details of the fourth task,2021/05/15 15:45,90.00,SJP-307
+4,AAA-004,2018/07/10 14:15,ADVANCED,Details of the fifth task,2018/07/25 09:30,150.00,BSR-305
+5,AAA-005,2019/11/05 17:45,BASIC,Details of the sixth task,2019/11/20 12:00,120.00,SJP-307
+6,AAA-006,2020/06/15 09:00,ADVANCED,Details of the seventh task,2020/06/30 16:20,100.00,BSR-305
+7,AAA-007,2021/10/20 10:30,BASIC,Details of the eighth task,2021/11/10 08:00,110.00,ABC-309
+8,AAA-008,2019/05/01 16:00,INTERMEDIATE,Details of the ninth task,2019/05/20 13:20,130.00,SJP-307
+9,AAA-009,2018/09/10 12:45,BASIC,Details of the tenth task,2018/09/30 18:30,140.00,LJS-303
