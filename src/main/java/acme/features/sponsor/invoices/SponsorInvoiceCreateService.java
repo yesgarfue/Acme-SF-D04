@@ -2,17 +2,23 @@
 package acme.features.sponsor.invoices;
 
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import acme.client.data.datatypes.Money;
 import acme.client.data.models.Dataset;
 import acme.client.helpers.MomentHelper;
+import acme.client.helpers.StringHelper;
 import acme.client.services.AbstractService;
+import acme.components.ExchangeRate;
 import acme.entities.sponsor.Invoice;
 import acme.entities.sponsor.Sponsorship;
+import acme.forms.MoneyExchange;
 import acme.roles.Sponsor;
 import acme.systemConfiguration.SystemConfiguration;
 
@@ -113,5 +119,58 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 		dataset.put("shipId", super.getRequest().getData("shipId", int.class));
 
 		super.getResponse().addData(dataset);
+	}
+
+	// ********************************************************************************
+
+	public MoneyExchange computeMoneyExchange(final Money amountInvoice, final String currencySponsorship) {
+		assert amountInvoice != null;
+		assert !StringHelper.isBlank(currencySponsorship);
+
+		MoneyExchange result;
+		RestTemplate api;
+		ExchangeRate api_response;
+		String inputCurrency;
+		Double inputAmount, targetAmount, rate;
+		Money target;
+		Date moment;
+
+		try {
+			api = new RestTemplate();
+
+			inputCurrency = amountInvoice.getCurrency();
+			inputAmount = amountInvoice.getAmount();
+
+			api_response = api.getForObject( //				
+				"https://api.currencyapi.com/v3/latest?apikey={0}&base_currency={1}&currencies={2}", //
+				ExchangeRate.class, //
+				"cur_live_9CS0QA54yYzg4W3iJ1QQMMktAfPY2DpLVpUjpPKP", //
+				inputCurrency, //
+				currencySponsorship);
+
+			assert api_response != null && api_response.getRates().containsKey(currencySponsorship);
+			rate = Double.valueOf(api_response.getRates().get(currencySponsorship));
+			//rate = Double.valueOf(api_response.getData().get(currencySponsorship).get("value"));
+			assert rate != null;
+			targetAmount = rate * inputAmount;
+
+			target = new Money();
+			target.setAmount(targetAmount);
+			target.setCurrency(currencySponsorship);
+
+			moment = api_response.getDate();
+
+			result = new MoneyExchange();
+			result.setSource(amountInvoice);
+			result.setTargetCurrency(currencySponsorship);
+			result.setDate(moment);
+			result.setTarget(target);
+
+			MomentHelper.sleep(1000); // HINT: need to pause the requests to the API a bit down to prevent DOS attacks
+		} catch (final Throwable oops) {
+			result = null;
+		}
+
+		return result;
 	}
 }
