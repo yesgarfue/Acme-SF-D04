@@ -21,6 +21,7 @@ master.menu.any = Cualquiera
 master.menu.any.projects = Proyectos
 master.menu.any.claims = Reclamaciones
 master.menu.any.sponsorship = Patrocinios
+master.menu.any.contracts = Contratos
 
 master.menu.sponsor.sponsorship.allSponsorship = Todos los patrocinios
 master.menu.sponsor.sponsorship.mySponsorship = Mis patrocinios
@@ -104,3 +105,5 @@ master.menu.user-account.manager = Datos de manager
 master.menu.user-account.become-manager = Hazte manager
 master.menu.user-account.developer = Datos de desarrollador
 master.menu.user-account.become-developer = Hazte desarrollador
+master.menu.user-account.client = Datos de cliente
+master.menu.user-account.become-client = Hazte cliente

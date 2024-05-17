@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import acme.client.data.models.Dataset;
 import acme.client.helpers.PrincipalHelper;
 import acme.client.services.AbstractService;
-import acme.entities.contract.Contract;
 import acme.entities.contract.ProgressLog;
 import acme.roles.Client;
 
@@ -25,16 +24,10 @@ public class ClientProgressLogUpdateService extends AbstractService<Client, Prog
 	@Override
 	public void authorise() {
 		boolean status;
-		int progressLogId;
-		Contract contract;
 
-		progressLogId = super.getRequest().getData("id", int.class);
-		contract = this.repository.findContractByProgressLogId(progressLogId);
-		ProgressLog pl = this.repository.findProgressLogById(progressLogId);
-		status = pl.getDraftMode() && contract != null && !contract.getDraftMode() && super.getRequest().getPrincipal().hasRole(contract.getClient());
+		status = super.getRequest().getPrincipal().hasRole(Client.class);
 
 		super.getResponse().setAuthorised(status);
-
 	}
 
 	@Override
@@ -55,13 +48,7 @@ public class ClientProgressLogUpdateService extends AbstractService<Client, Prog
 
 		assert object != null;
 
-		int progressLogId;
-
-		progressLogId = super.getRequest().getData("id", int.class);
-		Contract contract = this.repository.findContractByProgressLogId(progressLogId);
-
-		super.bind(object, "recordId", "completenessPercentage", "progressComment", "registrationMoment", "responsiblePerson");
-		object.setContract(contract);
+		super.bind(object, "recordId", "completenessPercentage", "progressComment", "registrationMoment", "responsiblePerson", "draftMode");
 	}
 
 	@Override
@@ -97,11 +84,7 @@ public class ClientProgressLogUpdateService extends AbstractService<Client, Prog
 		assert object != null;
 
 		Dataset dataset;
-
-		dataset = super.unbind(object, "recordId", "completenessPercentage", "progressComment", "registrationMoment", "responsiblePerson");
-
-		dataset.put("masterId", object.getContract().getId());
-		dataset.put("draftMode", object.getDraftMode());
+		dataset = super.unbind(object, "recordId", "completenessPercentage", "progressComment", "registrationMoment", "responsiblePerson", "draftMode");
 
 		super.getResponse().addData(dataset);
 	}

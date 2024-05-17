@@ -21,6 +21,7 @@ master.menu.any = Any
 master.menu.any.projects = Projects
 master.menu.any.claims = Claims
 master.menu.any.sponsorship = Sponsorships
+master.menu.any.contracts = Contracts
 
 # master.menu.anonymous #################################################################
 
@@ -100,3 +101,5 @@ master.menu.user-account.manager = Manager data
 master.menu.user-account.become-manager = Become a manager
 master.menu.user-account.developer = Developer data
 master.menu.user-account.become-developer = Become a developer
+master.menu.user-account.client = Client data
+master.menu.user-account.become-client = Become a client
