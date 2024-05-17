@@ -1,3 +1,3 @@
-oldRecordIndex,newRecordIndex,oldCode,newCode,title,abstracts,indication,cost,link,draftMode
-0,1,AAA-9876,ABC-2222,Design And Test II,Enter in this course to learn you how to design a software project and some methodologies to test it,false,USD 213.00,https://us.es,true
-1,2,ABC-2222,CAA-0000,Design And Test II,changed,true,EUR 12.00,https://us.es,true
+oldRecordIndex,newRecordIndex,oldCode,newCode,title,abstracts,indication,cost,link
+0,1,AAA-9876,ABC-2222,Design And Test II,Enter in this course to learn you how to design a software project and some methodologies to test it,false,USD 213.00,https://us.es
+1,2,ABC-2222,CAA-0000,Design And Test II,changed,true,EUR 12.00,https://us.es
