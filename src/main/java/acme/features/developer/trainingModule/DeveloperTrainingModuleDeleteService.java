@@ -87,12 +87,6 @@ public class DeveloperTrainingModuleDeleteService extends AbstractService<Develo
 	 * super.getResponse().addData(dataset);
 	 * 
 	 * }
-	 * 
-	 * 
-	 * @Override
-	 * public void onSuccess() {
-	 * if (super.getRequest().getMethod().equals("POST"))
-	 * PrincipalHelper.handleUpdate();
-	 * }
 	 */
+
 }

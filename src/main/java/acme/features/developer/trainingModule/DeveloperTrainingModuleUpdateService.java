@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
-import acme.client.helpers.PrincipalHelper;
 import acme.client.services.AbstractService;
 import acme.entities.projects.Project;
 import acme.entities.training.TrainingModule;
@@ -88,12 +87,6 @@ public class DeveloperTrainingModuleUpdateService extends AbstractService<Develo
 
 		super.getResponse().addData(dataset);
 
-	}
-
-	@Override
-	public void onSuccess() {
-		if (super.getRequest().getMethod().equals("PUT"))
-			PrincipalHelper.handleUpdate();
 	}
 
 }
