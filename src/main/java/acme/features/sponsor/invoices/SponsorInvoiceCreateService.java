@@ -65,6 +65,14 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 	@Override
 	public void bind(final Invoice object) {
 		assert object != null;
+		int shipId = super.getRequest().getData("shipId", int.class);
+		Sponsorship bla;
+		bla = this.repository.findOneSponsorshipById(shipId);
+		Double amountSponsorship = bla.getAmount().getAmount();
+		String currencySponsorship = bla.getAmount().getCurrency();
+
+		final MoneyExchange cambios;
+		cambios = this.computeMoneyExchange(object.getQuantity(), currencySponsorship);
 
 		super.bind(object, "code", "registrationTime", "dueDate", "quantity", "tax", "link");
 	}
@@ -91,6 +99,19 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 		if (!super.getBuffer().getErrors().hasErrors("quantity")) {
 			Double isAmount = object.getQuantity().getAmount();
 			super.state(isAmount != null && isAmount > 0, "quantity", "quantity-cannot-be-negative-or-zero ");
+
+			int shipId = super.getRequest().getData("shipId", int.class);
+			Sponsorship bla;
+			bla = this.repository.findOneSponsorshipById(shipId);
+			Double amountSponsorship = bla.getAmount().getAmount();
+			String currencySponsorship = bla.getAmount().getCurrency();
+			if (object.getQuantity().getCurrency().equals(currencySponsorship))
+				super.state(isAmount < amountSponsorship, "quantity", "quantity-cannot-be-greater-than-amount-sponsorship");
+			else {
+				MoneyExchange cambios;
+				cambios = this.computeMoneyExchange(object.getQuantity(), currencySponsorship);
+				super.state(cambios.getTarget().getAmount() < amountSponsorship, "quantity", "quantity-cannot-be-greate-currecnuar-than-amount-sponsorship");
+			}
 
 			String isCurrency = object.getQuantity().getCurrency();
 			List<SystemConfiguration> sc = this.repository.findSystemConfiguration();
