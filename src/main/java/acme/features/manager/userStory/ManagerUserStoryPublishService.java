@@ -58,16 +58,6 @@ public class ManagerUserStoryPublishService extends AbstractService<Manager, Use
 		assert object != null;
 
 	}
-
-	@Override
-	public void perform(final UserStory object) {
-		assert object != null;
-
-		object.setDraftMode(false);
-
-		this.repository.save(object);
-	}
-
 	@Override
 	public void unbind(final UserStory object) {
 		assert object != null;
@@ -79,4 +69,13 @@ public class ManagerUserStoryPublishService extends AbstractService<Manager, Use
 
 		super.getResponse().addData(dataset);
 	}
+	@Override
+	public void perform(final UserStory object) {
+		assert object != null;
+
+		object.setDraftMode(false);
+
+		this.repository.save(object);
+	}
+
 }

@@ -1,6 +1,0 @@
-recordIndex,title,description,estimatedCost,acceptanceCriteria,priority,link,draftMode
-0,Title Example,Description Example,1,criteria Example,SHOULD,http://example.com,true
-1,शीर्षक उदाहरण,विवरण उदाहरण,75,मानदंड उदाहरण,COULD,http://example.com10,false
-2,タイトルの例,説明の例,6,受け入れ基準の例,COULD,http://example.com6,false
-3,标题示例,描述示例,5,接受标准示例,SHOULD,http://example.com5,false
-4,標題範例,描述範例,5,接受標準範例,WONT,http://example.com,false

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
-import acme.client.helpers.PrincipalHelper;
 import acme.client.services.AbstractService;
 import acme.client.views.SelectChoices;
 import acme.entities.projects.UserStory;
@@ -78,9 +77,4 @@ public class ManagerUserStoryUpdateService extends AbstractService<Manager, User
 		super.getResponse().addData(dataset);
 	}
 
-	@Override
-	public void onSuccess() {
-		if (super.getRequest().getMethod().equals("PUT"))
-			PrincipalHelper.handleUpdate();
-	}
 }
