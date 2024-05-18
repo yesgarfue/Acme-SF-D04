@@ -8,9 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import acme.client.repositories.AbstractRepository;
+import acme.entities.invoice.Invoice;
 import acme.entities.projects.Project;
-import acme.entities.sponsor.Invoice;
-import acme.entities.sponsor.Sponsorship;
+import acme.entities.sponsorship.Sponsorship;
 import acme.roles.Sponsor;
 import acme.systemConfiguration.SystemConfiguration;
 

@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
-import acme.entities.sponsor.Invoice;
-import acme.entities.sponsor.Sponsorship;
+import acme.entities.invoice.Invoice;
+import acme.entities.sponsorship.Sponsorship;
 import acme.roles.Sponsor;
 
 @Service

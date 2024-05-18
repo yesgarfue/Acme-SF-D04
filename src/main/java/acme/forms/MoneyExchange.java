@@ -36,4 +36,6 @@ public class MoneyExchange extends AbstractForm {
 	private Money				target;
 
 	private Date				date;
+
+	public Throwable			oops;
 }
