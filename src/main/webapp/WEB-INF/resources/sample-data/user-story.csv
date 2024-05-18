@@ -1,5 +1,5 @@
 key,acceptance-criteria,description,estimated-cost,link,priority,title,draft-mode,key:manager
-user-story-01,criteria Example,Description Example,1,http://example.com,SHOULD,Title Example,false,manager-01
+user-story-01,criteria Example,Description Example,1,http://example.com,SHOULD,Title Example,true,manager-01
 user-story-02,criteria Example,Description Example,2,http://example.com2,COULD,Title Example,false,manager-02
 user-story-03,criteria Example,Description Example,7,null,MUST,Title Example,false,manager-02
 user-story-04,criteria Example,Description Example,4,http://example.com4,WONT,Title Example,false,manager-02

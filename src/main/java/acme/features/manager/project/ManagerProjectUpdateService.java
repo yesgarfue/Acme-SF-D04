@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
-import acme.client.helpers.PrincipalHelper;
 import acme.client.services.AbstractService;
 import acme.entities.projects.Project;
 import acme.roles.Manager;
@@ -87,12 +86,6 @@ public class ManagerProjectUpdateService extends AbstractService<Manager, Projec
 		dataset = super.unbind(object, "code", "title", "abstracts", "indication", "cost", "link", "draftMode");
 		dataset.put("projectId", object.getId());
 		super.getResponse().addData(dataset);
-	}
-
-	@Override
-	public void onSuccess() {
-		if (super.getRequest().getMethod().equals("PUT"))
-			PrincipalHelper.handleUpdate();
 	}
 
 }

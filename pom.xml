@@ -34,7 +34,6 @@
 		<relativePath>../../pom-24.4.0.xml</relativePath>
 	</parent>
 
-	
 	<dependencies>
 		<dependency>
 			<groupId>Acme</groupId>
@@ -42,4 +41,5 @@
 			<version>24.4.0</version>
 		</dependency>
 	</dependencies>
+
 </project>

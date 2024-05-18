@@ -4,7 +4,6 @@ package acme.features.manager.project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
 import acme.entities.projects.Project;
 import acme.roles.Manager;
@@ -62,18 +61,6 @@ public class ManagerProjectDeleteService extends AbstractService<Manager, Projec
 
 		this.repository.deleteAllEntitiesAssociatedToAProject(object);
 		this.repository.delete(object);
-	}
-
-	@Override
-	public void unbind(final Project object) {
-		assert object != null;
-		Dataset dataset;
-
-		dataset = super.unbind(object, "code", "title", "abstracts", "indication", "cost", "link", "draftMode");
-		dataset.put("managerId", object.getId());
-		dataset.put("draftMode", object.isDraftMode());
-		super.getResponse().addData(dataset);
-
 	}
 
 }

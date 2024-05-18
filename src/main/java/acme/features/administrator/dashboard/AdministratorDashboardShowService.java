@@ -31,7 +31,7 @@ public class AdministratorDashboardShowService extends AbstractService<Administr
 	@Override
 	public void load() {
 		AdministratorDashboard dashboard;
-		Map<String, Integer> numberOfPrincipalsByRol;
+		//Map<String, Integer> numberOfPrincipalsByRol;
 
 		Integer noticeWithEmailAndLinkRatio;
 		Integer criticalObjectiveRatio;
@@ -47,7 +47,7 @@ public class AdministratorDashboardShowService extends AbstractService<Administr
 		Integer maximunNumberOfClaimsOverLastTenWeeks;
 		Double desviationNumberOfClaimsOverLastTenWeeks;
 
-		numberOfPrincipalsByRol = this.repository.numberOfPrincipalsByRol();
+		//numberOfPrincipalsByRol = this.repository.numberOfPrincipalsByRol();
 		noticeWithEmailAndLinkRatio = this.repository.noticeWithEmailAndLinkRatio();
 		criticalObjectiveRatio = this.repository.criticalObjectiveRatio();
 		nonCriticalObjectiveRatio = this.repository.nonCriticalObjectiveRatio();

@@ -23,11 +23,7 @@ public class AdministratorBannerUpdateService extends AbstractService<Administra
 	@Override
 	public void authorise() {
 		boolean status;
-		int masterId;
-		Banner banner;
 
-		masterId = super.getRequest().getData("id", int.class);
-		banner = this.repository.findOneBannerById(masterId);
 		status = super.getRequest().getPrincipal().hasRole(Administrator.class);
 
 		super.getResponse().setAuthorised(status);
