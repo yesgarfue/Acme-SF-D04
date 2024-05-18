@@ -1,14 +1,14 @@
 sponsor.sponsor-dashboard.form.title = Sponsor Dashboard
 
-sponsor.dashboard.label.sponsorship.minimumSponsorshipsAmount = minimumSponsorshipsAmount
-sponsor.dashboard.label.sponsorship.maximunSponsorshipsAmount = maximunSponsorshipsAmount
-sponsor.dashboard.label.sponsorship.averageSponsorshipsAmount = averageSponsorshipsAmount
-sponsor.dashboard.label.sponsorship.deviationSponsorshipsAmount = deviationSponsorshipsAmount
+sponsor.dashboard.label.sponsorship.minimumSponsorshipsAmount = Minimum sponsorship amount
+sponsor.dashboard.label.sponsorship.maximunSponsorshipsAmount = Maximum sponsorship amount
+sponsor.dashboard.label.sponsorship.averageSponsorshipsAmount = Average amount of total sponsorships
+sponsor.dashboard.label.sponsorship.deviationSponsorshipsAmount = Deviation of the amount of the total sponsorships
 	
-sponsor.dashboard.label.invoice.minimumInvoicesQuantity = minimumInvoicesQuantity
-sponsor.dashboard.label.invoice.maximunInvoicesQuantity = maximunInvoicesQuantity
-sponsor.dashboard.label.invoice.averageInvoicesQuantity = averageInvoicesQuantity
-sponsor.dashboard.label.invoice.deviationInvoicesQuantity = deviationInvoicesQuantity
+sponsor.dashboard.label.invoice.minimumInvoicesQuantity = Minimum quantity of the total invoices
+sponsor.dashboard.label.invoice.maximunInvoicesQuantity = Maximum quantity of total invoices
+sponsor.dashboard.label.invoice.averageInvoicesQuantity = Average invoice quantity
+sponsor.dashboard.label.invoice.deviationInvoicesQuantity = Invoice quantity deviation
 	
-sponsor.dashboard.label.totalNumInvoicesWithTaxLessOrEqualTo21 = totalNumInvoicesWithTaxLessOrEqualTo21
-sponsor.dashboard.label.totalNumInvoicesWithLink = totalNumInvoicesWithLink 
+sponsor.dashboard.label.totalNumInvoicesWithTaxLessOrEqualTo21 = Total number of invoices with a tax less than or equal to 21.00 %
+sponsor.dashboard.label.totalNumInvoicesWithLink = Total number of sponsorships with a link

@@ -1,18 +1,23 @@
 
 package acme.features.sponsor.sponsorship;
 
+import java.time.temporal.ChronoUnit;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractService;
 import acme.client.views.SelectChoices;
 import acme.entities.projects.Project;
 import acme.entities.sponsor.Sponsorship;
 import acme.enumerate.SponsorshipType;
 import acme.roles.Sponsor;
+import acme.systemConfiguration.SystemConfiguration;
 
 @Service
 public class SponsorSponsorshipUpdateService extends AbstractService<Sponsor, Sponsorship> {
@@ -62,12 +67,47 @@ public class SponsorSponsorshipUpdateService extends AbstractService<Sponsor, Sp
 	public void validate(final Sponsorship object) {
 		assert object != null;
 
-		//AGREGAR MÁS RESTRICCIONES
 		if (!super.getBuffer().getErrors().hasErrors("code")) {
-			Sponsorship exist;
+			Sponsorship existing;
 
-			exist = this.repository.findOneSponsorshipByCode(object.getCode());
-			super.state(exist == null, "code", "sponsor.sponsorship.form.error.duplicated");
+			existing = this.repository.findOneSponsorshipByCode(object.getCode());
+			super.state(existing == null || existing.equals(object), "code", "Code-duplicated");
+		}
+
+		if (!super.getBuffer().getErrors().hasErrors("moment"))
+			super.state(object.getMoment() != null, "moment", "Moment-cannot-be-empty");
+
+		//* LIMITES PERMITIDOS DE FECHAS Y COMPROBAR LAS FECHAS PROBLEMATICAS
+		if (!super.getBuffer().getErrors().hasErrors("startDate"))
+			super.state(MomentHelper.isAfter(object.getStartDate(), object.getMoment()), "startDate", "must-be-date-after-moment");
+
+		//* LIMITES PERMITIDOS DE FECHAS Y COMPROBAR LAS FECHAS PROBLEMATICAS: AÑO BISIESTO NO RECIBE 
+		if (object.getFinishDate() != null)
+			if (!super.getBuffer().getErrors().hasErrors("finishDate")) {
+				super.state(MomentHelper.isAfter(object.getFinishDate(), object.getStartDate()), "finishDate", "must-be-date-after-startDate ");
+				super.state(MomentHelper.isLongEnough(object.getStartDate(), object.getFinishDate(), 1, ChronoUnit.MONTHS), "finishDate", "must-be-at-least-one-month-away");
+			}
+
+		if (!super.getBuffer().getErrors().hasErrors("amount")) {
+			Double isAmount = object.getAmount().getAmount();
+			super.state(isAmount != null && isAmount > 0, "amount", "Amount-cannot-be-negative-or-zero ");
+
+			String isCurrency = object.getAmount().getCurrency();
+			List<SystemConfiguration> sc = this.repository.findSystemConfiguration();
+			final boolean currencyOk = Stream.of(sc.get(0).aceptedCurrencies.split(",")).anyMatch(c -> c.equals(isCurrency));
+			super.state(currencyOk, "amount", "Currency-not-supported ");
+		}
+
+		if (!super.getBuffer().getErrors().hasErrors("sponsorshipType")) {
+			SponsorshipType isType = object.getSponsorshipType();
+			super.state(isType.equals(SponsorshipType.FINANCIAL) || isType.equals(SponsorshipType.INKIND), "sponsorshipType", "Invalid-sponsorshipType");
+		}
+
+		if (!super.getBuffer().getErrors().hasErrors("project")) {
+			Project existing;
+
+			existing = this.repository.findOneProjectByCode(object.getProject().getCode());
+			super.state(existing != null && !existing.isDraftMode(), "project", "Invalid-project-code");
 		}
 	}
 

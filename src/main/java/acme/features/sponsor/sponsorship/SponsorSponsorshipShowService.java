@@ -56,7 +56,7 @@ public class SponsorSponsorshipShowService extends AbstractService<Sponsor, Spon
 		choices = SelectChoices.from(projects, "code", object.getProject());
 		choicesEnum = SelectChoices.from(SponsorshipType.class, object.getSponsorshipType());
 
-		dataset = super.unbind(object, "code", "moment", "startDate", "finishDate", "amount", "email", "link");
+		dataset = super.unbind(object, "code", "moment", "startDate", "finishDate", "amount", "email", "link", "isPublished");
 		dataset.put("project", choices.getSelected().getKey());
 		dataset.put("sponsorshipType", choicesEnum);
 		dataset.put("projects", choices);

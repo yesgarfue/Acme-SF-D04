@@ -9,7 +9,6 @@
 	<acme:list-column code="developer.trainingSession.label.endDate" path="endDate" width="25%"/>
 	<acme:list-column code="developer.trainingSession.label.location" path="location" width="10%"/>
 	<acme:list-column code="developer.trainingSession.label.instructor" path="instructor" width="20%"/>
-	<acme:list-column code="developer.trainingSession.label.trainingModule" path="trainingModule" width="10%"/>
 	
 </acme:list>
 

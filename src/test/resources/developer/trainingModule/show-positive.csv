@@ -1,0 +1,6 @@
+index,code,creation-moment,details,difficulty-level,updated-moment,total-time,project,
+0,ABC-309,2022/04/25 08:30,ThIs Is A dEtAiL,INTERMEDIATE,2022/04/26 08:30,32.00,AAA-9876
+1,BBC-311,2022/05/05 17:50,تفاصيل مهمة,BASIC,null,42.00,XYS-9876
+2,BSR-305,2022/04/05 15:45,تفاصيل معينة,BASIC,2022/04/06 15:45,40.00,CSD-9876
+3,LJS-303,2022/03/30 18:00,This is a detail,INTERMEDIATE,2022/03/31 18:00,30.00,ABC-1234
+4,SJP-307,2022/04/15 21:00,这是另一种细节,ADVANCED,2022/04/16 21:00,28.00,BSA-9876

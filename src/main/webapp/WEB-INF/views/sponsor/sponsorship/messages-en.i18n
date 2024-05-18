@@ -15,6 +15,7 @@ sponsor.sponsorship.label.projectId			= Associated Project's code
 
 sponsor.sponsorship.label.moment		= Moment
 sponsor.sponsorship.label.finishDate	= FinishDate
+sponsor.sponsorship.label.projectCode	= Project's code
 
 sponsor.sponsorship.button.invoices		= Invoices
 sponsor.sponsorship.button.create		= Create

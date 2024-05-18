@@ -8,14 +8,13 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SponsorDashboard extends AbstractForm {
-	// Serialisation identifier -----------------------------------------------
 
+	// Serialisation identifier -----------------------------------------------
 	private static final long	serialVersionUID	= 1L;
 
 	// Atributes --------------------------------------------------------------
-
-	double						totalNumInvoicesWithTaxLessOrEqualTo21;
-	double						totalNumInvoicesWithLink;
+	int							totalNumInvoicesWithTaxLessOrEqualTo21;
+	int							totalNumInvoicesWithLink;
 	double						averageSponsorshipsAmount;
 	double						deviationSponsorshipsAmount;
 	double						minimumSponsorshipsAmount;

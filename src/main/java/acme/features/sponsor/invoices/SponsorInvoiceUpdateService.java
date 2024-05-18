@@ -1,13 +1,20 @@
 
 package acme.features.sponsor.invoices;
 
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.stream.Stream;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractService;
 import acme.entities.sponsor.Invoice;
+import acme.entities.sponsor.Sponsorship;
 import acme.roles.Sponsor;
+import acme.systemConfiguration.SystemConfiguration;
 
 @Service
 public class SponsorInvoiceUpdateService extends AbstractService<Sponsor, Invoice> {
@@ -19,8 +26,14 @@ public class SponsorInvoiceUpdateService extends AbstractService<Sponsor, Invoic
 	@Override
 	public void authorise() {
 		boolean status;
+		int invoiceId;
+		Invoice inv;
+		Sponsorship sponsorship;
 
-		status = super.getRequest().getPrincipal().hasRole(Sponsor.class);
+		invoiceId = super.getRequest().getData("id", int.class);
+		inv = this.repository.findOneInvoiceById(invoiceId);
+		sponsorship = this.repository.findOneSponsorshipByInvoiceId(invoiceId);
+		status = sponsorship != null && !inv.isPublished() && super.getRequest().getPrincipal().hasRole(Sponsor.class);
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -46,6 +59,34 @@ public class SponsorInvoiceUpdateService extends AbstractService<Sponsor, Invoic
 	@Override
 	public void validate(final Invoice object) {
 		assert object != null;
+
+		if (!super.getBuffer().getErrors().hasErrors("code")) {
+			Invoice existing;
+
+			existing = this.repository.findOneInvoiceByCode(object.getCode());
+			super.state(existing == null, "code", "Code-duplicated");
+		}
+
+		if (!super.getBuffer().getErrors().hasErrors("registrationTime"))
+			super.state(object.getRegistrationTime() != null, "registrationTime", "RegistrationTime-cannot-be-empty");
+
+		if (!super.getBuffer().getErrors().hasErrors("dueDate")) {
+			super.state(MomentHelper.isAfter(object.getDueDate(), object.getRegistrationTime()), "dueDate", "must-be-date-after-registrationTime ");
+			super.state(MomentHelper.isLongEnough(object.getRegistrationTime(), object.getDueDate(), 1, ChronoUnit.MONTHS), "dueDate", "must-be-at-least-one-month-away");
+		}
+
+		if (!super.getBuffer().getErrors().hasErrors("quantity")) {
+			Double isAmount = object.getQuantity().getAmount();
+			super.state(isAmount != null && isAmount > 0, "quantity", "quantity-cannot-be-negative-or-zero ");
+
+			String isCurrency = object.getQuantity().getCurrency();
+			List<SystemConfiguration> sc = this.repository.findSystemConfiguration();
+			final boolean currencyOk = Stream.of(sc.get(0).aceptedCurrencies.split(",")).anyMatch(c -> c.equals(isCurrency));
+			super.state(currencyOk, "quantity", "Currency-not-supported ");
+		}
+
+		if (!super.getBuffer().getErrors().hasErrors("tax"))
+			super.state(object.getTax() >= 0, "tax", "tax-must-be-positive-or-zero ");
 	}
 
 	@Override
