@@ -29,7 +29,7 @@ public class MoneyExchange extends AbstractEntity {
 
 	@NotBlank
 	@Pattern(regexp = "[A-Z]{3}")
-	private String				targetCurrency;
+	private String				currencyTarget;
 
 	// Response attributes ----------------------------------------------------
 

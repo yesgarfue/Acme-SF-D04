@@ -4,6 +4,7 @@ package acme.systemConfiguration.moneyExchange;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -14,6 +15,7 @@ import acme.client.data.datatypes.Money;
 import acme.client.helpers.MomentHelper;
 import acme.client.helpers.StringHelper;
 
+@Configuration
 public class MoneyExchangePerform {
 
 	@Autowired
@@ -76,7 +78,7 @@ public class MoneyExchangePerform {
 
 			response = new MoneyExchange();
 			response.setSource(source);
-			response.setTargetCurrency(targetCurrency);
+			response.setCurrencyTarget(targetCurrency);
 			response.setDate(moment);
 			response.setTarget(target);
 
