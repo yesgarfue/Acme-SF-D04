@@ -17,6 +17,7 @@ import acme.client.data.accounts.Authenticated;
 import acme.client.data.datatypes.Money;
 import acme.client.data.models.Dataset;
 import acme.client.helpers.MomentHelper;
+import acme.client.helpers.StringHelper;
 import acme.client.services.AbstractService;
 import acme.components.ExchangeRate;
 import acme.forms.MoneyExchange;
@@ -104,7 +105,7 @@ public class AuthenticatedMoneyExchangePerformService extends AbstractService<Au
 
 	public MoneyExchange computeMoneyExchange(final Money source, final String targetCurrency) {
 		assert source != null;
-		//assert !StringHelper.isBlank(targetCurrency);
+		assert !StringHelper.isBlank(targetCurrency);
 
 		MoneyExchange response;
 		RestTemplate api;
@@ -128,8 +129,7 @@ public class AuthenticatedMoneyExchangePerformService extends AbstractService<Au
 
 			parameters = new HttpEntity<String>("parameters", headers);
 
-			objectResponse = api.exchange("https://api.apilayer.com/exchangerates_data/latest?base={0}&symbols={1}", HttpMethod.GET, parameters, ExchangeRate.class, //
-				"cur_live_9CS0QA54yYzg4W3iJ1QQMMktAfPY2DpLVpUjpPKP", sourceCurrency, targetCurrency);
+			objectResponse = api.exchange("https://api.apilayer.com/exchangerates_data/latest?base={0}&symbols={1}", HttpMethod.GET, parameters, ExchangeRate.class, "cur_live_9CS0QA54yYzg4W3iJ1QQMMktAfPY2DpLVpUjpPKP", sourceCurrency, targetCurrency);
 			/*
 			 * if (objectResponse != null && objectResponse.getRates() != null) {
 			 * Double rate = objectResponse.getRates().get("EUR");

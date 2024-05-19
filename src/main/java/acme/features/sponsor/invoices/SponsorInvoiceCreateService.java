@@ -13,6 +13,7 @@ import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractService;
 import acme.entities.invoice.Invoice;
 import acme.entities.sponsorship.Sponsorship;
+import acme.features.authenticated.moneyExchange.AuthenticatedMoneyExchangePerformService;
 import acme.roles.Sponsor;
 import acme.systemConfiguration.SystemConfiguration;
 
@@ -22,7 +23,10 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private SponsorInvoiceRepository repository;
+	private SponsorInvoiceRepository					repository;
+
+	@Autowired
+	private AuthenticatedMoneyExchangePerformService	exchange;
 
 	// AbstractService interface ----------------------------------------------
 
@@ -90,6 +94,7 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 			List<SystemConfiguration> sc = this.repository.findSystemConfiguration();
 			final boolean currencyOk = Stream.of(sc.get(0).aceptedCurrencies.split(",")).anyMatch(c -> c.equals(isCurrency));
 			super.state(currencyOk, "quantity", "Currency-not-supported ");
+
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("tax"))

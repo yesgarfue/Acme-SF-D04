@@ -10,6 +10,7 @@
 	<acme:input-money code="sponsor.invoice.label.quantity" path="quantity" placeholder="(EUR/USD/GBP) 00.00"/>
 	<acme:input-double code="sponsor.invoice.label.tax" path="tax" placeholder="00.00"/>
 	<acme:input-textbox code="sponsor.invoice.label.link" path="link" placeholder="https://www.example.com"/>
+
 	<jstl:choose>
 		<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish') && isPublished == false}">
 			<acme:submit code="sponsor.invoice.button.update" action="/sponsor/invoice/update"/>
