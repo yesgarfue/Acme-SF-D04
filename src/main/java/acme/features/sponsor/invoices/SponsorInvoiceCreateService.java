@@ -2,20 +2,23 @@
 package acme.features.sponsor.invoices;
 
 import java.time.temporal.ChronoUnit;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import acme.client.data.datatypes.Money;
 import acme.client.data.models.Dataset;
 import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractService;
 import acme.entities.invoice.Invoice;
 import acme.entities.sponsorship.Sponsorship;
-import acme.features.authenticated.moneyExchange.AuthenticatedMoneyExchangePerformService;
 import acme.roles.Sponsor;
 import acme.systemConfiguration.SystemConfiguration;
+import acme.systemConfiguration.moneyExchange.MoneyExchange;
+import acme.systemConfiguration.moneyExchange.MoneyExchangePerform;
 
 @Service
 public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoice> {
@@ -23,10 +26,10 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private SponsorInvoiceRepository					repository;
+	private SponsorInvoiceRepository	repository;
 
 	@Autowired
-	private AuthenticatedMoneyExchangePerformService	exchange;
+	private MoneyExchangePerform		currencyExchange;
 
 	// AbstractService interface ----------------------------------------------
 
@@ -94,7 +97,6 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 			List<SystemConfiguration> sc = this.repository.findSystemConfiguration();
 			final boolean currencyOk = Stream.of(sc.get(0).aceptedCurrencies.split(",")).anyMatch(c -> c.equals(isCurrency));
 			super.state(currencyOk, "quantity", "Currency-not-supported ");
-
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("tax"))
@@ -113,9 +115,21 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 		assert object != null;
 
 		Dataset dataset;
+		int shipId;
+
+		shipId = super.getRequest().getData("shipId", int.class);
+
+		MoneyExchange currency;
+		Money balance = new Money();
+
+		Collection<Invoice> invoicesBySponsorship = this.repository.findManyPublishedInvoicesBySponsorshipId(shipId);
+
+		if (invoicesBySponsorship == null)
+			balance = object.getSponsorship().getAmount();
 
 		dataset = super.unbind(object, "code", "registrationTime", "dueDate", "quantity", "tax", "link", "isPublished");
 		dataset.put("shipId", super.getRequest().getData("shipId", int.class));
+		dataset.put("balance", balance);
 
 		super.getResponse().addData(dataset);
 	}

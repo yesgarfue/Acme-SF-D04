@@ -8,6 +8,9 @@
 	<acme:input-moment code="sponsor.invoice.label.registrationTime" path="registrationTime" placeholder="YYYY/MM/DD HH:SS"/>
 	<acme:input-moment code="sponsor.invoice.label.dueDate" path="dueDate" placeholder="YYYY/MM/DD HH:SS"/>
 	<acme:input-money code="sponsor.invoice.label.quantity" path="quantity" placeholder="(EUR/USD/GBP) 00.00"/>
+	<jstl:if test="${_command == 'create'}">
+		<acme:input-money code="sponsor.invoice.form.label.quantity-default" path="balance" readonly="true" placeholder="N/A"/>
+	</jstl:if>
 	<acme:input-double code="sponsor.invoice.label.tax" path="tax" placeholder="00.00"/>
 	<acme:input-textbox code="sponsor.invoice.label.link" path="link" placeholder="https://www.example.com"/>
 

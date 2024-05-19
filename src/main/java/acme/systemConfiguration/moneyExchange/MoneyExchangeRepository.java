@@ -1,5 +1,5 @@
 
-package acme.features.authenticated.moneyExchange;
+package acme.systemConfiguration.moneyExchange;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import acme.client.repositories.AbstractRepository;
 import acme.systemConfiguration.SystemConfiguration;
 
 @Repository
-public interface AuthenticatedMoneyExchangeRepository extends AbstractRepository {
+public interface MoneyExchangeRepository extends AbstractRepository {
 
 	@Query("SELECT sc FROM SystemConfiguration sc")
 	List<SystemConfiguration> findSystemConfiguration();
