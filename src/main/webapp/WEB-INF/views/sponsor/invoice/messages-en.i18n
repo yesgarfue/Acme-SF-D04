@@ -13,3 +13,9 @@ sponsor.invoice.button.create = Register
 sponsor.invoice.button.update = Update
 sponsor.invoice.button.delete = Delete
 sponsor.invoice.button.publish = Publish 
+
+sponsor.invoice.label.info.sponsorship = Information about the sponsorship
+sponsor.invoice.label.info.sponsorship.amount = Total amount of the sponsorship
+sponsor.invoice.label.info.sponsorship.currency = Currency chosen for the sponsorship
+sponsor.invoice.label.info.sponsorship.accumulatedAmountInvoices = Accumulated amount of published invoices (Converted to the currency chosen for the sponsorship)
+sponsor.invoice.label.recomendation = * Recommended Quantity * Required to fulfill the total sponsorship (calculated based on the entered tax and in the sponsorship currency).

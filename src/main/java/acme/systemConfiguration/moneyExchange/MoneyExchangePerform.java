@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import acme.client.data.datatypes.Money;
 import acme.client.helpers.MomentHelper;
 import acme.client.helpers.StringHelper;
 
@@ -20,6 +21,18 @@ public class MoneyExchangePerform {
 	@Autowired
 	private MoneyExchangeRepository repository;
 
+
+	public Money exchangeMoney(final double amount, final String currency) {
+		assert amount != 0.00;
+		assert !StringHelper.isBlank(currency);
+
+		Money newExchange;
+		newExchange = new Money();
+		newExchange.setAmount(amount);
+		newExchange.setCurrency(currency);
+
+		return newExchange;
+	}
 
 	public double computeMoneyExchange(final String currencyBase, final String currencyTarget) {
 		assert !StringHelper.isBlank(currencyBase);

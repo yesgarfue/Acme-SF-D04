@@ -13,3 +13,9 @@ sponsor.invoice.button.create = Registrar
 sponsor.invoice.button.update = Modificar
 sponsor.invoice.button.delete = Eliminar
 sponsor.invoice.button.publish = Publicar
+
+sponsor.invoice.label.info.sponsorship = Informacion sobre el patrocinio
+sponsor.invoice.label.info.sponsorship.amount = Monto total del patrocinio
+sponsor.invoice.label.info.sponsorship.currency = Divisa elegida para el patrocinio
+sponsor.invoice.label.info.sponsorship.accumulatedAmountInvoices = Monto acumulado de las facturas publicadas (cambiada a la divisa elegida por el sponsorship)
+sponsor.invoice.label.recomendation = * Cantidad recomendada * necesaria para completar el total del patrocinio (calculado según el impuesto ingresado y en la divisa del patrocinio).
