@@ -17,7 +17,6 @@ import acme.entities.invoice.Invoice;
 import acme.entities.sponsorship.Sponsorship;
 import acme.roles.Sponsor;
 import acme.systemConfiguration.SystemConfiguration;
-import acme.systemConfiguration.moneyExchange.MoneyExchange;
 import acme.systemConfiguration.moneyExchange.MoneyExchangePerform;
 
 @Service
@@ -114,22 +113,31 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 	public void unbind(final Invoice object) {
 		assert object != null;
 
-		Dataset dataset;
 		int shipId;
 
 		shipId = super.getRequest().getData("shipId", int.class);
-
-		MoneyExchange currency;
-		Money balance = new Money();
+		Dataset dataset;
+		double balance;
+		Money f = new Money();
 
 		Collection<Invoice> invoicesBySponsorship = this.repository.findManyPublishedInvoicesBySponsorshipId(shipId);
 
-		if (invoicesBySponsorship == null)
-			balance = object.getSponsorship().getAmount();
-
 		dataset = super.unbind(object, "code", "registrationTime", "dueDate", "quantity", "tax", "link", "isPublished");
 		dataset.put("shipId", super.getRequest().getData("shipId", int.class));
+		balance = 5.23;
 		dataset.put("balance", balance);
+
+		//amountAprox = Double.parseDouble(String.format("%.2f", amountAprox));
+
+		if (invoicesBySponsorship.isEmpty()) {
+			double amountAprox = object.getSponsorship().getAmount().getAmount();
+			String currencyAprox = object.getSponsorship().getAmount().getCurrency();
+			//amountAprox = Double.parseDouble(String.format("%.2f", amountAprox));
+			//f = object.getSponsorship().getAmount();
+			//f.setAmount(amountAprox);
+			dataset.put("amountAprox", amountAprox);
+			dataset.put("currencyAprox", currencyAprox);
+		}
 
 		super.getResponse().addData(dataset);
 	}
