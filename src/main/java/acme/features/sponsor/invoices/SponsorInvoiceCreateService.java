@@ -10,7 +10,6 @@ import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import acme.client.data.datatypes.Money;
 import acme.client.data.models.Dataset;
 import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractService;
@@ -68,7 +67,7 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 	public void bind(final Invoice object) {
 		assert object != null;
 
-		super.bind(object, "code", "registrationTime", "dueDate", "quantity", "tax", "link");
+		super.bind(object, "code", "dueDate", "quantity", "tax", "link");
 	}
 
 	@Override
@@ -91,13 +90,11 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 
 			super.state(MomentHelper.isAfter(object.getDueDate(), object.getRegistrationTime()), "dueDate", "must-be-date-after-registrationTime ");
 			super.state(MomentHelper.isLongEnough(object.getRegistrationTime(), object.getDueDate(), 1, ChronoUnit.MONTHS), "dueDate", "must-be-at-least-one-month-away");
-			super.state(MomentHelper.isBefore(object.getDueDate(), limitDate), "dueDate", "sponsor.invoice.form.error.dateOutOfBounds");
+			super.state(MomentHelper.isBefore(object.getDueDate(), limitDate), "dueDate", "sponsor.invoice.form.error.date-out-of-bounds");
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("quantity")) {
-			Double isAmount = object.getQuantity().getAmount();
-			super.state(isAmount != null && isAmount == 0, "quantity", "quantity-cannot-be-negative-or-zero ");
-			super.state(0 < isAmount && isAmount <= 1000000.00, "quantity", "quantity-must-be-between-0-and-1000000.00 ");
+			super.state(object.getQuantity() != null && object.getQuantity().getAmount() <= 1000000.00 && object.getQuantity().getAmount() >= 0.00, "quantity", "amount-must-be-between-limits-0-and-1000000.00 ");
 
 			String isCurrency = object.getQuantity().getCurrency();
 			List<SystemConfiguration> sc = this.repository.findSystemConfiguration();
@@ -105,8 +102,11 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 			super.state(currencyOk, "quantity", "Currency-not-supported ");
 		}
 
-		if (!super.getBuffer().getErrors().hasErrors("tax"))
+		if (!super.getBuffer().getErrors().hasErrors("tax")) {
 			super.state(object.getTax() >= 0, "tax", "tax-must-be-positive-or-zero ");
+
+			super.state(object.getTax() < 1000000.00, "tax", "tax-out-of-bounds ");
+		}
 	}
 
 	@Override
@@ -121,29 +121,30 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 		assert object != null;
 
 		int shipId;
-
-		shipId = super.getRequest().getData("shipId", int.class);
+		double accumulatedAmountInvoices = 0.00;
 		Dataset dataset;
-		double balance;
-		Money f = new Money();
 
-		Collection<Invoice> invoicesBySponsorship = this.repository.findManyPublishedInvoicesBySponsorshipId(shipId);
+		double sponsorshipAmount = object.getSponsorship().getAmount().getAmount();
+		String sponsorshipCurrency = object.getSponsorship().getAmount().getCurrency();
+		shipId = super.getRequest().getData("shipId", int.class);
+		Collection<Invoice> invoicesPublishedBySponsorship = this.repository.findManyPublishedInvoicesBySponsorshipId(shipId);
 
 		dataset = super.unbind(object, "code", "registrationTime", "dueDate", "quantity", "tax", "link", "isPublished");
 		dataset.put("shipId", super.getRequest().getData("shipId", int.class));
-		balance = 5.23;
-		dataset.put("balance", balance);
+		dataset.put("sponsorshipAmount", sponsorshipAmount);
+		dataset.put("sponsorshipCurrency", sponsorshipCurrency);
 
-		//amountAprox = Double.parseDouble(String.format("%.2f", amountAprox));
-
-		if (invoicesBySponsorship.isEmpty()) {
-			double amountAprox = object.getSponsorship().getAmount().getAmount();
-			String currencyAprox = object.getSponsorship().getAmount().getCurrency();
-			//amountAprox = Double.parseDouble(String.format("%.2f", amountAprox));
-			//f = object.getSponsorship().getAmount();
-			//f.setAmount(amountAprox);
-			dataset.put("amountAprox", amountAprox);
-			dataset.put("currencyAprox", currencyAprox);
+		if (invoicesPublishedBySponsorship.isEmpty())
+			dataset.put("accumulatedAmountInvoices", accumulatedAmountInvoices);
+		else {
+			for (Invoice i : invoicesPublishedBySponsorship)
+				if (i.getQuantity().getCurrency().equals(sponsorshipCurrency))
+					accumulatedAmountInvoices += i.totalAmount();
+				else {
+					double rate = this.currencyExchange.computeMoneyExchange(i.getQuantity().getCurrency(), sponsorshipCurrency);
+					accumulatedAmountInvoices += rate * i.totalAmount();
+				}
+			dataset.put("accumulatedAmountInvoices", accumulatedAmountInvoices);
 		}
 
 		super.getResponse().addData(dataset);

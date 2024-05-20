@@ -4,27 +4,26 @@ package acme.systemConfiguration.moneyExchange;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import acme.client.data.datatypes.Money;
 import acme.client.helpers.MomentHelper;
 import acme.client.helpers.StringHelper;
 
-@Configuration
+@Component
 public class MoneyExchangePerform {
 
 	@Autowired
 	private MoneyExchangeRepository repository;
 
 
-	public MoneyExchange computeMoneyExchange(final Money source, final String targetCurrency) {
-		assert source != null;
-		assert !StringHelper.isBlank(targetCurrency);
+	public double computeMoneyExchange(final String currencyBase, final String currencyTarget) {
+		assert !StringHelper.isBlank(currencyBase);
+		assert !StringHelper.isBlank(currencyTarget);
 
 		MoneyExchange response;
 		RestTemplate api;
@@ -32,61 +31,58 @@ public class MoneyExchangePerform {
 		HttpEntity<String> parameters;
 		ResponseEntity<ExchangeRate> objectResponse;
 		ExchangeRate record;
-		String sourceCurrency;
-		Double sourceAmount, targetAmount, rate;
-		Money target;
+		Double currencyExchange;
 		Date moment;
 
 		try {
+
 			api = new RestTemplate();
 
-			sourceAmount = source.getAmount();
-			sourceCurrency = source.getCurrency();
-
 			headers = new HttpHeaders();
-			headers.add("apikey", "wLIxo1nnIv5zaTqUNHMHDWXJDpaOhls8");
+			headers.add("apikey", "cur_live_y7beSkQRf0YzYa7tbAozTeZOXZZEr7iYzdAQd8Eq");
 
 			parameters = new HttpEntity<String>("parameters", headers);
 
-			objectResponse = api.exchange("https://api.apilayer.com/exchangerates_data/latest?base={0}&symbols={1}", HttpMethod.GET, parameters, ExchangeRate.class, "cur_live_9CS0QA54yYzg4W3iJ1QQMMktAfPY2DpLVpUjpPKP", sourceCurrency, targetCurrency);
-			/*
-			 * if (objectResponse != null && objectResponse.getRates() != null) {
-			 * Double rate = objectResponse.getRates().get("EUR");
-			 * if (rate != null) {
-			 * // Usa la tasa de cambio `rate`
-			 * } else {
-			 * // Maneja el caso donde la clave "EUR" no está presente en el mapa
-			 * }
-			 * } else {
-			 * // Maneja el caso donde `objectResponse` o `rates` son `null`
-			 * }
-			 */
+			objectResponse = api.exchange( //				
+				"https://api.currencyapi.com/v3/latest?base_currency={1}&currencies={2}", //
+				HttpMethod.GET, //
+				parameters, //
+				ExchangeRate.class, //
+				currencyBase,//
+				currencyTarget);
 
 			assert objectResponse != null && objectResponse.getBody() != null;
 			record = objectResponse.getBody();
 
-			assert record != null && record.getRates().containsKey(targetCurrency);
-			rate = record.getRates().get(targetCurrency);
+			assert record != null;
+			currencyExchange = Double.valueOf(record.getData().get(currencyTarget).get("value"));
 
-			targetAmount = rate * sourceAmount;
-
-			target = new Money();
-			target.setAmount(targetAmount);
-			target.setCurrency(targetCurrency);
-
-			moment = record.getDate();
+			moment = MomentHelper.getCurrentMoment();
 
 			response = new MoneyExchange();
-			response.setSource(source);
-			response.setCurrencyTarget(targetCurrency);
+			response.setCurrencyOriginal(currencyBase);
+			response.setCurrencyTarget(currencyTarget);
 			response.setDate(moment);
-			response.setTarget(target);
+			response.setCurrencyExchange(currencyExchange);
+
+			this.storeLastExchangeRatios(response);
 
 			MomentHelper.sleep(1000); // HINT: need to pause the requests to the API a bit down to prevent DOS attacks
+
 		} catch (final Throwable oops) {
-			response = null;
+			currencyExchange = null;
 		}
 
-		return response;
+		return currencyExchange;
+	}
+
+	private void storeLastExchangeRatios(final MoneyExchange object) {
+		assert object != null;
+
+		MoneyExchange lastExchange = this.repository.findLastMoneyExchangeForCurrency(object.getCurrencyOriginal());
+		if (lastExchange != null)
+			this.repository.deleteById(lastExchange.getId());
+
+		this.repository.save(object);
 	}
 }

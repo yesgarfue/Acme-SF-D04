@@ -1,7 +1,6 @@
 
 package acme.systemConfiguration.moneyExchange;
 
-import java.util.Date;
 import java.util.Map;
 
 import lombok.Getter;
@@ -11,9 +10,7 @@ import lombok.Setter;
 @Setter
 public class ExchangeRate {
 
-	public String				base;
-	public Date					date;
-	public Map<String, Double>	rates;
-	public boolean				success;
-	public long					timestamp;
+	public Map<String, String>				meta;
+
+	public Map<String, Map<String, String>>	data;
 }

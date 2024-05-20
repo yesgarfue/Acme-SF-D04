@@ -15,4 +15,6 @@ public interface MoneyExchangeRepository extends AbstractRepository {
 	@Query("SELECT sc FROM SystemConfiguration sc")
 	List<SystemConfiguration> findSystemConfiguration();
 
+	@Query("SELECT me FROM MoneyExchange me WHERE me.currencyOriginal = :currencyOriginal")
+	MoneyExchange findLastMoneyExchangeForCurrency(String currencyOriginal);
 }
