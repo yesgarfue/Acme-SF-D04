@@ -3,6 +3,7 @@ package acme.features.sponsor.invoices;
 
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -57,6 +58,7 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 
 		object = new Invoice();
 		object.setSponsorship(sponsorship);
+		object.setRegistrationTime(MomentHelper.getCurrentMoment());
 		object.setPublished(false);
 
 		super.getBuffer().addData(object);
@@ -84,13 +86,18 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 			super.state(object.getRegistrationTime() != null, "registrationTime", "RegistrationTime-cannot-be-empty");
 
 		if (!super.getBuffer().getErrors().hasErrors("dueDate")) {
+			String dateString = "2201/01/01 00:00";
+			Date limitDate = MomentHelper.parse(dateString, "yyyy/MM/dd HH:mm");
+
 			super.state(MomentHelper.isAfter(object.getDueDate(), object.getRegistrationTime()), "dueDate", "must-be-date-after-registrationTime ");
 			super.state(MomentHelper.isLongEnough(object.getRegistrationTime(), object.getDueDate(), 1, ChronoUnit.MONTHS), "dueDate", "must-be-at-least-one-month-away");
+			super.state(MomentHelper.isBefore(object.getDueDate(), limitDate), "dueDate", "sponsor.invoice.form.error.dateOutOfBounds");
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("quantity")) {
 			Double isAmount = object.getQuantity().getAmount();
-			super.state(isAmount != null && isAmount > 0, "quantity", "quantity-cannot-be-negative-or-zero ");
+			super.state(isAmount != null && isAmount == 0, "quantity", "quantity-cannot-be-negative-or-zero ");
+			super.state(0 < isAmount && isAmount <= 1000000.00, "quantity", "quantity-must-be-between-0-and-1000000.00 ");
 
 			String isCurrency = object.getQuantity().getCurrency();
 			List<SystemConfiguration> sc = this.repository.findSystemConfiguration();
