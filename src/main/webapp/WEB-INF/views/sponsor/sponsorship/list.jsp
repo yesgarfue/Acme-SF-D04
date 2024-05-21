@@ -6,8 +6,8 @@
 <acme:list>
 	<acme:list-column code="sponsor.sponsorship.label.code" path="code" width="20%"/>
 	<acme:list-column code="sponsor.sponsorship.label.startDate" path="startDate" width="20%"/>
-	<acme:list-column code="sponsor.sponsorship.label.sponsorshipType" path="sponsorshipType" sortable="false" width="20%"/>
-	<acme:list-column code="sponsor.sponsorship.label.url" path="link" sortable="false" width="20%"/>
+	<acme:list-column code="sponsor.sponsorship.label.sponsorshipType" path="sponsorshipType" sortable="true" width="20%"/>
+	<acme:list-column code="sponsor.sponsorship.label.sponsorshipAmount" path="amount" sortable="true" width="20%"/>
 	<acme:list-column code="sponsor.sponsorship.label.projectId" path="project.code" width="20%"/>
 </acme:list>
 
