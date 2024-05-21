@@ -68,7 +68,7 @@ public class ClientProgressLogPublishService extends AbstractService<Client, Pro
 			ProgressLog existing;
 
 			existing = this.repository.findProgressLogByRecordId(object.getRecordId());
-			super.state(existing == null || existing.equals(object), "recordId", "client.progressLog.form.error.duplicated");
+			super.state(existing == null || existing.equals(object), "recordId", "client.progress-log.form.error.duplicated");
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("registrationMoment"))

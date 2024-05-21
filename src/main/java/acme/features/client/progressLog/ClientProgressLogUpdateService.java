@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
-import acme.client.helpers.PrincipalHelper;
 import acme.client.services.AbstractService;
 import acme.entities.contract.ProgressLog;
 import acme.roles.Client;
@@ -92,9 +91,4 @@ public class ClientProgressLogUpdateService extends AbstractService<Client, Prog
 		super.getResponse().addData(dataset);
 	}
 
-	@Override
-	public void onSuccess() {
-		if (super.getRequest().getMethod().equals("PUT"))
-			PrincipalHelper.handleUpdate();
-	}
 }

@@ -79,7 +79,7 @@ public class ClientContractPublishService extends AbstractService<Client, Contra
 				List<SystemConfiguration> sc = this.repository.findSystemConfiguration();
 				final boolean foundCurrency = Stream.of(sc.get(0).aceptedCurrencies.split(",")).anyMatch(c -> c.equals(object.getBudget().getCurrency()));
 
-				super.state(foundCurrency, "budget", "client.contract.form.error.currency-not-supported");
+				super.state(foundCurrency, "budget", "client.contract.form.error.currency-not-suported");
 
 			}
 		}
@@ -89,17 +89,14 @@ public class ClientContractPublishService extends AbstractService<Client, Contra
 	private Boolean checkContractsAmountsLessThanProjectCost(final Contract object) {
 		assert object != null;
 
-		if (object.getProject() != null) {
-			Collection<Contract> contratos = this.repository.findManyContractsByClientId(object.getProject().getId());
+		Collection<Contract> contratos = this.repository.findContractsByProjectId(object.getProject().getId());
 
-			Double budgetTotal = contratos.stream().filter(contract -> !contract.getDraftMode()).mapToDouble(contract -> contract.getBudget().getAmount()).sum();
+		Double budgetTotal = contratos.stream().filter(contract -> !contract.getDraftMode()).mapToDouble(contract -> contract.getBudget().getAmount()).sum();
 
-			Double projectCost = object.getProject().getCost().getAmount();
+		Double projectCost = object.getProject().getCost().getAmount();
 
-			return projectCost >= budgetTotal + object.getBudget().getAmount();
-		}
+		return projectCost >= budgetTotal + object.getBudget().getAmount();
 
-		return true;
 	}
 
 	@Override
