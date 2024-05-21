@@ -90,7 +90,7 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 
 			super.state(MomentHelper.isAfter(object.getDueDate(), object.getRegistrationTime()), "dueDate", "must-be-date-after-registrationTime ");
 			super.state(MomentHelper.isLongEnough(object.getRegistrationTime(), object.getDueDate(), 1, ChronoUnit.MONTHS), "dueDate", "must-be-at-least-one-month-away");
-			super.state(MomentHelper.isBefore(object.getDueDate(), limitDate), "dueDate", "sponsor.invoice.form.error.date-out-of-bounds");
+			super.state(MomentHelper.isBefore(object.getDueDate(), limitDate), "dueDate", "dueDate-error-date-out-of-bounds");
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("quantity")) {
