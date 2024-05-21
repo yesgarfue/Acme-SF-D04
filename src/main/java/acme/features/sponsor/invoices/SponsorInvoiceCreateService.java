@@ -85,7 +85,7 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 			super.state(object.getRegistrationTime() != null, "registrationTime", "RegistrationTime-cannot-be-empty");
 
 		if (!super.getBuffer().getErrors().hasErrors("dueDate")) {
-			String dateString = "2201/01/01 00:00";
+			String dateString = "2200/12/31 23:59";
 			Date limitDate = MomentHelper.parse(dateString, "yyyy/MM/dd HH:mm");
 
 			super.state(MomentHelper.isAfter(object.getDueDate(), object.getRegistrationTime()), "dueDate", "must-be-date-after-registrationTime ");
@@ -94,7 +94,8 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("quantity")) {
-			super.state(object.getQuantity() != null && object.getQuantity().getAmount() <= 1000000.00 && object.getQuantity().getAmount() >= 0.00, "quantity", "amount-must-be-between-limits-0-and-1000000.00 ");
+			super.state(object.getQuantity().getAmount() >= 0, "quantity", "amount-error-negative");
+			super.state(object.getQuantity().getAmount() <= 1_000_000.00, "quantity", "amount-error-too-high-salary");
 
 			String isCurrency = object.getQuantity().getCurrency();
 			List<SystemConfiguration> sc = this.repository.findSystemConfiguration();
@@ -104,8 +105,7 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 
 		if (!super.getBuffer().getErrors().hasErrors("tax")) {
 			super.state(object.getTax() >= 0, "tax", "tax-must-be-positive-or-zero ");
-
-			super.state(object.getTax() < 1000000.00, "tax", "tax-out-of-bounds ");
+			super.state(object.getTax() <= 1_000_000.00, "tax", "tax-out-of-bounds ");
 		}
 	}
 

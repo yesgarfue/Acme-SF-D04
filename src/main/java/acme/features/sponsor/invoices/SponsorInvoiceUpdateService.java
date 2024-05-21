@@ -2,6 +2,7 @@
 package acme.features.sponsor.invoices;
 
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -32,7 +33,7 @@ public class SponsorInvoiceUpdateService extends AbstractService<Sponsor, Invoic
 
 		invoiceId = super.getRequest().getData("id", int.class);
 		inv = this.repository.findOneInvoiceById(invoiceId);
-		sponsorship = this.repository.findOneSponsorshipByInvoiceId(invoiceId);
+		sponsorship = inv == null ? null : inv.getSponsorship();
 		status = sponsorship != null && !inv.isPublished() && super.getRequest().getPrincipal().hasRole(Sponsor.class);
 
 		super.getResponse().setAuthorised(status);
@@ -64,20 +65,24 @@ public class SponsorInvoiceUpdateService extends AbstractService<Sponsor, Invoic
 			Invoice existing;
 
 			existing = this.repository.findOneInvoiceByCode(object.getCode());
-			super.state(existing == null, "code", "Code-duplicated");
+			super.state(existing == null || existing.equals(object), "code", "Code-duplicated");
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("registrationTime"))
 			super.state(object.getRegistrationTime() != null, "registrationTime", "RegistrationTime-cannot-be-empty");
 
 		if (!super.getBuffer().getErrors().hasErrors("dueDate")) {
+			String dateString = "2200/12/31 23:59";
+			Date limitDate = MomentHelper.parse(dateString, "yyyy/MM/dd HH:mm");
+
 			super.state(MomentHelper.isAfter(object.getDueDate(), object.getRegistrationTime()), "dueDate", "must-be-date-after-registrationTime ");
 			super.state(MomentHelper.isLongEnough(object.getRegistrationTime(), object.getDueDate(), 1, ChronoUnit.MONTHS), "dueDate", "must-be-at-least-one-month-away");
+			super.state(MomentHelper.isBefore(object.getDueDate(), limitDate), "dueDate", "sponsor.invoice.form.error.date-out-of-bounds");
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("quantity")) {
-			Double isAmount = object.getQuantity().getAmount();
-			super.state(isAmount != null && isAmount > 0, "quantity", "quantity-cannot-be-negative-or-zero ");
+			super.state(object.getQuantity().getAmount() >= 0, "quantity", "amount-error-negative");
+			super.state(object.getQuantity().getAmount() <= 1_000_000.00, "quantity", "amount-error-too-high-salary");
 
 			String isCurrency = object.getQuantity().getCurrency();
 			List<SystemConfiguration> sc = this.repository.findSystemConfiguration();
@@ -85,14 +90,15 @@ public class SponsorInvoiceUpdateService extends AbstractService<Sponsor, Invoic
 			super.state(currencyOk, "quantity", "Currency-not-supported ");
 		}
 
-		if (!super.getBuffer().getErrors().hasErrors("tax"))
+		if (!super.getBuffer().getErrors().hasErrors("tax")) {
 			super.state(object.getTax() >= 0, "tax", "tax-must-be-positive-or-zero ");
+			super.state(object.getTax() <= 1_000_000.00, "tax", "tax-out-of-bounds ");
+		}
 	}
 
 	@Override
 	public void perform(final Invoice object) {
 		assert object != null;
-
 		this.repository.save(object);
 	}
 
@@ -101,8 +107,12 @@ public class SponsorInvoiceUpdateService extends AbstractService<Sponsor, Invoic
 		assert object != null;
 
 		Dataset dataset;
+		int id;
 
-		dataset = super.unbind(object, "code", "registrationTime", "dueDate", "quantity", "tax", "link");
+		dataset = super.unbind(object, "code", "registrationTime", "dueDate", "quantity", "tax", "link", "isPublished");
 		dataset.put("shipId", object.getSponsorship().getId());
+		dataset.put("quantityTax", object.totalAmount());
+
+		super.getResponse().addData(dataset);
 	}
 }
