@@ -70,16 +70,16 @@ public class ClientContractPublishService extends AbstractService<Client, Contra
 			Contract existing;
 
 			existing = this.repository.findContractByCode(object.getCode());
-			super.state(existing == null || existing.equals(object), "code", "client.contract.error.code.duplicated");
+			super.state(existing == null || existing.equals(object), "code", "client.contract.form.error.duplicated");
 
 			if (!super.getBuffer().getErrors().hasErrors("budget")) {
-				super.state(this.checkContractsAmountsLessThanProjectCost(object), "budget", "client.contract.error.code.exceededBudget");
-				super.state(object.getBudget().getAmount() > 0, "budget", "client.contract.error.code.negative-amount");
+				super.state(this.checkContractsAmountsLessThanProjectCost(object), "budget", "client.contract.form.error.exceededBudget");
+				super.state(object.getBudget().getAmount() > 0, "budget", "client.contract.form.error.negative-amount");
 
 				List<SystemConfiguration> sc = this.repository.findSystemConfiguration();
 				final boolean foundCurrency = Stream.of(sc.get(0).aceptedCurrencies.split(",")).anyMatch(c -> c.equals(object.getBudget().getCurrency()));
 
-				super.state(foundCurrency, "budget", "client.contract.error.code.currency-not-supported");
+				super.state(foundCurrency, "budget", "client.contract.form.error.currency-not-supported");
 
 			}
 		}

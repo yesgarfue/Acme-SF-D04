@@ -24,8 +24,11 @@ public class ClientProgressLogUpdateService extends AbstractService<Client, Prog
 	@Override
 	public void authorise() {
 		boolean status;
+		ProgressLog progressLog;
 
-		status = super.getRequest().getPrincipal().hasRole(Client.class);
+		progressLog = this.repository.findProgressLogById(super.getRequest().getData("id", int.class));
+
+		status = progressLog != null && progressLog.getDraftMode() && super.getRequest().getPrincipal().hasRole(progressLog.getContract().getClient());
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -49,6 +52,7 @@ public class ClientProgressLogUpdateService extends AbstractService<Client, Prog
 		assert object != null;
 
 		super.bind(object, "recordId", "completenessPercentage", "progressComment", "registrationMoment", "responsiblePerson", "draftMode");
+
 	}
 
 	@Override
@@ -62,11 +66,6 @@ public class ClientProgressLogUpdateService extends AbstractService<Client, Prog
 			super.state(existing == null || existing.equals(object), "recordId", "client.progress-log.form.error.duplicated");
 		}
 
-		if (!super.getBuffer().getErrors().hasErrors("completeness")) {
-			Double existing;
-			existing = this.repository.findPublishedProgressLogWithMaxCompleteness(object.getContract().getId());
-			super.state(object.getCompletenessPercentage() >= existing, "completenessPercentage", "client.progress-log.form.error.completeness-too-low");
-		}
 		if (!super.getBuffer().getErrors().hasErrors("registrationMoment"))
 			super.state(object.getRegistrationMoment().after(object.getContract().getInstantiationMoment()), "registrationMoment", "client.progress-log.form.error.registration-moment-must-be-later");
 
@@ -84,7 +83,11 @@ public class ClientProgressLogUpdateService extends AbstractService<Client, Prog
 		assert object != null;
 
 		Dataset dataset;
-		dataset = super.unbind(object, "recordId", "completenessPercentage", "progressComment", "registrationMoment", "responsiblePerson", "draftMode");
+
+		dataset = super.unbind(object, "recordId", "completenessPercentage", "progressComment", "registrationMoment", "responsiblePerson");
+
+		dataset.put("masterId", object.getContract().getId());
+		dataset.put("draftMode", object.getDraftMode());
 
 		super.getResponse().addData(dataset);
 	}
