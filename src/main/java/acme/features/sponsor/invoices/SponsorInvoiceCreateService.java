@@ -128,9 +128,10 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 		shipId = super.getRequest().getData("shipId", int.class);
 		Collection<Invoice> invoicesPublishedBySponsorship = this.repository.findManyPublishedInvoicesBySponsorshipId(shipId);
 
-		dataset = super.unbind(object, "code", "registrationTime", "dueDate", "quantity", "tax", "link", "isPublished");
+		dataset = super.unbind(object, "code", "registrationTime", "dueDate", "quantity", "tax", "link", "isPublished", "sponsorship");
 		dataset.put("shipId", super.getRequest().getData("shipId", int.class));
-		dataset.put("amountSponsorship", object.getSponsorship().getAmount());
+		dataset.put("sponsorshipAmount", object.getSponsorship().getAmount().getAmount());
+		dataset.put("sponsorshipCurrency", sponsorshipCurrency);
 
 		if (invoicesPublishedBySponsorship.isEmpty())
 			dataset.put("accumulatedAmountInvoices", accumulatedAmountInvoices);

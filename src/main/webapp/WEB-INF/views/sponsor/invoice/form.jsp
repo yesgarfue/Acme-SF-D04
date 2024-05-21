@@ -5,8 +5,14 @@
 
 <table class="table table-sm">
 	<tr>
-		<td><acme:input-money code="sponsor.invoice.label.info.sponsorship.amount" path="amountSponsorship" readonly="true" placeholder="N/A"/></td>
-		<td><acme:input-money code="sponsor.invoice.label.info.sponsorship.accumulatedAmountInvoices" path="accumulatedAmountInvoices" readonly="true" placeholder="N/A"/></td>
+		<th scope="row"><acme:message code="sponsor.invoice.label.info.sponsorship"/></th>
+		<td><acme:input-double code="sponsor.invoice.label.info.sponsorship.amount" path="sponsorshipAmount" readonly="true" placeholder="N/A"/></td>
+		<td><acme:input-textbox code="sponsor.invoice.label.info.sponsorship.currency" path="sponsorshipCurrency" readonly="true" placeholder="N/A"/></td>
+	</tr>
+	<tr>
+		<th scope="row"><acme:message code="sponsor.invoice.label.info.invoice"/></th>
+		<td><acme:input-double code="sponsor.invoice.label.info.accumulatedAmountInvoices" path="accumulatedAmountInvoices" readonly="true" placeholder="N/A"/></td>
+		<td><jstl:if test="${_command == 'create'}"><acme:input-textbox code="sponsor.invoice.label.recomendation" path="result" readonly="true" placeholder="quantity + (quantity * tax/100)"/></jstl:if></td>
 	</tr>
 </table>
 
@@ -17,10 +23,6 @@
 	<acme:input-money code="sponsor.invoice.label.quantity" path="quantity" placeholder="(EUR/USD/GBP) 00.00"/>
 	<acme:input-double code="sponsor.invoice.label.tax" path="tax" placeholder="00.00"/>
 	<acme:input-textbox code="sponsor.invoice.label.link" path="link" placeholder="https://www.example.com"/>
-	
-	<jstl:if test="${_command == 'create'}">
-		<acme:input-textbox  code="sponsor.invoice.label.recomendation" path="result" readonly="true"/>
-	</jstl:if>
 	<jstl:choose>
 		<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish') && isPublished == false}">
 			<acme:submit code="sponsor.invoice.button.update" action="/sponsor/invoice/update"/>
@@ -35,16 +37,17 @@
 
 <script type="text/javascript">
 	document.addEventListener("DOMContentLoaded", function() {
-			const accumulatedAmountInvoicesField = document.getElementById('amountSponsorship.getAmount().getAmount()');
-	    	const amountSponsorshipField = document.getElementById('accumulatedAmountInvoices');
+			const totalField = document.getElementById('sponsorshipAmount');
+			const accumulatedField = document.getElementById('accumulatedAmountInvoices');
 	        const taxField = document.getElementById('tax');
-	        const resultField = document.getElementById('result');accumulatedAmountInvoices
+	        const resultField = document.getElementById('result');
 
 	        function updateResult() {
-	        	const accumulatedAmountInvoicesValue = parseFloat(accumulatedField.value.replace(/,/g, '')) || 0;
-		        const amountSponsorshipValue = parseFloat(fField.value.replace(/,/g, '')) || 0;
+	        	const totalValue = parseFloat(totalField.value.replace(/,/g, '')) || 0;
+	        	const accumulatedValue = parseFloat(accumulatedField.value.replace(/,/g, '')) || 0;
 	            const taxValue = parseFloat(taxField.value.replace(/,/g, '')) || 0;
-	            const result = (amountSponsorshipValue-accumulatedAmountInvoicesValue) / (1 + taxValue / 100);
+	            const result = (totalValue - accumulatedValue) / (1 + taxValue / 100);
+	            
 	            resultField.value = result.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 			}
 	        taxField.addEventListener('input', updateResult);
