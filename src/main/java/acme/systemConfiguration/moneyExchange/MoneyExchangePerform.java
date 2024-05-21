@@ -1,6 +1,7 @@
 
 package acme.systemConfiguration.moneyExchange;
 
+import java.util.Collection;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import acme.client.data.datatypes.Money;
 import acme.client.helpers.MomentHelper;
 import acme.client.helpers.StringHelper;
+import acme.entities.invoice.Invoice;
 
 @Component
 public class MoneyExchangePerform {
@@ -22,19 +23,36 @@ public class MoneyExchangePerform {
 	private MoneyExchangeRepository repository;
 
 
-	public Money exchangeMoney(final double amount, final String currency) {
-		assert amount != 0.00;
-		assert !StringHelper.isBlank(currency);
+	public double totalMoneyExchangeInvoices(final Collection<Invoice> invoices, final String currencyTarget) {
+		MoneyExchange lastMoneyExchange;
+		Date currentDate;
+		Double rate;
 
-		Money newExchange;
-		newExchange = new Money();
-		newExchange.setAmount(amount);
-		newExchange.setCurrency(currency);
+		double accumulatedAmountInvoices = 0.00;
 
-		return newExchange;
+		if (invoices.isEmpty())
+			return accumulatedAmountInvoices;
+		else {
+			for (Invoice i : invoices)
+				if (i.getQuantity().getCurrency().equals(currencyTarget))
+					accumulatedAmountInvoices += i.totalAmount();
+				else {
+					lastMoneyExchange = this.repository.findLastMoneyExchangeForCurrency(i.getQuantity().getCurrency(), currencyTarget);
+					currentDate = MomentHelper.getCurrentMoment();
+
+					if (lastMoneyExchange != null && MomentHelper.isEqual(currentDate, lastMoneyExchange.getDate())) {
+						rate = lastMoneyExchange.getCurrencyExchange();
+						accumulatedAmountInvoices += rate * i.totalAmount();
+					} else {
+						rate = this.computeMoneyExchange(i.getQuantity().getCurrency(), currencyTarget);
+						accumulatedAmountInvoices += rate * i.totalAmount();
+					}
+				}
+			return Double.valueOf(accumulatedAmountInvoices);
+		}
 	}
 
-	public double computeMoneyExchange(final String currencyBase, final String currencyTarget) {
+	private double computeMoneyExchange(final String currencyBase, final String currencyTarget) {
 		assert !StringHelper.isBlank(currencyBase);
 		assert !StringHelper.isBlank(currencyTarget);
 
@@ -78,7 +96,7 @@ public class MoneyExchangePerform {
 			response.setDate(moment);
 			response.setCurrencyExchange(currencyExchange);
 
-			this.storeLastExchangeRatios(response);
+			this.cacheExchangeRate(response);
 
 			MomentHelper.sleep(1000); // HINT: need to pause the requests to the API a bit down to prevent DOS attacks
 
@@ -89,10 +107,10 @@ public class MoneyExchangePerform {
 		return currencyExchange;
 	}
 
-	private void storeLastExchangeRatios(final MoneyExchange object) {
+	private void cacheExchangeRate(final MoneyExchange object) {
 		assert object != null;
 
-		MoneyExchange lastExchange = this.repository.findLastMoneyExchangeForCurrency(object.getCurrencyOriginal());
+		MoneyExchange lastExchange = this.repository.findLastMoneyExchange(object.getCurrencyOriginal());
 		if (lastExchange != null)
 			this.repository.deleteById(lastExchange.getId());
 

@@ -2,6 +2,8 @@
 package acme.features.sponsor.invoices;
 
 import java.time.temporal.ChronoUnit;
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -15,12 +17,16 @@ import acme.entities.invoice.Invoice;
 import acme.entities.sponsorship.Sponsorship;
 import acme.roles.Sponsor;
 import acme.systemConfiguration.SystemConfiguration;
+import acme.systemConfiguration.moneyExchange.MoneyExchangePerform;
 
 @Service
 public class SponsorInvoicePublishService extends AbstractService<Sponsor, Invoice> {
 
 	@Autowired
-	private SponsorInvoiceRepository repository;
+	private SponsorInvoiceRepository	repository;
+
+	@Autowired
+	private MoneyExchangePerform		moneyExchange;
 
 
 	@Override
@@ -32,8 +38,8 @@ public class SponsorInvoicePublishService extends AbstractService<Sponsor, Invoi
 
 		invoiceId = super.getRequest().getData("id", int.class);
 		inv = this.repository.findOneInvoiceById(invoiceId);
-		sponsorship = this.repository.findOneSponsorshipByInvoiceId(invoiceId);
-		status = sponsorship != null && super.getRequest().getPrincipal().hasRole(Sponsor.class);
+		sponsorship = inv == null ? null : inv.getSponsorship();
+		status = sponsorship != null && !inv.isPublished() && super.getRequest().getPrincipal().hasRole(Sponsor.class);
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -71,22 +77,37 @@ public class SponsorInvoicePublishService extends AbstractService<Sponsor, Invoi
 			super.state(object.getRegistrationTime() != null, "registrationTime", "RegistrationTime-cannot-be-empty");
 
 		if (!super.getBuffer().getErrors().hasErrors("dueDate")) {
+			String dateString = "2200/12/31 23:59";
+			Date limitDate = MomentHelper.parse(dateString, "yyyy/MM/dd HH:mm");
+
 			super.state(MomentHelper.isAfter(object.getDueDate(), object.getRegistrationTime()), "dueDate", "must-be-date-after-registrationTime ");
 			super.state(MomentHelper.isLongEnough(object.getRegistrationTime(), object.getDueDate(), 1, ChronoUnit.MONTHS), "dueDate", "must-be-at-least-one-month-away");
+			super.state(MomentHelper.isBefore(object.getDueDate(), limitDate), "dueDate", "sponsor.invoice.form.error.date-out-of-bounds");
+		}
+
+		if (!super.getBuffer().getErrors().hasErrors("tax")) {
+			super.state(object.getTax() >= 0, "tax", "tax-must-be-positive-or-zero ");
+			super.state(object.getTax() <= 1_000_000.00, "tax", "tax-out-of-bounds ");
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("quantity")) {
-			Double isAmount = object.getQuantity().getAmount();
-			super.state(isAmount != null && isAmount > 0, "quantity", "quantity-cannot-be-negative-or-zero ");
+			String sponsorshipCurrency = object.getSponsorship().getAmount().getCurrency();
+			Double sponsorshipAmount = object.getSponsorship().getAmount().getAmount();
+			int idShip = object.getSponsorship().getId();
+
+			super.state(object.getQuantity().getAmount() >= 0, "quantity", "amount-error-negative");
+			super.state(object.getQuantity().getAmount() <= 1_000_000.00, "quantity", "amount-error-too-high-salary");
 
 			String isCurrency = object.getQuantity().getCurrency();
 			List<SystemConfiguration> sc = this.repository.findSystemConfiguration();
 			final boolean currencyOk = Stream.of(sc.get(0).aceptedCurrencies.split(",")).anyMatch(c -> c.equals(isCurrency));
 			super.state(currencyOk, "quantity", "Currency-not-supported ");
-		}
 
-		if (!super.getBuffer().getErrors().hasErrors("tax"))
-			super.state(object.getTax() >= 0, "tax", "tax-must-be-positive-or-zero ");
+			Collection<Invoice> invoicesPublishedBySponsorship = this.repository.findManyPublishedInvoicesBySponsorshipId(idShip);
+			invoicesPublishedBySponsorship.add(object);
+			double total = this.moneyExchange.totalMoneyExchangeInvoices(invoicesPublishedBySponsorship, sponsorshipCurrency);
+			super.state(total <= sponsorshipAmount, "quantity", "Cannot-be-published: published-invoices-exceed-sponsorship-amount");
+		}
 	}
 
 	@Override
@@ -104,7 +125,8 @@ public class SponsorInvoicePublishService extends AbstractService<Sponsor, Invoi
 		Dataset dataset;
 
 		dataset = super.unbind(object, "code", "registrationTime", "dueDate", "quantity", "tax", "link", "isPublished");
-		dataset.put("shipId", super.getRequest().getData("shipId", int.class));
+		dataset.put("shipId", object.getSponsorship().getId());
+		dataset.put("quantityTax", object.totalAmount());
 
 		super.getResponse().addData(dataset);
 	}

@@ -28,7 +28,7 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 	private SponsorInvoiceRepository	repository;
 
 	@Autowired
-	private MoneyExchangePerform		currencyExchange;
+	private MoneyExchangePerform		moneyExchange;
 
 	// AbstractService interface ----------------------------------------------
 
@@ -122,7 +122,6 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 
 		int shipId;
 		Dataset dataset;
-		double accumulatedAmountInvoices = 0.00;
 
 		String sponsorshipCurrency = object.getSponsorship().getAmount().getCurrency();
 		shipId = super.getRequest().getData("shipId", int.class);
@@ -132,20 +131,7 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 		dataset.put("shipId", super.getRequest().getData("shipId", int.class));
 		dataset.put("sponsorshipAmount", object.getSponsorship().getAmount().getAmount());
 		dataset.put("sponsorshipCurrency", sponsorshipCurrency);
-
-		if (invoicesPublishedBySponsorship.isEmpty())
-			dataset.put("accumulatedAmountInvoices", accumulatedAmountInvoices);
-		else {
-
-			for (Invoice i : invoicesPublishedBySponsorship)
-				if (i.getQuantity().getCurrency().equals(sponsorshipCurrency))
-					accumulatedAmountInvoices += i.totalAmount();
-				else {
-					double rate = this.currencyExchange.computeMoneyExchange(i.getQuantity().getCurrency(), sponsorshipCurrency);
-					accumulatedAmountInvoices += rate * i.totalAmount();
-				}
-			dataset.put("accumulatedAmountInvoices", accumulatedAmountInvoices);
-		}
+		dataset.put("accumulatedAmountInvoices", this.moneyExchange.totalMoneyExchangeInvoices(invoicesPublishedBySponsorship, sponsorshipCurrency));
 
 		super.getResponse().addData(dataset);
 	}
