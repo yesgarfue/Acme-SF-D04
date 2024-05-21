@@ -8,6 +8,7 @@ sponsor.invoice.label.quantity = Quantity
 sponsor.invoice.label.tax = Tax (%)
 sponsor.invoice.label.link = Link
 sponsor.invoice.label.sponsorshipCode = Sponsorship's code
+sponsor.invoice.label.totalAmount = Total invoice amount (tax-include)
 
 sponsor.invoice.button.create = Register
 sponsor.invoice.button.update = Update

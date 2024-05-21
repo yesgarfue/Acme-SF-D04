@@ -3,18 +3,20 @@
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="acme" uri="http://acme-framework.org/" %>
 
-<table class="table table-sm">
-	<tr>
-		<th scope="row"><acme:message code="sponsor.invoice.label.info.sponsorship"/></th>
-		<td><acme:input-double code="sponsor.invoice.label.info.sponsorship.amount" path="sponsorshipAmount" readonly="true" placeholder="N/A"/></td>
-		<td><acme:input-textbox code="sponsor.invoice.label.info.sponsorship.currency" path="sponsorshipCurrency" readonly="true" placeholder="N/A"/></td>
-	</tr>
-	<tr>
-		<th scope="row"><acme:message code="sponsor.invoice.label.info.invoice"/></th>
-		<td><acme:input-double code="sponsor.invoice.label.info.accumulatedAmountInvoices" path="accumulatedAmountInvoices" readonly="true" placeholder="N/A"/></td>
-		<td><jstl:if test="${_command == 'create'}"><acme:input-textbox code="sponsor.invoice.label.recomendation" path="result" readonly="true" placeholder="quantity + (quantity * tax/100)"/></jstl:if></td>
-	</tr>
-</table>
+<jstl:if test="${_command == 'create'}">
+	<table class="table table-sm">
+		<tr>
+			<th scope="row"><acme:message code="sponsor.invoice.label.info.sponsorship"/></th>
+			<td><acme:input-double code="sponsor.invoice.label.info.sponsorship.amount" path="sponsorshipAmount" readonly="true" placeholder="N/A"/></td>
+			<td><acme:input-textbox code="sponsor.invoice.label.info.sponsorship.currency" path="sponsorshipCurrency" readonly="true" placeholder="N/A"/></td>
+		</tr>
+		<tr>
+			<th scope="row"><acme:message code="sponsor.invoice.label.info.invoice"/></th>
+			<td><acme:input-double code="sponsor.invoice.label.info.accumulatedAmountInvoices" path="accumulatedAmountInvoices" readonly="true" placeholder="N/A"/></td>
+			<td><acme:input-textbox code="sponsor.invoice.label.recomendation" path="result" readonly="true" placeholder="quantity + (quantity * tax/100)"/></td>
+		</tr>
+	</table>
+</jstl:if>
 
 <acme:form>
 	<acme:input-textbox code="sponsor.invoice.label.code" path="code" placeholder="IN-XXXX-XXXX"/>
@@ -23,6 +25,10 @@
 	<acme:input-money code="sponsor.invoice.label.quantity" path="quantity" placeholder="(EUR/USD/GBP) 00.00"/>
 	<acme:input-double code="sponsor.invoice.label.tax" path="tax" placeholder="00.00"/>
 	<acme:input-textbox code="sponsor.invoice.label.link" path="link" placeholder="https://www.example.com"/>
+	<jstl:if test="${acme:anyOf(_command, 'show|update|delete|publish')}">
+		<acme:input-double code="sponsor.invoice.label.totalAmount" path="quantityTax" readonly="true" placeholder="N/A"/>
+	</jstl:if>
+	
 	<jstl:choose>
 		<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish') && isPublished == false}">
 			<acme:submit code="sponsor.invoice.button.update" action="/sponsor/invoice/update"/>

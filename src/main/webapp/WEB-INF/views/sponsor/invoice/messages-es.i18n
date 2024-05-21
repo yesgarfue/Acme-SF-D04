@@ -8,6 +8,7 @@ sponsor.invoice.label.quantity = Cantidad
 sponsor.invoice.label.tax = Impuesto (%)
 sponsor.invoice.label.link = URL
 sponsor.invoice.label.sponsorshipCode = Código de patrocinio
+sponsor.invoice.label.totalAmount = Monto total de la Factura (impuestos incluidos)
 
 sponsor.invoice.button.create = Registrar
 sponsor.invoice.button.update = Modificar
