@@ -60,19 +60,18 @@ public class DeveloperTrainingSessionCreateService extends AbstractService<Devel
 			existing = this.repository.findTrainingSessionByCode(object.getCode());
 			super.state(existing == null, "code", "developer.trainingSession.error.code.duplicated");
 		}
-		/*
-		 * if (!super.getBuffer().getErrors().hasErrors("startDate") && !super.getBuffer().getErrors().hasErrors("endDate")) {
-		 * super.state(object.getStartDate().before(object.getEndDate()), "endDate", "developer.trainingSession.error.endDate.afterStartDate");
-		 * super.state(object.getEndDate().after(object.getStartDate()), "startDate", "developer.trainingSession.error.startDate.afterEndDate");
-		 * 
-		 * long oneWeekInMillis = 7 * 24 * 60 * 60 * 1000; // 1 semana en milisegundos
-		 * long diffM_SF = object.getEndDate().getTime() - object.getStartDate().getTime();
-		 * long diffM_CS = object.getTrainingModule().getCreationMoment().getTime() - object.getStartDate().getTime();
-		 * 
-		 * super.state(diffM_SF >= oneWeekInMillis, "startDate", "developer.trainingSession.error.duration.lessThanOneWeek");
-		 * super.state(diffM_CS >= oneWeekInMillis, "startDate", "developer.trainingSession.error.startDate.lessThanOneWeek");
-		 * }
-		 */
+
+		if (!super.getBuffer().getErrors().hasErrors("startDate") && !super.getBuffer().getErrors().hasErrors("endDate")) {
+			super.state(object.getStartDate().before(object.getEndDate()), "endDate", "developer.trainingSession.error.endDate.afterStartDate");
+			super.state(object.getEndDate().after(object.getStartDate()), "startDate", "developer.trainingSession.error.startDate.afterEndDate");
+
+			long oneWeekInMillis = 7 * 24 * 60 * 60 * 1000; // 1 semana en milisegundos
+			long diffM_SF = object.getEndDate().getTime() - object.getStartDate().getTime();
+			long diffM_CS = object.getTrainingModule().getCreationMoment().getTime() - object.getStartDate().getTime();
+
+			super.state(diffM_SF >= oneWeekInMillis, "startDate", "developer.trainingSession.error.duration.lessThanOneWeek");
+			super.state(diffM_CS >= oneWeekInMillis, "startDate", "developer.trainingSession.error.startDate.lessThanOneWeek");
+		}
 
 	}
 
