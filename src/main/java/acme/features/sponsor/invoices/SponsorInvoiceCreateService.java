@@ -23,16 +23,14 @@ import acme.systemConfiguration.moneyExchange.MoneyExchangePerform;
 public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoice> {
 
 	// Internal state ---------------------------------------------------------
-
 	@Autowired
 	private SponsorInvoiceRepository	repository;
 
 	@Autowired
 	private MoneyExchangePerform		moneyExchange;
 
+
 	// AbstractService interface ----------------------------------------------
-
-
 	@Override
 	public void authorise() {
 		boolean status;

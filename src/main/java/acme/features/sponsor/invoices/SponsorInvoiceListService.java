@@ -49,7 +49,7 @@ public class SponsorInvoiceListService extends AbstractService<Sponsor, Invoice>
 
 		Dataset dataset;
 		double totalAmount;
-		String state = "";
+		String state = "Yeah";
 
 		totalAmount = object.totalAmount();
 		Boolean temp = object.isPublished();
