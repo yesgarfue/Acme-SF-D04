@@ -7,6 +7,8 @@ sponsor.invoice.label.dueDate = DueDate
 sponsor.invoice.label.quantity = Quantity
 sponsor.invoice.label.tax = Tax (%)
 sponsor.invoice.label.link = Link
+sponsor.invoice.label.calculatedTotal = Total amount
+sponsor.invoice.label.isPublished = Published
 sponsor.invoice.label.sponsorshipCode = Sponsorship's code
 sponsor.invoice.label.totalAmount = Total invoice amount (tax-include)
 

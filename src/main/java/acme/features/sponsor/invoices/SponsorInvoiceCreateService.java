@@ -94,7 +94,7 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("quantity")) {
-			super.state(object.getQuantity().getAmount() >= 0, "quantity", "amount-error-negative");
+			super.state(object.getQuantity().getAmount() > 0, "quantity", "quantity-error-not-validated-or-negative");
 			super.state(object.getQuantity().getAmount() <= 1_000_000.00, "quantity", "amount-error-too-high-salary");
 
 			String isCurrency = object.getQuantity().getCurrency();

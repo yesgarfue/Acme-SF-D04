@@ -48,8 +48,21 @@ public class SponsorInvoiceListService extends AbstractService<Sponsor, Invoice>
 		assert object != null;
 
 		Dataset dataset;
+		double totalAmount;
+		String state = "";
 
-		dataset = super.unbind(object, "code", "registrationTime", "dueDate", "quantity", "tax", "link", "sponsorship.code");
+		totalAmount = object.totalAmount();
+		Boolean temp = object.isPublished();
+
+		dataset = super.unbind(object, "code", "registrationTime", "dueDate", "quantity", "tax", "link", "sponsorship.code", "isPublished");
+		dataset.put("totalAmount", totalAmount);
+
+		if (temp.equals(true))
+			dataset.put("state", state);
+		else {
+			state = "No";
+			dataset.put("state", state);
+		}
 
 		super.getResponse().addData(dataset);
 	}
