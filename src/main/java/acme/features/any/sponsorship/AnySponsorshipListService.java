@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import acme.client.data.accounts.Any;
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
-import acme.entities.sponsor.Sponsorship;
+import acme.entities.sponsorship.Sponsorship;
 
 @Service
 public class AnySponsorshipListService extends AbstractService<Any, Sponsorship> {

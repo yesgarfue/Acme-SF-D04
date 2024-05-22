@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import acme.client.repositories.AbstractRepository;
 import acme.entities.projects.Project;
-import acme.entities.sponsor.Sponsorship;
+import acme.entities.sponsorship.Sponsorship;
 
 @Repository
 public interface AnySponsorshipRepository extends AbstractRepository {

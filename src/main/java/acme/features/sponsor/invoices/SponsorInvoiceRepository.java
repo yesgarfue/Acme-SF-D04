@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import acme.client.repositories.AbstractRepository;
-import acme.entities.sponsor.Invoice;
-import acme.entities.sponsor.Sponsorship;
+import acme.entities.invoice.Invoice;
+import acme.entities.sponsorship.Sponsorship;
 import acme.systemConfiguration.SystemConfiguration;
 
 @Repository
@@ -36,12 +36,6 @@ public interface SponsorInvoiceRepository extends AbstractRepository {
 	@Query("SELECT i FROM Invoice i WHERE i.code = :code")
 	Invoice findOneInvoiceByCode(String code);
 
-	//--------------------------------
-
-	//@Query("SELECT i FROM Invoice i")
-	//Collection<Invoice> findAllInvoices();
-
-	//@Query("select i from Invoice i join Sponsorship s on i.sponsorship.id = s.id join Sponsor s2  on s.sponsor.id = s2.id where s2.id = :sponsorId")
-	//Collection<Invoice> findAllInvoicesBySponsorId(int sponsorId);
-
+	@Query("SELECT i FROM Invoice i Where i.sponsorship.id= :shipId AND i.isPublished= true")
+	Collection<Invoice> findManyPublishedInvoicesBySponsorshipId(int shipId);
 }

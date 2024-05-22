@@ -10,7 +10,7 @@ import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
 import acme.client.views.SelectChoices;
 import acme.entities.projects.Project;
-import acme.entities.sponsor.Sponsorship;
+import acme.entities.sponsorship.Sponsorship;
 import acme.enumerate.SponsorshipType;
 import acme.roles.Sponsor;
 
@@ -24,12 +24,14 @@ public class SponsorSponsorshipShowService extends AbstractService<Sponsor, Spon
 	@Override
 	public void authorise() {
 		boolean status;
-		Sponsorship sponsorship;
 		int shipId;
+		Sponsor sponsor;
+		Sponsorship sponsorship;
 
 		shipId = super.getRequest().getData("id", int.class);
 		sponsorship = this.repository.findSponsorshipById(shipId);
-		status = sponsorship != null && super.getRequest().getPrincipal().hasRole(Sponsor.class);
+		sponsor = sponsorship == null ? null : sponsorship.getSponsor();
+		status = sponsor != null && super.getRequest().getPrincipal().hasRole(Sponsor.class);
 
 		super.getResponse().setAuthorised(status);
 	}

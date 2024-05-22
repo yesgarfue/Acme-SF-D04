@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 
 import acme.client.controllers.AbstractController;
 import acme.client.data.accounts.Any;
-import acme.entities.sponsor.Sponsorship;
+import acme.entities.sponsorship.Sponsorship;
 
 @Controller
 public class AnySponsorshipController extends AbstractController<Any, Sponsorship> {

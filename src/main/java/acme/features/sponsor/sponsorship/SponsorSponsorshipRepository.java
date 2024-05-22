@@ -8,9 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import acme.client.repositories.AbstractRepository;
+import acme.entities.invoice.Invoice;
 import acme.entities.projects.Project;
-import acme.entities.sponsor.Invoice;
-import acme.entities.sponsor.Sponsorship;
+import acme.entities.sponsorship.Sponsorship;
 import acme.roles.Sponsor;
 import acme.systemConfiguration.SystemConfiguration;
 
@@ -38,6 +38,12 @@ public interface SponsorSponsorshipRepository extends AbstractRepository {
 	@Query("SELECT s FROM Sponsorship s WHERE s.sponsor.id= :activeRoleId")
 	Collection<Sponsorship> findMySponsorshipById(int activeRoleId);
 
+	@Query("SELECT i FROM Invoice i Where i.sponsorship.id= :id AND i.isPublished= true")
+	Collection<Invoice> findPublishedInvoicesBySponsorshipId(int id);
+
+	@Query("SELECT i FROM Invoice i Where i.sponsorship.id= :id AND i.isPublished= false")
+	Collection<Invoice> findNotPublishedInvoicesBySponsorshipId(int id);
+
 	//------------------------------
 
 	@Query("SELECT s FROM Sponsorship s WHERE s.code= :code")
@@ -48,4 +54,5 @@ public interface SponsorSponsorshipRepository extends AbstractRepository {
 
 	@Query("SELECT p FROM Project p WHERE p.code= :code")
 	Project findOneProjectByCode(String code);
+
 }

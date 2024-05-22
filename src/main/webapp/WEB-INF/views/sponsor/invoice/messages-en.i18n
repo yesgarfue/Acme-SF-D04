@@ -7,9 +7,19 @@ sponsor.invoice.label.dueDate = DueDate
 sponsor.invoice.label.quantity = Quantity
 sponsor.invoice.label.tax = Tax (%)
 sponsor.invoice.label.link = Link
+sponsor.invoice.label.calculatedTotal = Total amount
+sponsor.invoice.label.isPublished = Published
 sponsor.invoice.label.sponsorshipCode = Sponsorship's code
+sponsor.invoice.label.totalAmount = Total invoice amount (tax-include)
 
 sponsor.invoice.button.create = Register
 sponsor.invoice.button.update = Update
 sponsor.invoice.button.delete = Delete
 sponsor.invoice.button.publish = Publish 
+
+sponsor.invoice.label.info.sponsorship = Sponsorship information
+sponsor.invoice.label.info.sponsorship.amount = Amount
+sponsor.invoice.label.info.sponsorship.currency = Currency
+sponsor.invoice.label.info.invoice = Invoices information
+sponsor.invoice.label.info.accumulatedAmountInvoices = Accumulated amount (in sponsorship currency)
+sponsor.invoice.label.recomendation = * Recommended net quantity * (tax-inclusive, in sponsorship currency)

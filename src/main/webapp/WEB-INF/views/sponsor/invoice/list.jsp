@@ -6,9 +6,9 @@
 <acme:list>
 	<acme:list-column code="sponsor.invoice.label.code" path="code" width="20%"/>
 	<acme:list-column code="sponsor.invoice.label.registrationTime" path="registrationTime" width="20%"/>
-	<acme:list-column code="sponsor.invoice.label.quantity" path="quantity" width="20%"/>
-	<acme:list-column code="sponsor.invoice.label.tax" path="tax" width="20%"/>
+	<acme:list-column code="sponsor.invoice.label.calculatedTotal" path="totalAmount" width="20%"/>
 	<acme:list-column code="sponsor.invoice.label.sponsorshipCode" path="sponsorship.code" width="20%"/>
+	<acme:list-column code="sponsor.invoice.label.isPublished" path="f" width="20%"/>
 </acme:list>
 
 <jstl:if test="${showCreate}">

@@ -2,25 +2,22 @@
 package acme.features.sponsor.invoices;
 
 import java.time.temporal.ChronoUnit;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
-import acme.client.data.datatypes.Money;
 import acme.client.data.models.Dataset;
 import acme.client.helpers.MomentHelper;
-import acme.client.helpers.StringHelper;
 import acme.client.services.AbstractService;
-import acme.components.ExchangeRate;
-import acme.entities.sponsor.Invoice;
-import acme.entities.sponsor.Sponsorship;
-import acme.forms.MoneyExchange;
+import acme.entities.invoice.Invoice;
+import acme.entities.sponsorship.Sponsorship;
 import acme.roles.Sponsor;
 import acme.systemConfiguration.SystemConfiguration;
+import acme.systemConfiguration.moneyExchange.MoneyExchangePerform;
 
 @Service
 public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoice> {
@@ -28,7 +25,10 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private SponsorInvoiceRepository repository;
+	private SponsorInvoiceRepository	repository;
+
+	@Autowired
+	private MoneyExchangePerform		moneyExchange;
 
 	// AbstractService interface ----------------------------------------------
 
@@ -57,6 +57,7 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 
 		object = new Invoice();
 		object.setSponsorship(sponsorship);
+		object.setRegistrationTime(MomentHelper.getCurrentMoment());
 		object.setPublished(false);
 
 		super.getBuffer().addData(object);
@@ -65,16 +66,8 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 	@Override
 	public void bind(final Invoice object) {
 		assert object != null;
-		int shipId = super.getRequest().getData("shipId", int.class);
-		Sponsorship bla;
-		bla = this.repository.findOneSponsorshipById(shipId);
-		Double amountSponsorship = bla.getAmount().getAmount();
-		String currencySponsorship = bla.getAmount().getCurrency();
 
-		final MoneyExchange cambios;
-		cambios = this.computeMoneyExchange(object.getQuantity(), currencySponsorship);
-
-		super.bind(object, "code", "registrationTime", "dueDate", "quantity", "tax", "link");
+		super.bind(object, "code", "dueDate", "quantity", "tax", "link");
 	}
 
 	@Override
@@ -92,26 +85,17 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 			super.state(object.getRegistrationTime() != null, "registrationTime", "RegistrationTime-cannot-be-empty");
 
 		if (!super.getBuffer().getErrors().hasErrors("dueDate")) {
+			String dateString = "2200/12/31 23:59";
+			Date limitDate = MomentHelper.parse(dateString, "yyyy/MM/dd HH:mm");
+
 			super.state(MomentHelper.isAfter(object.getDueDate(), object.getRegistrationTime()), "dueDate", "must-be-date-after-registrationTime ");
 			super.state(MomentHelper.isLongEnough(object.getRegistrationTime(), object.getDueDate(), 1, ChronoUnit.MONTHS), "dueDate", "must-be-at-least-one-month-away");
+			super.state(MomentHelper.isBefore(object.getDueDate(), limitDate), "dueDate", "dueDate-error-date-out-of-bounds");
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("quantity")) {
-			Double isAmount = object.getQuantity().getAmount();
-			super.state(isAmount != null && isAmount > 0, "quantity", "quantity-cannot-be-negative-or-zero ");
-
-			int shipId = super.getRequest().getData("shipId", int.class);
-			Sponsorship bla;
-			bla = this.repository.findOneSponsorshipById(shipId);
-			Double amountSponsorship = bla.getAmount().getAmount();
-			String currencySponsorship = bla.getAmount().getCurrency();
-			if (object.getQuantity().getCurrency().equals(currencySponsorship))
-				super.state(isAmount < amountSponsorship, "quantity", "quantity-cannot-be-greater-than-amount-sponsorship");
-			else {
-				MoneyExchange cambios;
-				cambios = this.computeMoneyExchange(object.getQuantity(), currencySponsorship);
-				super.state(cambios.getTarget().getAmount() < amountSponsorship, "quantity", "quantity-cannot-be-greate-currecnuar-than-amount-sponsorship");
-			}
+			super.state(object.getQuantity().getAmount() > 0, "quantity", "quantity-error-not-validated-or-negative");
+			super.state(object.getQuantity().getAmount() <= 1_000_000.00, "quantity", "amount-error-too-high-salary");
 
 			String isCurrency = object.getQuantity().getCurrency();
 			List<SystemConfiguration> sc = this.repository.findSystemConfiguration();
@@ -119,8 +103,10 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 			super.state(currencyOk, "quantity", "Currency-not-supported ");
 		}
 
-		if (!super.getBuffer().getErrors().hasErrors("tax"))
+		if (!super.getBuffer().getErrors().hasErrors("tax")) {
 			super.state(object.getTax() >= 0, "tax", "tax-must-be-positive-or-zero ");
+			super.state(object.getTax() <= 1_000_000.00, "tax", "tax-out-of-bounds ");
+		}
 	}
 
 	@Override
@@ -134,64 +120,19 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 	public void unbind(final Invoice object) {
 		assert object != null;
 
+		int shipId;
 		Dataset dataset;
 
-		dataset = super.unbind(object, "code", "registrationTime", "dueDate", "quantity", "tax", "link", "isPublished");
+		String sponsorshipCurrency = object.getSponsorship().getAmount().getCurrency();
+		shipId = super.getRequest().getData("shipId", int.class);
+		Collection<Invoice> invoicesPublishedBySponsorship = this.repository.findManyPublishedInvoicesBySponsorshipId(shipId);
+
+		dataset = super.unbind(object, "code", "registrationTime", "dueDate", "quantity", "tax", "link", "isPublished", "sponsorship");
 		dataset.put("shipId", super.getRequest().getData("shipId", int.class));
+		dataset.put("sponsorshipAmount", object.getSponsorship().getAmount().getAmount());
+		dataset.put("sponsorshipCurrency", sponsorshipCurrency);
+		dataset.put("accumulatedAmountInvoices", this.moneyExchange.totalMoneyExchangeInvoices(invoicesPublishedBySponsorship, sponsorshipCurrency));
 
 		super.getResponse().addData(dataset);
-	}
-
-	// ********************************************************************************
-
-	public MoneyExchange computeMoneyExchange(final Money amountInvoice, final String currencySponsorship) {
-		assert amountInvoice != null;
-		assert !StringHelper.isBlank(currencySponsorship);
-
-		MoneyExchange result;
-		RestTemplate api;
-		ExchangeRate api_response;
-		String inputCurrency;
-		Double inputAmount, targetAmount, rate;
-		Money target;
-		Date moment;
-
-		try {
-			api = new RestTemplate();
-
-			inputCurrency = amountInvoice.getCurrency();
-			inputAmount = amountInvoice.getAmount();
-
-			api_response = api.getForObject( //				
-				"https://api.currencyapi.com/v3/latest?apikey={0}&base_currency={1}&currencies={2}", //
-				ExchangeRate.class, //
-				"cur_live_9CS0QA54yYzg4W3iJ1QQMMktAfPY2DpLVpUjpPKP", //
-				inputCurrency, //
-				currencySponsorship);
-
-			assert api_response != null && api_response.getRates().containsKey(currencySponsorship);
-			rate = Double.valueOf(api_response.getRates().get(currencySponsorship));
-			//rate = Double.valueOf(api_response.getData().get(currencySponsorship).get("value"));
-			assert rate != null;
-			targetAmount = rate * inputAmount;
-
-			target = new Money();
-			target.setAmount(targetAmount);
-			target.setCurrency(currencySponsorship);
-
-			moment = api_response.getDate();
-
-			result = new MoneyExchange();
-			result.setSource(amountInvoice);
-			result.setTargetCurrency(currencySponsorship);
-			result.setDate(moment);
-			result.setTarget(target);
-
-			MomentHelper.sleep(1000); // HINT: need to pause the requests to the API a bit down to prevent DOS attacks
-		} catch (final Throwable oops) {
-			result = null;
-		}
-
-		return result;
 	}
 }

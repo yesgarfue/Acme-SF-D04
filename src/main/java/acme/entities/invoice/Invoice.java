@@ -1,6 +1,8 @@
 
-package acme.entities.sponsor;
+package acme.entities.invoice;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -8,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -19,6 +22,7 @@ import org.hibernate.validator.constraints.URL;
 
 import acme.client.data.AbstractEntity;
 import acme.client.data.datatypes.Money;
+import acme.entities.sponsorship.Sponsorship;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -61,8 +65,16 @@ public class Invoice extends AbstractEntity {
 	// Derived attributes -----------------------------------------------------
 
 
-	private double totalAmount() {
-		return this.quantity.getAmount() + this.quantity.getAmount() * (this.tax / 100);
+	@Transient
+	public double totalAmount() {
+		BigDecimal temp;
+		double total;
+
+		total = this.quantity.getAmount() + this.quantity.getAmount() * (this.tax / 100);
+		temp = new BigDecimal(Double.toString(total)).setScale(2, RoundingMode.HALF_UP);
+		total = temp.doubleValue();
+
+		return total;
 	}
 
 	// Relationships ----------------------------------------------------------

@@ -15,10 +15,7 @@
 	<acme:input-textbox code="sponsor.sponsorship.label.url" path="link" placeholder="https://www.example.com"/>
 	
 	<jstl:choose>
-		<jstl:when test="${_command == 'show' && isPublished == false}">
-			<acme:button code="sponsor.sponsorship.button.invoices" action="/sponsor/invoice/list?shipId=${id}"/>
-		</jstl:when>
-		<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish') && isPublished == true}">
+		<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish') && isPublished == false}">
 			<acme:button code="sponsor.sponsorship.button.invoices" action="/sponsor/invoice/list?shipId=${id}"/>
 			<acme:submit code="sponsor.sponsorship.button.update" action="/sponsor/sponsorship/update"/>
 			<acme:submit code="sponsor.sponsorship.button.delete" action="/sponsor/sponsorship/delete"/>
@@ -26,6 +23,9 @@
 		</jstl:when>
 		<jstl:when test="${_command == 'create'}">
 			<acme:submit code="sponsor.sponsorship.button.create" action="/sponsor/sponsorship/create"/>
+		</jstl:when>
+		<jstl:when test="${_command == 'show' && isPublished == true }">
+			<acme:button code="sponsor.sponsorship.button.invoices" action="/sponsor/invoice/list?shipId=${id}"/>
 		</jstl:when>
 	</jstl:choose>
 </acme:form>

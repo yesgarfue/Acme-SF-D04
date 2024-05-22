@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import acme.client.data.accounts.Principal;
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
-import acme.entities.sponsor.Sponsorship;
+import acme.entities.sponsorship.Sponsorship;
 import acme.roles.Sponsor;
 
 @Service
@@ -21,7 +21,15 @@ public class SponsorSponsorshipMyListService extends AbstractService<Sponsor, Sp
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean status;
+		int id;
+		Sponsor sponsor;
+
+		id = super.getRequest().getPrincipal().getActiveRoleId();
+		sponsor = this.repository.findOneSponsorbyId(id);
+		status = sponsor != null && super.getRequest().getPrincipal().hasRole(Sponsor.class);
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
