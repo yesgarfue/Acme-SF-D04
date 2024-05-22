@@ -28,7 +28,7 @@ public interface SponsorInvoiceRepository extends AbstractRepository {
 	@Query("SELECT sc FROM SystemConfiguration sc")
 	List<SystemConfiguration> findSystemConfiguration();
 
-	@Query("SELECT i FROM Invoice i Where i.sponsorship.id= :shipId AND i.isPublished= true")
+	@Query("SELECT i FROM Invoice i WHERE i.sponsorship.id= :shipId AND i.isPublished= true")
 	Collection<Invoice> findManyPublishedInvoicesBySponsorshipId(int shipId);
 
 	@Query("SELECT sp FROM Sponsor sp WHERE sp.id= :id")
