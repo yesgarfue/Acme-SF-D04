@@ -131,7 +131,7 @@ public class SponsorSponsorshipPublishService extends AbstractService<Sponsor, S
 			Collection<Invoice> invoicesNotPublished = this.repository.findNotPublishedInvoicesBySponsorshipId(object.getId());
 
 			double total = this.moneyExchange.totalMoneyExchangeInvoices(invoicesPublished, sponsorshipCurrency);
-			super.state(total == sponsorshipAmount, "amount", "Cannot-be-published:Invoices-insufficient-to-cover-total-sponsorship-amount ");
+			super.state(total == sponsorshipAmount, "amount", "Error-invoices-published-insufficient-to-cover-total-sponsorship-amount ");
 			super.state(invoicesNotPublished.isEmpty(), "amount", "Remove-unnecessary-invoices ");
 		}
 	}

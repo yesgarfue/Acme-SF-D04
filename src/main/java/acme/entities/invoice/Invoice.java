@@ -1,6 +1,8 @@
 
 package acme.entities.invoice;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -65,7 +67,14 @@ public class Invoice extends AbstractEntity {
 
 	@Transient
 	public double totalAmount() {
-		return this.quantity.getAmount() + this.quantity.getAmount() * (this.tax / 100);
+		BigDecimal temp;
+		double total;
+
+		total = this.quantity.getAmount() + this.quantity.getAmount() * (this.tax / 100);
+		temp = new BigDecimal(Double.toString(total)).setScale(2, RoundingMode.HALF_UP);
+		total = temp.doubleValue();
+
+		return total;
 	}
 
 	// Relationships ----------------------------------------------------------

@@ -1,6 +1,8 @@
 
 package acme.systemConfiguration.moneyExchange;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Collection;
 import java.util.Date;
 
@@ -27,8 +29,9 @@ public class MoneyExchangePerform {
 		MoneyExchange lastMoneyExchange;
 		Date currentDate;
 		Double rate;
+		BigDecimal temp;
 
-		double accumulatedAmountInvoices = 0.00;
+		double accumulatedAmountInvoices = 00.00;
 
 		if (invoices.isEmpty())
 			return accumulatedAmountInvoices;
@@ -48,7 +51,10 @@ public class MoneyExchangePerform {
 						accumulatedAmountInvoices += rate * i.totalAmount();
 					}
 				}
-			return Double.valueOf(accumulatedAmountInvoices);
+			temp = new BigDecimal(Double.toString(accumulatedAmountInvoices)).setScale(2, RoundingMode.HALF_UP);
+			accumulatedAmountInvoices = temp.doubleValue();
+
+			return accumulatedAmountInvoices;
 		}
 	}
 
@@ -64,6 +70,7 @@ public class MoneyExchangePerform {
 		ExchangeRate record;
 		Double currencyExchange;
 		Date moment;
+		BigDecimal temp;
 
 		try {
 
@@ -87,6 +94,8 @@ public class MoneyExchangePerform {
 
 			assert record != null;
 			currencyExchange = Double.valueOf(record.getData().get(currencyTarget).get("value"));
+			temp = new BigDecimal(Double.toString(currencyExchange)).setScale(2, RoundingMode.HALF_UP);
+			currencyExchange = temp.doubleValue();
 
 			moment = MomentHelper.getCurrentMoment();
 

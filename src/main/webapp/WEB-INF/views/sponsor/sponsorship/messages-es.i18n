@@ -7,6 +7,7 @@ sponsor.sponsorship.label.cost 				= Costo
 sponsor.sponsorship.label.sponsorshipType	= Tipo de Patrocinio
 sponsor.sponsorship.label.email 			= Correo electronico
 sponsor.sponsorship.label.sponsorshipAmount = Monto
+sponsor.sponsorship.label.url				= URL
 sponsor.sponsorship.label.projectId			= Código del Proyecto asociado
 
 sponsor.sponsorship.label.moment 		= Momento
