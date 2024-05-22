@@ -12,3 +12,7 @@ sponsor.dashboard.label.invoice.deviationInvoicesQuantity = Desviación del impo
 	
 sponsor.dashboard.label.totalNumInvoicesWithTaxLessOrEqualTo21 = Número total de facturas con un impuesto menor o igual al 21,00%
 sponsor.dashboard.label.totalNumInvoicesWithLink = Número total de patrocinios con una URL
+
+sponsor.dashboard.label.euros = EUROS
+sponsor.dashboard.label.usd = DOLARES
+sponsor.dashboard.label.gbp = GBP
