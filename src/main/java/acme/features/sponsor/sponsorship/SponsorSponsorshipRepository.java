@@ -38,6 +38,12 @@ public interface SponsorSponsorshipRepository extends AbstractRepository {
 	@Query("SELECT s FROM Sponsorship s WHERE s.sponsor.id= :activeRoleId")
 	Collection<Sponsorship> findMySponsorshipById(int activeRoleId);
 
+	@Query("SELECT i FROM Invoice i Where i.sponsorship.id= :id AND i.isPublished= true")
+	Collection<Invoice> findPublishedInvoicesBySponsorshipId(int id);
+
+	@Query("SELECT i FROM Invoice i Where i.sponsorship.id= :id AND i.isPublished= false")
+	Collection<Invoice> findNotPublishedInvoicesBySponsorshipId(int id);
+
 	//------------------------------
 
 	@Query("SELECT s FROM Sponsorship s WHERE s.code= :code")
@@ -48,4 +54,5 @@ public interface SponsorSponsorshipRepository extends AbstractRepository {
 
 	@Query("SELECT p FROM Project p WHERE p.code= :code")
 	Project findOneProjectByCode(String code);
+
 }

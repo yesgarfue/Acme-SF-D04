@@ -42,6 +42,7 @@ public class SponsorSponsorshipCreateService extends AbstractService<Sponsor, Sp
 		sponsor = this.repository.findOneSponsorbyId(super.getRequest().getPrincipal().getActiveRoleId());
 		object = new Sponsorship();
 		object.setSponsor(sponsor);
+		object.setMoment(MomentHelper.getCurrentMoment());
 		object.setPublished(false);
 
 		super.getBuffer().addData(object);
