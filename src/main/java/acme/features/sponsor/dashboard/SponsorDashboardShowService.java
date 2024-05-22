@@ -1,7 +1,10 @@
 
 package acme.features.sponsor.dashboard;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,82 +34,160 @@ public class SponsorDashboardShowService extends AbstractService<Sponsor, Sponso
 	@Override
 	public void load() {
 		final int sponsorId;
+
 		sponsorId = super.getRequest().getPrincipal().getActiveRoleId();
-
-		int invoicesTax = 0;
-
-		Double minimumAmount = null;
-		Double maximumAmount = null;
-		Double averageAmount = null;
-		int totalSponsorship = 0;
-		double deviationSponsorship = 0;
-		Double deviationAmount = null;
-
-		Double minimumQuanty = null;
-		Double maximumQuanty = null;
-		Double averageQuanty = null;
-		int totalInvoices = 0;
-		double deviationInvoice = 0;
-		Double deviationQuanty = null;
-
-		//Calculation of total invoices with Tax<=21%
-		Collection<Invoice> invoices = this.repository.totalNumberOfInvoicesOfSponsor(sponsorId);
-		for (Invoice inv : invoices)
-			if (inv.getTax() >= 21.00)
-				invoicesTax++;
-
-		int totalSponsorshipLink = this.repository.totalNumberSponsorshipWithLink(sponsorId);
-
-		//SPONSORSHIP
-		minimumAmount = this.repository.minimumEstimatedCostOfSponsorshipOfSponsor(sponsorId);
-		maximumAmount = this.repository.maximumEstimatedCostOfSponsorshipOfSponsor(sponsorId);
-		averageAmount = this.repository.averageEstimatedCostOfSponsorshipOfSponsor(sponsorId);
-
-		//Calculation of the standard deviation of the amount of all sponsorships
-		Collection<Sponsorship> sponsorships = this.repository.findSponsorshipsBySponsorId(sponsorId);
-		totalSponsorship = this.repository.totalNumberSponsorshipBySponsor(sponsorId);
-		for (Sponsorship sp : sponsorships)
-			deviationSponsorship += Math.pow(sp.getAmount().getAmount() - averageAmount, 2);
-
-		deviationAmount = Math.sqrt(deviationSponsorship / totalSponsorship);
-
-		//INVOICES
-		minimumQuanty = this.repository.minimumQuantityForInvoicesBySponsorId(sponsorId);
-		maximumQuanty = this.repository.maximumQuantityForInvoicesBySponsorId(sponsorId);
-		averageQuanty = this.repository.averageQuantityForInvoicesBySponsorId(sponsorId);
-
-		//Calculation of the standard deviation of the quantity of all invoices
-		totalInvoices = invoices.size();
-		for (Invoice inv : invoices)
-			deviationInvoice += Math.pow(inv.getQuantity().getAmount() - averageQuanty, 2);
-
-		deviationQuanty = Math.sqrt(deviationInvoice / totalInvoices);
-
-		SponsorDashboard dashboard = new SponsorDashboard();
-
-		dashboard.setTotalNumInvoicesWithTaxLessOrEqualTo21(invoicesTax);
-		dashboard.setTotalNumInvoicesWithLink(totalSponsorshipLink);
-
-		dashboard.setMinimumSponsorshipsAmount(minimumAmount);
-		dashboard.setMaximunSponsorshipsAmount(maximumAmount);
-		dashboard.setAverageSponsorshipsAmount(averageAmount);
-		dashboard.setDeviationSponsorshipsAmount(deviationAmount);
-
-		dashboard.setMinimumInvoicesQuantity(minimumQuanty);
-		dashboard.setMaximunInvoicesQuantity(maximumQuanty);
-		dashboard.setAverageInvoicesQuantity(averageQuanty);
-		dashboard.setDeviationInvoicesQuantity(deviationQuanty);
+		String currencyDefault = this.repository.findCurrencyDefault();
+		SponsorDashboard dashboard = this.dash(currencyDefault, sponsorId);
 
 		super.getBuffer().addData(dashboard);
 	}
 
 	@Override
 	public void unbind(final SponsorDashboard object) {
+		final int sponsorId;
+
+		sponsorId = super.getRequest().getPrincipal().getActiveRoleId();
 		Dataset dataset;
+
+		SponsorDashboard usd, gbp;
+		usd = this.dash("USD", sponsorId);
+		gbp = this.dash("GBP", sponsorId);
 
 		dataset = super.unbind(object, "minimumSponsorshipsAmount", "maximunSponsorshipsAmount", "averageSponsorshipsAmount", "deviationSponsorshipsAmount", "minimumInvoicesQuantity", "maximunInvoicesQuantity", "averageInvoicesQuantity",
 			"deviationInvoicesQuantity", "totalNumInvoicesWithTaxLessOrEqualTo21", "totalNumInvoicesWithLink");
 
+		dataset.put("usdMinimumSponsorshipsAmount", usd.getMinimumSponsorshipsAmount());
+		dataset.put("usdMaximunSponsorshipsAmount", usd.getMaximunSponsorshipsAmount());
+		dataset.put("usdAverageSponsorshipsAmount", usd.getAverageSponsorshipsAmount());
+		dataset.put("usdDeviationSponsorshipsAmount", usd.getDeviationSponsorshipsAmount());
+
+		dataset.put("usdMinimumInvoicesQuantity", usd.getMinimumInvoicesQuantity());
+		dataset.put("usdMaximunInvoicesQuantity", usd.getMaximunInvoicesQuantity());
+		dataset.put("usdAverageInvoicesQuantityt", usd.getAverageInvoicesQuantity());
+		dataset.put("usdDeviationInvoicesQuantity", usd.getDeviationInvoicesQuantity());
+
+		dataset.put("gbpMinimumSponsorshipsAmount", gbp.getMinimumSponsorshipsAmount());
+		dataset.put("gbpMaximunSponsorshipsAmount", gbp.getMaximunSponsorshipsAmount());
+		dataset.put("gbpAverageSponsorshipsAmount", gbp.getAverageSponsorshipsAmount());
+		dataset.put("gbpDeviationSponsorshipsAmount", gbp.getDeviationSponsorshipsAmount());
+
+		dataset.put("gbpMinimumInvoicesQuantity", gbp.getMinimumInvoicesQuantity());
+		dataset.put("gbpMaximunInvoicesQuantity", gbp.getMaximunInvoicesQuantity());
+		dataset.put("gbpAverageInvoicesQuantityt", gbp.getAverageInvoicesQuantity());
+		dataset.put("gbpDeviationInvoicesQuantity", gbp.getDeviationInvoicesQuantity());
+
 		super.getResponse().addData(dataset);
+	}
+
+	private SponsorDashboard dash(final String currencyTarget, final int id) {
+
+		SponsorDashboard dashboardNew, temp;
+
+		Collection<Sponsorship> allSponsorships = this.repository.findSponsorshipsBySponsorId(id);
+		Map<String, Collection<Sponsorship>> collectionSPcurrencies = new HashMap<>();
+		for (Sponsorship sp : allSponsorships) {
+			String currency = sp.getAmount().getCurrency();
+			collectionSPcurrencies.computeIfAbsent(currency, k -> new ArrayList<>()).add(sp);
+		}
+
+		Collection<Invoice> allInvoices = this.repository.totalNumberOfInvoicesOfSponsor(id);
+		Map<String, Collection<Invoice>> collectionINVcurrencies = new HashMap<>();
+		for (Invoice inv : allInvoices) {
+			String currency = inv.getQuantity().getCurrency();
+			collectionINVcurrencies.computeIfAbsent(currency, k -> new ArrayList<>()).add(inv);
+		}
+
+		double tempEUR = 0;
+		int invoicesTax = 0;
+
+		Double minimum = null;
+		Double maximum = null;
+		Double average = null;
+		Double deviation = null;
+
+		Double minimumQua = null;
+		Double maximumQua = null;
+		Double averageQua = null;
+		Double deviationQua = null;
+
+		Collection<Invoice> invoices = this.repository.totalNumberOfInvoicesOfSponsor(id);
+		for (Invoice inv : invoices)
+			if (inv.getTax() >= 21.00)
+				invoicesTax++;
+
+		int totalSponsorshipLink = this.repository.totalNumberSponsorshipWithLink(id);
+
+		temp = new SponsorDashboard();
+		temp = this.initializeDash(temp);
+
+		Collection<Sponsorship> sponsorshipCurrency = collectionSPcurrencies.get(currencyTarget);
+		if (sponsorshipCurrency == null) {
+			minimum = temp.getMinimumSponsorshipsAmount();
+			maximum = temp.getMaximunSponsorshipsAmount();
+			average = temp.getAverageSponsorshipsAmount();
+			deviation = temp.getDeviationSponsorshipsAmount();
+		} else {
+			minimum = this.repository.minimumSponsorship(id, currencyTarget);
+			maximum = this.repository.maximumSponsorship(id, currencyTarget);
+			average = this.repository.averageSponsorship(id, currencyTarget);
+
+			double numSponsorship = sponsorshipCurrency.size();
+			for (Sponsorship sp : sponsorshipCurrency)
+				tempEUR += Math.pow(sp.getAmount().getAmount() - average, 2);
+			deviation = Math.sqrt(tempEUR / numSponsorship);
+		}
+
+		Collection<Invoice> invoiceCurrency = collectionINVcurrencies.get(currencyTarget);
+		if (invoiceCurrency == null) {
+			minimumQua = temp.getMinimumInvoicesQuantity();
+			maximumQua = temp.getMaximunInvoicesQuantity();
+			averageQua = temp.getAverageInvoicesQuantity();
+			deviationQua = temp.getDeviationInvoicesQuantity();
+		} else {
+			minimumQua = this.repository.minimumInvoices(id);
+			maximumQua = this.repository.maximumInvoices(id);
+			averageQua = this.repository.averageInvoices(id);
+
+			double numInvoices = invoiceCurrency.size();
+			tempEUR = 0;
+			for (Invoice inv : invoiceCurrency)
+				tempEUR += Math.pow(inv.getQuantity().getAmount() - averageQua, 2);
+			deviationQua = Math.sqrt(tempEUR / numInvoices);
+		}
+
+		dashboardNew = new SponsorDashboard();
+
+		dashboardNew.setTotalNumInvoicesWithTaxLessOrEqualTo21(invoicesTax);
+		dashboardNew.setTotalNumInvoicesWithLink(totalSponsorshipLink);
+
+		dashboardNew.setMinimumSponsorshipsAmount(minimum);
+		dashboardNew.setMaximunSponsorshipsAmount(maximum);
+		dashboardNew.setAverageSponsorshipsAmount(average);
+		dashboardNew.setDeviationSponsorshipsAmount(deviation);
+
+		dashboardNew.setMinimumInvoicesQuantity(minimumQua);
+		dashboardNew.setMaximunInvoicesQuantity(maximumQua);
+		dashboardNew.setAverageInvoicesQuantity(averageQua);
+		dashboardNew.setDeviationInvoicesQuantity(deviationQua);
+
+		return dashboardNew;
+	}
+
+	private SponsorDashboard initializeDash(final SponsorDashboard dash) {
+
+		dash.setTotalNumInvoicesWithTaxLessOrEqualTo21(0);
+		dash.setTotalNumInvoicesWithLink(0);
+
+		dash.setMinimumSponsorshipsAmount(0);
+		dash.setMaximunSponsorshipsAmount(0);
+		dash.setAverageSponsorshipsAmount(0);
+		dash.setDeviationSponsorshipsAmount(0);
+
+		dash.setMinimumInvoicesQuantity(0);
+		dash.setMaximunInvoicesQuantity(0);
+		dash.setAverageInvoicesQuantity(0);
+		dash.setDeviationInvoicesQuantity(0);
+
+		return dash;
 	}
 }

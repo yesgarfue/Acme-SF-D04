@@ -35,11 +35,23 @@ public interface SponsorDashboardRepository extends AbstractRepository {
 	Integer totalNumberSponsorshipBySponsor(int sponsorId);
 
 	@Query("SELECT MIN(i.quantity.amount) FROM Invoice i JOIN Sponsorship s ON i.sponsorship.id = s.id JOIN Sponsor sp ON s.sponsor.id = sp.id WHERE sp.id = :sponsorId")
-	Double minimumQuantityForInvoicesBySponsorId(int sponsorId);
+	Double minimumInvoices(int sponsorId);
 
 	@Query("SELECT MAX(i.quantity.amount) FROM Invoice i JOIN Sponsorship s ON i.sponsorship.id = s.id JOIN Sponsor sp ON s.sponsor.id = sp.id WHERE sp.id = :sponsorId")
-	Double maximumQuantityForInvoicesBySponsorId(int sponsorId);
+	Double maximumInvoices(int sponsorId);
 
 	@Query("SELECT AVG(i.quantity.amount) FROM Invoice i JOIN Sponsorship s ON i.sponsorship.id = s.id JOIN Sponsor sp ON s.sponsor.id = sp.id WHERE sp.id = :sponsorId")
-	Double averageQuantityForInvoicesBySponsorId(int sponsorId);
+	Double averageInvoices(int sponsorId);
+
+	@Query("SELECT MIN(s.amount.amount) FROM Sponsorship s WHERE s.sponsor.id = :sponsorId AND s.amount.currency = :currency")
+	Double minimumSponsorship(int sponsorId, String currency);
+
+	@Query("SELECT MAX(s.amount.amount) FROM Sponsorship s WHERE s.sponsor.id = :sponsorId AND s.amount.currency = :currency")
+	Double maximumSponsorship(int sponsorId, String currency);
+
+	@Query("SELECT AVG(s.amount.amount) FROM Sponsorship s WHERE s.sponsor.id = :sponsorId AND s.amount.currency = :currency")
+	Double averageSponsorship(int sponsorId, String currency);
+
+	@Query("SELECT systemCurrency FROM SystemConfiguration")
+	String findCurrencyDefault();
 }
