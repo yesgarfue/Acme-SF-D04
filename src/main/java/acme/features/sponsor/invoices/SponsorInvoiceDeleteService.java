@@ -12,14 +12,13 @@ import acme.roles.Sponsor;
 
 @Service
 public class SponsorInvoiceDeleteService extends AbstractService<Sponsor, Invoice> {
-	// Internal state ---------------------------------------------------------
 
+	// Internal state ---------------------------------------------------------
 	@Autowired
 	private SponsorInvoiceRepository repository;
 
+
 	// AbstractService interface ----------------------------------------------
-
-
 	@Override
 	public void authorise() {
 		boolean status;
@@ -70,7 +69,6 @@ public class SponsorInvoiceDeleteService extends AbstractService<Sponsor, Invoic
 		assert object != null;
 
 		Dataset dataset;
-		int id;
 
 		dataset = super.unbind(object, "code", "registrationTime", "dueDate", "quantity", "tax", "link", "isPublished");
 		dataset.put("shipId", object.getSponsorship().getId());

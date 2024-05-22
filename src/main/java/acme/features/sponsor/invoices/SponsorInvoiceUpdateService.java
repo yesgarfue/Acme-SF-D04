@@ -99,6 +99,7 @@ public class SponsorInvoiceUpdateService extends AbstractService<Sponsor, Invoic
 	@Override
 	public void perform(final Invoice object) {
 		assert object != null;
+
 		this.repository.save(object);
 	}
 
@@ -107,7 +108,6 @@ public class SponsorInvoiceUpdateService extends AbstractService<Sponsor, Invoic
 		assert object != null;
 
 		Dataset dataset;
-		int id;
 
 		dataset = super.unbind(object, "code", "registrationTime", "dueDate", "quantity", "tax", "link", "isPublished");
 		dataset.put("shipId", object.getSponsorship().getId());
