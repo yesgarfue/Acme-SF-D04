@@ -48,3 +48,7 @@ client.progress-log.button.create = Crear
 client.progress-log.form.error.duplicated = Id de Registro Duplicado
 client.progress-log.form.error.completeness-too-low = El ultimo porcenaje completado que fue asignado a este contrato era mayor o igual a este valor
 client.progress-log.form.error.registration-moment-must-be-later = El momento de registro del registro de progreso debe ser posterior al momento de instanciacion del contrato
+
+#######################################################################
+
+client.progress-log.form.recordId.placeholder = PG-[A-Z]{1,2}-[0-9]{4}

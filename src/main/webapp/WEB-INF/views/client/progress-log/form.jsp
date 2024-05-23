@@ -5,7 +5,7 @@
 
 <acme:form>
 	<acme:input-textbox code="client.progress-log.form.label.recordId"
-		path="recordId" />
+		path="recordId" placeholder="client.progress-log.form.recordId.placeholder"/>
 	<acme:input-select
 		code="client.progress-log.form.label.contract"
 		path="contract" choices="${contracts}" />
