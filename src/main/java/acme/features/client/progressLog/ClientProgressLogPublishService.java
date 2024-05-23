@@ -1,11 +1,14 @@
 
 package acme.features.client.progressLog;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
+import acme.client.views.SelectChoices;
 import acme.entities.contract.Contract;
 import acme.entities.contract.ProgressLog;
 import acme.roles.Client;
@@ -48,16 +51,16 @@ public class ClientProgressLogPublishService extends AbstractService<Client, Pro
 
 	@Override
 	public void bind(final ProgressLog object) {
-
 		assert object != null;
+		int contractId;
+		Contract contract;
 
-		int progressLogId;
+		contractId = super.getRequest().getData("contract", int.class);
+		contract = this.repository.findContractById(contractId);
 
-		progressLogId = super.getRequest().getData("id", int.class);
-		Contract contract = this.repository.findContractByProgressLogId(progressLogId);
-
-		super.bind(object, "recordId", "completenessPercentage", "progressComment", "registrationMoment", "responsiblePerson");
+		super.bind(object, "recordId", "completenessPercentage", "progressComment", "registrationMoment", "responsiblePerson", "draftMode");
 		object.setContract(contract);
+
 	}
 
 	@Override
@@ -68,15 +71,9 @@ public class ClientProgressLogPublishService extends AbstractService<Client, Pro
 			ProgressLog existing;
 
 			existing = this.repository.findProgressLogByRecordId(object.getRecordId());
-			super.state(existing == null || existing.equals(object), "recordId", "client.progressLog.form.error.duplicated");
+			super.state(existing == null || existing.equals(object), "recordId", "client.progress-log.form.error.duplicated");
 		}
 
-		if (!super.getBuffer().getErrors().hasErrors("completenessPercentage")) {
-			Double existing;
-			existing = this.repository.findPublishedProgressLogWithMaxCompleteness(object.getContract().getId());
-			System.out.println(existing);
-			super.state(object.getCompletenessPercentage() >= existing, "completenessPercentage", "client.progress-log.form.error.completeness-too-low");
-		}
 		if (!super.getBuffer().getErrors().hasErrors("registrationMoment"))
 			super.state(object.getRegistrationMoment().after(object.getContract().getInstantiationMoment()), "registrationMoment", "client.progress-log.form.error.registration-moment-must-be-later");
 
@@ -92,14 +89,20 @@ public class ClientProgressLogPublishService extends AbstractService<Client, Pro
 
 	@Override
 	public void unbind(final ProgressLog object) {
+
 		assert object != null;
+
+		Collection<Contract> contracts;
+		SelectChoices choices;
+
+		contracts = this.repository.findAllContracts();
+		choices = SelectChoices.from(contracts, "code", object.getContract());
 
 		Dataset dataset;
 
-		dataset = super.unbind(object, "recordId", "completenessPercentage", "progressComment", "registrationMoment", "responsiblePerson");
-
-		dataset.put("masterId", object.getContract().getId());
-		dataset.put("draftMode", object.getDraftMode());
+		dataset = super.unbind(object, "recordId", "completenessPercentage", "progressComment", "registrationMoment", "responsiblePerson", "draftMode");
+		dataset.put("contract", choices.getSelected().getKey());
+		dataset.put("contracts", choices);
 
 		super.getResponse().addData(dataset);
 	}
