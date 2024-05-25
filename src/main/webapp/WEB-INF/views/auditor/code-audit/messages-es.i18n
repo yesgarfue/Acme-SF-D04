@@ -19,4 +19,5 @@
  auditor.code-audit.button.delete = Eliminar
  auditor.code-audit.button.publish = Publicar
  ##########################################################
+ auditor.code-audit.error.code.duplicated = Ya existe una auditoría con ese código 
  auditor.code-audit.error.mark.minimum  = La auditoría no cuenta con la nota mínima para ser publicada
