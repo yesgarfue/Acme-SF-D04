@@ -47,7 +47,14 @@ public class ClientProgressLogCreateService extends AbstractService<Client, Prog
 	@Override
 	public void bind(final ProgressLog object) {
 		assert object != null;
-		super.bind(object, "recordId", "completenessPercentage", "progressComment", "registrationMoment", "responsiblePerson", "draftMode", "contract");
+		int contractId;
+		Contract contract;
+
+		contractId = super.getRequest().getData("contract", int.class);
+		contract = this.repository.findContractById(contractId);
+
+		super.bind(object, "recordId", "completenessPercentage", "progressComment", "registrationMoment", "responsiblePerson", "draftMode");
+		object.setContract(contract);
 
 	}
 
@@ -63,11 +70,6 @@ public class ClientProgressLogCreateService extends AbstractService<Client, Prog
 			super.state(existing == null, "recordId", "client.progress-log.form.error.duplicated");
 		}
 
-		if (!super.getBuffer().getErrors().hasErrors("completeness")) {
-			Double existing;
-			existing = this.repository.findPublishedProgressLogWithMaxCompleteness(object.getContract().getId());
-			super.state(object.getCompletenessPercentage() > existing, "completeness", "client.progress-log.form.error.completeness-too-low");
-		}
 		if (!super.getBuffer().getErrors().hasErrors("registrationMoment"))
 			super.state(object.getRegistrationMoment().after(object.getContract().getInstantiationMoment()), "registrationMoment", "client.progress-log.form.error.registration-moment-must-be-later");
 	}
@@ -80,23 +82,23 @@ public class ClientProgressLogCreateService extends AbstractService<Client, Prog
 
 	@Override
 	public void unbind(final ProgressLog object) {
+
 		assert object != null;
 
+		Collection<Contract> contracts;
 		SelectChoices choices;
-		Dataset dataset;
-		int clientId;
-		clientId = super.getRequest().getPrincipal().getActiveRoleId();
-		final Collection<Contract> contracts = this.repository.findContractsByClientId(clientId);
 
+		contracts = this.repository.findAllContracts();
 		choices = SelectChoices.from(contracts, "code", object.getContract());
-		dataset = super.unbind(object, "recordId", "completenessPercentage", "progressComment", "registrationMoment", "responsiblePerson");
+
+		Dataset dataset;
+
+		dataset = super.unbind(object, "recordId", "completenessPercentage", "progressComment", "registrationMoment", "responsiblePerson", "draftMode");
 		dataset.put("contract", choices.getSelected().getKey());
 		dataset.put("contracts", choices);
-		dataset.put("draftMode", object.getDraftMode());
 
 		super.getResponse().addData(dataset);
 	}
-
 	@Override
 	public void onSuccess() {
 		if (super.getRequest().getMethod().equals("POST"))

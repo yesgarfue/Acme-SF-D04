@@ -45,7 +45,11 @@ client.contract.form.title = Contrato
 
 #################################################################################
 
-client.contract.error.code.duplicated = Contrato Duplicado
-client.contract.error.code.exceededBudget = Presupuesto Excedido
-client.contract.error.code.negative-amount = Cantidad Negativa
-client.contract.error.code.currency-not-supported = Divisa No Soportada
+client.contract.form.error.duplicated = Contrato Duplicado
+client.contract.form.error.exceededBudget = Presupuesto Excedido
+client.contract.form.error.negative-amount = Cantidad Negativa
+client.contract.form.error.currency-not-suported = Divisa No Soportada
+
+#################################################################################
+
+client.contract.form.code.placeholder = [A-Z]{1,3}-[0-9]{3}
