@@ -15,7 +15,7 @@ sponsor.sponsorship.label.finishDate 	= Fecha de finalización
 sponsor.sponsorship.label.projectCode	= Código del Proyecto
 
 sponsor.sponsorship.button.invoices		= Facturas asociadas
-sponsor.sponsorship.button.create		= Registrar
+sponsor.sponsorship.button.create		= Crear
 sponsor.sponsorship.button.update		= Actualizar
 sponsor.sponsorship.button.delete		= Eliminar
 sponsor.sponsorship.button.publish		= Publicar

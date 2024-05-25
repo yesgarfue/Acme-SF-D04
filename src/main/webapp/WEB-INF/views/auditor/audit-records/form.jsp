@@ -5,7 +5,7 @@
 
 <acme:form>
 		<acme:input-textbox code="auditor.audit-records.form.label.code" 
-		path="code" placeholder="AAAA-XXX" />
+		path="code" placeholder="AU-XXXX-XXX" />
 		<acme:input-moment code="auditor.audit-records.form.label.startTime" 
 		path="startTime"/>
 		<acme:input-moment code="auditor.audit-records.form.label.finishTime" 

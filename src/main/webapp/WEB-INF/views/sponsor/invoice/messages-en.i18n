@@ -12,7 +12,7 @@ sponsor.invoice.label.isPublished = Published
 sponsor.invoice.label.sponsorshipCode = Sponsorship's code
 sponsor.invoice.label.totalAmount = Total invoice amount (tax-include)
 
-sponsor.invoice.button.create = Register
+sponsor.invoice.button.create = Create
 sponsor.invoice.button.update = Update
 sponsor.invoice.button.delete = Delete
 sponsor.invoice.button.publish = Publish 

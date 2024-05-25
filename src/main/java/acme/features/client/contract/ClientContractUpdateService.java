@@ -2,17 +2,19 @@
 package acme.features.client.contract;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
-import acme.client.helpers.PrincipalHelper;
 import acme.client.services.AbstractService;
 import acme.client.views.SelectChoices;
 import acme.entities.contract.Contract;
 import acme.entities.projects.Project;
 import acme.roles.Client;
+import acme.systemConfiguration.SystemConfiguration;
 
 @Service
 public class ClientContractUpdateService extends AbstractService<Client, Contract> {
@@ -68,7 +70,17 @@ public class ClientContractUpdateService extends AbstractService<Client, Contrac
 			Contract existing;
 
 			existing = this.repository.findContractByCode(object.getCode());
-			super.state(existing == null || existing.getId() == object.getId(), "code", "client.contract.error.code.duplicated");
+			super.state(existing == null || existing.equals(object), "code", "client.contract.form.error.duplicated");
+		}
+
+		if (!super.getBuffer().getErrors().hasErrors("budget")) {
+			super.state(object.getBudget().getAmount() > 0, "budget", "client.contract.form.error.negative-amount");
+
+			List<SystemConfiguration> sc = this.repository.findSystemConfiguration();
+			final boolean foundCurrency = Stream.of(sc.get(0).aceptedCurrencies.split(",")).anyMatch(c -> c.equals(object.getBudget().getCurrency()));
+
+			super.state(foundCurrency, "budget", "client.contract.form.error.currency-not-suported");
+
 		}
 	}
 
@@ -97,12 +109,6 @@ public class ClientContractUpdateService extends AbstractService<Client, Contrac
 		dataset.put("projects", choices);
 
 		super.getResponse().addData(dataset);
-	}
-
-	@Override
-	public void onSuccess() {
-		if (super.getRequest().getMethod().equals("PUT"))
-			PrincipalHelper.handleUpdate();
 	}
 
 }

@@ -45,7 +45,11 @@ client.contract.form.title = Contract
 
 #################################################################################
 
-client.contract.error.code.duplicated = Duplicated Contract
-client.contract.error.code.exceededBudget = Exceeded Budget
-client.contract.error.code.negative-amount = Negative Amount
-client.contract.error.code.currency-not-supported = Currency Not Supported
+client.contract.form.error.duplicated = Duplicated Contract
+client.contract.form.error.exceededBudget = Exceeded Budget
+client.contract.form.error.negative-amount = Negative Amount
+client.contract.form.error.currency-not-suported = Currency Not Supported
+
+#################################################################################
+
+client.contract.form.code.placeholder = [A-Z]{1,3}-[0-9]{3}

@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.accounts.Authenticated;
-import acme.client.data.accounts.UserAccount;
 import acme.client.data.models.Dataset;
 import acme.client.helpers.PrincipalHelper;
 import acme.client.services.AbstractService;
@@ -30,7 +29,6 @@ public class AuthenticatedSponsorUpdateService extends AbstractService<Authentic
 	public void load() {
 		Sponsor object;
 		int sponsorId;
-		UserAccount userAccount;
 
 		sponsorId = super.getRequest().getPrincipal().getAccountId();
 		object = this.repository.findOneSponsorByAccountId(sponsorId);

@@ -63,6 +63,8 @@
 			<acme:menu-suboption code="master.menu.any.claims" action="/any/claim/list"/>
 			<acme:menu-suboption code="master.menu.any.trainingModules" action="/any/training-module/list"/>
 			<acme:menu-suboption code="master.menu.any.sponsorships" action="/any/sponsorship/list"/>
+			<acme:menu-suboption code="master.menu.any.contracts" action="/any/contract/list"/>
+			<acme:menu-suboption code="master.menu.any.code-audit" action="/any/code-audit/list"/>
 		</acme:menu-option>
 		
 		<acme:menu-option code="master.menu.developer" access="hasRole('Developer')">
@@ -73,7 +75,9 @@
 		
 		<acme:menu-option code="master.menu.sponsor" access="hasRole('Sponsor')">
 			<acme:menu-suboption code="master.menu.sponsor.mySponsorships" action="/sponsor/sponsorship/my-list"/>
+			<acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.sponsor.myInvoices" action="/sponsor/invoice/listAll"/>
+			<acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.sponsor.dashboard" action="/sponsor/sponsor-dashboard/show"/>
 		</acme:menu-option>
 		
@@ -99,6 +103,8 @@
 			<acme:menu-suboption code="master.menu.user-account.developer" action="/authenticated/developer/update" access="hasRole('Developer')"/>
 			<acme:menu-suboption code="master.menu.user-account.become-sponsor" action="/authenticated/sponsor/create" access="!hasRole('Sponsor')"/>
 			<acme:menu-suboption code="master.menu.user-account.sponsor" action="/authenticated/sponsor/update" access="hasRole('Sponsor')"/>
+			<acme:menu-suboption code="master.menu.user-account.become-client" action="/authenticated/client/create" access="!hasRole('Client')"/>
+			<acme:menu-suboption code="master.menu.user-account.client" action="/authenticated/client/update" access="hasRole('Client')"/>
 		</acme:menu-option>
 		<acme:menu-option code="master.menu.sign-out" action="/authenticated/system/sign-out" access="isAuthenticated()"/>
 	</acme:menu-right>

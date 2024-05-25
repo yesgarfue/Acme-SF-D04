@@ -16,6 +16,9 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <div class="jumbotron">
-	<h1><acme:message code="master.welcome.title"/></h1>
+	<h1><acme:message code="master.welcome.title" /></h1>
 	<acme:message code="master.welcome.text"/>
 </div>
+
+
+

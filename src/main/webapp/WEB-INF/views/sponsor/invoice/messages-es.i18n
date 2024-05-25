@@ -12,7 +12,7 @@ sponsor.invoice.label.isPublished = Publicado
 sponsor.invoice.label.sponsorshipCode = Código de patrocinio
 sponsor.invoice.label.totalAmount = Monto total de la Factura (impuestos incluidos)
 
-sponsor.invoice.button.create = Registrar
+sponsor.invoice.button.create = Crear
 sponsor.invoice.button.update = Modificar
 sponsor.invoice.button.delete = Eliminar
 sponsor.invoice.button.publish = Publicar
@@ -21,7 +21,5 @@ sponsor.invoice.label.info.sponsorship = Informacion del patrocinio
 sponsor.invoice.label.info.sponsorship.amount = Monto
 sponsor.invoice.label.info.sponsorship.currency = Divisa
 sponsor.invoice.label.info.invoice = Informacion de facturas
-sponsor.invoice.label.info.sponsorship.accumulatedAmountInvoices = Cantidad acumulada convertida a la divisa del patrocinio
-sponsor.invoice.label.recomendation = Recomendación: Cantidad necesaria para cumplir con el total del patrocinio (incluido el impuesto segun divisa del patrocinio).
 sponsor.invoice.label.info.accumulatedAmountInvoices = Cantidad acumulada (en la divisa del patrocinio)
 sponsor.invoice.label.recomendation = * Cantidad neta recomendada * (impuesto inclusive, en la divisa del patrocinio)

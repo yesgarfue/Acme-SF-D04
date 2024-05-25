@@ -21,7 +21,15 @@ public class SponsorInvoiceListAllService extends AbstractService<Sponsor, Invoi
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean status;
+		int id;
+		Sponsor sponsor;
+
+		id = super.getRequest().getPrincipal().getActiveRoleId();
+		sponsor = this.repository.findOneSponsorbyId(id);
+		status = sponsor != null && super.getRequest().getPrincipal().hasRole(Sponsor.class);
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -40,8 +48,22 @@ public class SponsorInvoiceListAllService extends AbstractService<Sponsor, Invoi
 		assert object != null;
 
 		Dataset dataset;
+		double totalAmount;
+		String state = "Yeah";
 
-		dataset = super.unbind(object, "code", "registrationTime", "dueDate", "quantity", "tax", "link", "sponsorship.code");
+		totalAmount = object.totalAmount();
+		Boolean temp = object.isPublished();
+
+		dataset = super.unbind(object, "code", "registrationTime", "dueDate", "quantity", "tax", "link", "sponsorship.code", "isPublished");
+		dataset.put("totalAmount", totalAmount);
+
+		if (temp.equals(true))
+			dataset.put("state", state);
+		else {
+			state = "No";
+			dataset.put("state", state);
+		}
+
 		super.getResponse().addData(dataset);
 	}
 }

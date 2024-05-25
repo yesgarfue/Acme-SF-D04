@@ -61,7 +61,7 @@ public class AuditorAuditRecordsUpdateService extends AbstractService<Auditor, A
 			AuditRecords existing;
 
 			existing = this.repository.findAuditRecordByCode(object.getCode());
-			super.state(existing == null || existing.getId() == object.getId(), "code", "code", "auditor.auditRecords.error.code.duplicated");
+			super.state(existing == null || existing.getId() == object.getId(), "code", "auditor.auditRecords.error.code.duplicated");
 		}
 		if (!super.getBuffer().getErrors().hasErrors("startTime") && !super.getBuffer().getErrors().hasErrors("finishTime")) {
 			super.state(object.getStartTime().before(object.getFinishTime()), "finishTime", "auditor.auditRecords.error.finishTime.afterStartTime");

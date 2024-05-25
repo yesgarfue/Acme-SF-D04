@@ -1,7 +1,8 @@
 
 package acme.features.sponsor.sponsorship;
 
-import java.time.temporal.ChronoUnit;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -24,7 +25,10 @@ import acme.systemConfiguration.SystemConfiguration;
 public class SponsorSponsorshipUpdateService extends AbstractService<Sponsor, Sponsorship> {
 
 	@Autowired
-	private SponsorSponsorshipRepository repository;
+	private SponsorSponsorshipRepository	repository;
+
+	@Autowired
+	private SponsorSponsorshipCreateService	sponsorshipCreateService;
 
 
 	@Override
@@ -79,8 +83,13 @@ public class SponsorSponsorshipUpdateService extends AbstractService<Sponsor, Sp
 			super.state(existing == null || existing.equals(object), "code", "Code-duplicated");
 		}
 
-		if (!super.getBuffer().getErrors().hasErrors("moment"))
+		if (!super.getBuffer().getErrors().hasErrors("moment")) {
+			String dateStart = "2000/01/01 01:00";
+			Date minimunDate = MomentHelper.parse(dateStart, "yyyy/MM/dd HH:mm");
 			super.state(object.getMoment() != null, "moment", "Moment-cannot-be-empty");
+			super.state(MomentHelper.isAfter(object.getMoment(), minimunDate), "moment", "moment-out-of-bounds ");
+
+		}
 
 		if (!super.getBuffer().getErrors().hasErrors("startDate")) {
 			super.state(MomentHelper.isAfter(object.getStartDate(), object.getMoment()), "startDate", "must-be-date-after-moment");
@@ -90,9 +99,78 @@ public class SponsorSponsorshipUpdateService extends AbstractService<Sponsor, Sp
 		if (object.getFinishDate() != null)
 			if (!super.getBuffer().getErrors().hasErrors("finishDate")) {
 				super.state(MomentHelper.isAfter(object.getFinishDate(), object.getStartDate()), "finishDate", "must-be-date-after-startDate ");
-				super.state(MomentHelper.isLongEnough(object.getStartDate(), object.getFinishDate(), 1, ChronoUnit.MONTHS), "finishDate", "must-be-at-least-one-month-away");
 				super.state(MomentHelper.isBefore(object.getFinishDate(), limitDate), "finishDate", "finishDate-error-date-out-of-bounds");
 			}
+
+		if (object.getFinishDate() != null) {
+			LocalDateTime registrationDateLocal = object.getStartDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+
+			int yearValue = registrationDateLocal.getYear();
+			int monthValue = registrationDateLocal.getMonthValue();
+			int dayValue = registrationDateLocal.getDayOfMonth();
+
+			Date date30 = this.sponsorshipCreateService.sumarDias(registrationDateLocal, 30);
+			Date date31 = this.sponsorshipCreateService.sumarDias(registrationDateLocal, 31);
+			Date date28 = this.sponsorshipCreateService.sumarDias(registrationDateLocal, 28);
+			Date date29 = this.sponsorshipCreateService.sumarDias(registrationDateLocal, 29);
+
+			boolean esBisiesto = yearValue % 4 == 0 && (yearValue % 100 != 0 || yearValue % 400 == 0);
+
+			//JANUARY
+			if (monthValue == 01 && esBisiesto && dayValue == 31)
+				if (!super.getBuffer().getErrors().hasErrors("finishDate"))
+					super.state(MomentHelper.isAfterOrEqual(object.getFinishDate(), date29), "finishDate", "must-be-at-least-one-month-away");
+
+			if (monthValue == 01 && esBisiesto && dayValue == 30)
+				if (!super.getBuffer().getErrors().hasErrors("finishDate"))
+					super.state(MomentHelper.isAfterOrEqual(object.getFinishDate(), date30), "finishDate", "must-be-at-least-one-month-away");
+
+			if (monthValue == 01 && esBisiesto && dayValue != 30 && dayValue != 31)
+				if (!super.getBuffer().getErrors().hasErrors("finishDate"))
+					super.state(MomentHelper.isAfterOrEqual(object.getFinishDate(), date31), "finishDate", "must-be-at-least-one-month-away");
+
+			if (monthValue == 01 && !esBisiesto && dayValue == 29)
+				if (!super.getBuffer().getErrors().hasErrors("finishDate"))
+					super.state(MomentHelper.isAfterOrEqual(object.getFinishDate(), date30), "finishDate", "must-be-at-least-one-month-away");
+
+			if (monthValue == 01 && !esBisiesto && dayValue == 30)
+				if (!super.getBuffer().getErrors().hasErrors("finishDate"))
+					super.state(MomentHelper.isAfterOrEqual(object.getFinishDate(), date29), "finishDate", "must-be-at-least-one-month-away");
+
+			if (monthValue == 01 && !esBisiesto && dayValue == 31)
+				if (!super.getBuffer().getErrors().hasErrors("finishDate"))
+					super.state(MomentHelper.isAfterOrEqual(object.getFinishDate(), date28), "finishDate", "must-be-at-least-one-month-away");
+
+			if (monthValue == 01 && !esBisiesto && dayValue != 29 && dayValue != 30 && dayValue != 31)
+				if (!super.getBuffer().getErrors().hasErrors("finishDate"))
+					super.state(MomentHelper.isAfterOrEqual(object.getFinishDate(), date31), "finishDate", "must-be-at-least-one-month-away");
+
+			//FEBRUARY
+			if (monthValue == 02 && esBisiesto)
+				if (!super.getBuffer().getErrors().hasErrors("finishDate"))
+					super.state(MomentHelper.isAfterOrEqual(object.getFinishDate(), date29), "finishDate", "must-be-at-least-one-month-away");
+
+			if (monthValue == 02 && !esBisiesto)
+				if (!super.getBuffer().getErrors().hasErrors("finishDate"))
+					super.state(MomentHelper.isAfterOrEqual(object.getFinishDate(), date28), "finishDate", "must-be-at-least-one-month-away");
+
+			//OTHERS MONTHS
+			if ((monthValue == 10 || monthValue == 8 || monthValue == 7 || monthValue == 5 || monthValue == 3) && dayValue == 31)
+				if (!super.getBuffer().getErrors().hasErrors("finishDate"))
+					super.state(MomentHelper.isAfterOrEqual(object.getFinishDate(), date30), "finishDate", "must-be-at-least-one-month-away");
+
+			if ((monthValue == 10 || monthValue == 8 || monthValue == 7 || monthValue == 5 || monthValue == 3) && dayValue != 31)
+				if (!super.getBuffer().getErrors().hasErrors("finishDate"))
+					super.state(MomentHelper.isAfterOrEqual(object.getFinishDate(), date31), "finishDate", "must-be-at-least-one-month-away");
+
+			if (monthValue == 11 || monthValue == 9 || monthValue == 6 || monthValue == 4)
+				if (!super.getBuffer().getErrors().hasErrors("finishDate"))
+					super.state(MomentHelper.isAfterOrEqual(object.getFinishDate(), date30), "finishDate", "must-be-at-least-one-month-away");
+
+			if (monthValue == 12)
+				if (!super.getBuffer().getErrors().hasErrors("finishDate"))
+					super.state(MomentHelper.isAfterOrEqual(object.getFinishDate(), date31), "finishDate", "must-be-at-least-one-month-away");
+		}
 
 		if (!super.getBuffer().getErrors().hasErrors("amount")) {
 			Double isAmount = object.getAmount().getAmount();

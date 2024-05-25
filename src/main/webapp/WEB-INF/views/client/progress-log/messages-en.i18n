@@ -48,3 +48,7 @@ client.progress-log.button.create = Create
 client.progress-log.form.error.duplicated = Record Id Duplicated
 client.progress-log.form.error.completeness-too-low = The latest completeness that was assigned to this contract was higher or equal than this value
 client.progress-log.form.error.registration-moment-must-be-later = The registration moment of the progress log must be later than the instantiation moment of the contract
+
+#######################################################################
+
+client.progress-log.form.recordId.placeholder = PG-[A-Z]{1,2}-[0-9]{4}
