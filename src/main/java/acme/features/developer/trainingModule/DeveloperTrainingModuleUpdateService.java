@@ -1,13 +1,17 @@
 
 package acme.features.developer.trainingModule;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
+import acme.client.views.SelectChoices;
 import acme.entities.projects.Project;
 import acme.entities.training.TrainingModule;
+import acme.enumerate.Difficulty;
 import acme.roles.Developer;
 
 @Service
@@ -49,14 +53,8 @@ public class DeveloperTrainingModuleUpdateService extends AbstractService<Develo
 	@Override
 	public void bind(final TrainingModule object) {
 		assert object != null;
-		int projectId;
-		Project project;
-
-		projectId = super.getRequest().getData("project", int.class);
-		project = this.repository.findProjectById(projectId);
-
 		super.bind(object, "code", "creationMoment", "details", "difficultyLevel", "updatedMoment", "optionalLink", "totalTime", "draftMode");
-		object.setProject(project);
+
 	}
 
 	@Override
@@ -83,8 +81,16 @@ public class DeveloperTrainingModuleUpdateService extends AbstractService<Develo
 		assert object != null;
 
 		Dataset dataset;
-		dataset = super.unbind(object, "code", "creationMoment", "details", "difficultyLevel", "updatedMoment", "optionalLink", "totalTime", "draftMode");
+		SelectChoices choices;
+		SelectChoices choices2;
+		final Collection<Project> projects = this.repository.findAllProject();
 
+		choices = SelectChoices.from(projects, "code", object.getProject());
+		choices2 = SelectChoices.from(Difficulty.class, object.getDifficultyLevel());
+		dataset = super.unbind(object, "code", "creationMoment", "details", "updatedMoment", "optionalLink", "totalTime", "draftMode");
+		dataset.put("difficultyLevels", choices2);
+		dataset.put("project", choices.getSelected().getKey());
+		dataset.put("projects", choices);
 		super.getResponse().addData(dataset);
 
 	}
