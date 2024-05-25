@@ -20,7 +20,7 @@
 
 <acme:form>
 	<acme:input-textbox code="sponsor.invoice.label.code" path="code" placeholder="IN-XXXX-XXXX"/>
-	<acme:input-moment code="sponsor.invoice.label.registrationTime" path="registrationTime" readonly="true"/>
+	<acme:input-moment code="sponsor.invoice.label.registrationTime" path="registrationTime"/>
 	<acme:input-moment code="sponsor.invoice.label.dueDate" path="dueDate" placeholder="YYYY/MM/DD HH:SS"/>
 	<acme:input-money code="sponsor.invoice.label.quantity" path="quantity" placeholder="(EUR/USD/GBP) 00.00"/>
 	<acme:input-double code="sponsor.invoice.label.tax" path="tax" placeholder="00.00"/>

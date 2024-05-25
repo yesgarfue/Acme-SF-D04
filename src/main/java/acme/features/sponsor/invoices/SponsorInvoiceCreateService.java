@@ -1,7 +1,9 @@
 
 package acme.features.sponsor.invoices;
 
-import java.time.temporal.ChronoUnit;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -79,16 +81,11 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 			super.state(existing == null, "code", "Code-duplicated");
 		}
 
-		if (!super.getBuffer().getErrors().hasErrors("registrationTime"))
+		if (!super.getBuffer().getErrors().hasErrors("registrationTime")) {
+			String dateString = "2000/01/01 01:00";
+			Date minimunDate = MomentHelper.parse(dateString, "yyyy/MM/dd HH:mm");
 			super.state(object.getRegistrationTime() != null, "registrationTime", "RegistrationTime-cannot-be-empty");
-
-		if (!super.getBuffer().getErrors().hasErrors("dueDate")) {
-			String dateString = "2200/12/31 23:59";
-			Date limitDate = MomentHelper.parse(dateString, "yyyy/MM/dd HH:mm");
-
-			super.state(MomentHelper.isAfter(object.getDueDate(), object.getRegistrationTime()), "dueDate", "must-be-date-after-registrationTime ");
-			super.state(MomentHelper.isLongEnough(object.getRegistrationTime(), object.getDueDate(), 1, ChronoUnit.MONTHS), "dueDate", "must-be-at-least-one-month-away");
-			super.state(MomentHelper.isBefore(object.getDueDate(), limitDate), "dueDate", "dueDate-error-date-out-of-bounds");
+			super.state(MomentHelper.isAfter(object.getRegistrationTime(), minimunDate), "registrationTime", "registrationTime-out-of-bounds ");
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("quantity")) {
@@ -104,6 +101,71 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 		if (!super.getBuffer().getErrors().hasErrors("tax")) {
 			super.state(object.getTax() >= 0, "tax", "tax-must-be-positive-or-zero ");
 			super.state(object.getTax() <= 1_000_000.00, "tax", "tax-out-of-bounds ");
+		}
+
+		if (!super.getBuffer().getErrors().hasErrors("dueDate")) {
+			String dateString = "2200/12/31 23:59";
+			Date limitDate = MomentHelper.parse(dateString, "yyyy/MM/dd HH:mm");
+			super.state(MomentHelper.isAfter(object.getDueDate(), object.getRegistrationTime()), "dueDate", "must-be-date-after-registrationTime ");
+			super.state(MomentHelper.isBeforeOrEqual(object.getDueDate(), limitDate), "dueDate", "sponsor.invoice.form.error.date-out-of-bounds");
+		}
+
+		if (!super.getBuffer().getErrors().hasErrors("dueDate")) {
+
+			LocalDateTime registrationDateLocal = object.getRegistrationTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+
+			int yearValue = registrationDateLocal.getYear();
+			int monthValue = registrationDateLocal.getMonthValue();
+			int dayValue = registrationDateLocal.getDayOfMonth();
+
+			Date date30 = this.sumarDias(registrationDateLocal, 30);
+			Date date31 = this.sumarDias(registrationDateLocal, 31);
+			Date date28 = this.sumarDias(registrationDateLocal, 28);
+			Date date29 = this.sumarDias(registrationDateLocal, 29);
+
+			boolean esBisiesto = yearValue % 4 == 0 && (yearValue % 100 != 0 || yearValue % 400 == 0);
+
+			switch (monthValue) {
+			case 1:
+			case 2:
+				if (esBisiesto) {
+					if (monthValue == 1) {
+						if (dayValue == 30 || dayValue == 31)
+							super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date30), "dueDate", "must-be-at-least-one-month-away");
+						super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date31), "dueDate", "must-be-at-least-one-month-away");
+					} else
+						super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date29), "dueDate", "must-be-at-least-one-month-away");
+				} else if (monthValue == 1) {
+					if (dayValue == 29)
+						super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date30), "dueDate", "must-be-at-least-one-month-away");
+					else {
+						if (dayValue == 30 || dayValue == 31)
+							super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date28), "dueDate", "must-be-at-least-one-month-away");
+						super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date31), "dueDate", "must-be-at-least-one-month-away");
+					}
+				} else
+					super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date28), "dueDate", "must-be-at-least-one-month-away");
+				break;
+			case 12:
+			case 10:
+			case 8:
+			case 7:
+			case 5:
+			case 3:
+				if (dayValue == 31)
+					super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date30), "dueDate", "must-be-at-least-one-month-away");
+				super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date31), "dueDate", "must-be-at-least-one-month-away");
+				break;
+			default:
+				super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date30), "dueDate", "must-be-at-least-one-month-away");
+			}
+		}
+
+		if (!super.getBuffer().getErrors().hasErrors("sponsorship")) {
+			Sponsorship existing;
+
+			existing = this.repository.findOneSponsorshipByCode(object.getSponsorship().getCode());
+			super.state(existing != null, "sponsorship", "Invalid-Sponsorship-code");
 		}
 	}
 
@@ -132,5 +194,18 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 		dataset.put("accumulatedAmountInvoices", this.moneyExchange.totalMoneyExchangeInvoices(invoicesPublishedBySponsorship, sponsorshipCurrency));
 
 		super.getResponse().addData(dataset);
+	}
+
+	public Date sumarDias(final LocalDateTime registrationDateLocal1, final int dias) {
+		LocalDateTime dateTemp1;
+		ZoneId zoneId1 = ZoneId.systemDefault();
+		ZonedDateTime zonedDateTime1;
+		Date dateVar1;
+
+		dateTemp1 = registrationDateLocal1.plusDays(dias);
+		zonedDateTime1 = dateTemp1.atZone(zoneId1);
+		dateVar1 = Date.from(zonedDateTime1.toInstant());
+
+		return dateVar1;
 	}
 }

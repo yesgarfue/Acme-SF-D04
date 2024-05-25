@@ -1,6 +1,8 @@
 
 package acme.features.sponsor.sponsorship;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.Date;
@@ -24,7 +26,10 @@ import acme.systemConfiguration.SystemConfiguration;
 public class SponsorSponsorshipUpdateService extends AbstractService<Sponsor, Sponsorship> {
 
 	@Autowired
-	private SponsorSponsorshipRepository repository;
+	private SponsorSponsorshipRepository	repository;
+
+	@Autowired
+	private SponsorSponsorshipCreateService	sponsorshipCreateService;
 
 
 	@Override
@@ -79,8 +84,13 @@ public class SponsorSponsorshipUpdateService extends AbstractService<Sponsor, Sp
 			super.state(existing == null || existing.equals(object), "code", "Code-duplicated");
 		}
 
-		if (!super.getBuffer().getErrors().hasErrors("moment"))
+		if (!super.getBuffer().getErrors().hasErrors("moment")) {
+			String dateStart = "2000/01/01 01:00";
+			Date minimunDate = MomentHelper.parse(dateStart, "yyyy/MM/dd HH:mm");
 			super.state(object.getMoment() != null, "moment", "Moment-cannot-be-empty");
+			super.state(MomentHelper.isAfter(object.getMoment(), minimunDate), "moment", "moment-out-of-bounds ");
+
+		}
 
 		if (!super.getBuffer().getErrors().hasErrors("startDate")) {
 			super.state(MomentHelper.isAfter(object.getStartDate(), object.getMoment()), "startDate", "must-be-date-after-moment");
@@ -92,6 +102,60 @@ public class SponsorSponsorshipUpdateService extends AbstractService<Sponsor, Sp
 				super.state(MomentHelper.isAfter(object.getFinishDate(), object.getStartDate()), "finishDate", "must-be-date-after-startDate ");
 				super.state(MomentHelper.isLongEnough(object.getStartDate(), object.getFinishDate(), 1, ChronoUnit.MONTHS), "finishDate", "must-be-at-least-one-month-away");
 				super.state(MomentHelper.isBefore(object.getFinishDate(), limitDate), "finishDate", "finishDate-error-date-out-of-bounds");
+
+				LocalDateTime registrationDateLocal = object.getStartDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+
+				int yearValue = registrationDateLocal.getYear();
+				int monthValue = registrationDateLocal.getMonthValue();
+				int dayValue = registrationDateLocal.getDayOfMonth();
+
+				Date date30 = this.sponsorshipCreateService.sumarDias(registrationDateLocal, 30);
+				Date date31 = this.sponsorshipCreateService.sumarDias(registrationDateLocal, 31);
+				Date date28 = this.sponsorshipCreateService.sumarDias(registrationDateLocal, 28);
+				Date date29 = this.sponsorshipCreateService.sumarDias(registrationDateLocal, 29);
+
+				boolean esBisiesto = yearValue % 4 == 0 && (yearValue % 100 != 0 || yearValue % 400 == 0);
+
+				switch (monthValue) {
+				case 1:
+				case 2:
+					if (esBisiesto) {
+						if (monthValue == 1) {
+							if (dayValue == 30 || dayValue == 31) {
+								Date minimumEndDate = MomentHelper.deltaFromMoment(object.getStartDate(), 30, ChronoUnit.DAYS);
+								super.state(MomentHelper.isAfterOrEqual(object.getFinishDate(), minimumEndDate), "finishDate", "must-be-at-least-one-month-away");
+							}
+							super.state(MomentHelper.isAfterOrEqual(object.getFinishDate(), date31), "finishDate", "must-be-at-least-one-month-away");
+						} else
+							super.state(MomentHelper.isAfterOrEqual(object.getFinishDate(), date29), "finishDate", "must-be-at-least-one-month-away");
+					} else if (monthValue == 1) {
+						if (dayValue == 29)
+							super.state(MomentHelper.isAfterOrEqual(object.getFinishDate(), date30), "finishDate", "must-be-at-least-one-month-away");
+						else {
+							if (dayValue == 30 || dayValue == 31) {
+								Date minimumEndDate = MomentHelper.deltaFromMoment(object.getStartDate(), 28, ChronoUnit.DAYS);
+								super.state(MomentHelper.isAfterOrEqual(object.getFinishDate(), minimumEndDate), "finishDate", "must-be-at-least-one-month-away");
+							}
+							super.state(MomentHelper.isAfterOrEqual(object.getFinishDate(), date31), "finishDate", "must-be-at-least-one-month-away");
+						}
+					} else
+						super.state(MomentHelper.isAfterOrEqual(object.getFinishDate(), date28), "finishDate", "must-be-at-least-one-month-away");
+					break;
+				case 12:
+				case 10:
+				case 8:
+				case 7:
+				case 5:
+				case 3:
+					if (dayValue == 31) {
+						Date minimumEndDate = MomentHelper.deltaFromMoment(object.getStartDate(), 30, ChronoUnit.DAYS);
+						super.state(MomentHelper.isAfterOrEqual(object.getFinishDate(), minimumEndDate), "finishDate", "must-be-at-least-one-month-away");
+					}
+					super.state(MomentHelper.isAfterOrEqual(object.getFinishDate(), date31), "finishDate", "must-be-at-least-one-month-away");
+					break;
+				default:
+					super.state(MomentHelper.isAfterOrEqual(object.getFinishDate(), date30), "finishDate", "must-be-at-least-one-month-away");
+				}
 			}
 
 		if (!super.getBuffer().getErrors().hasErrors("amount")) {
