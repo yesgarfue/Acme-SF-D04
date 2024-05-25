@@ -11,7 +11,7 @@ invoice-09,IN-7627-4343,2000/02/02 05:35,2016/11/14 06:32,EUR 51.69,13.35,http:/
 invoice-10,IN-0857-2408,2010/11/25 01:50,2010/12/30 12:36,USD 2740.9,5,http://ifeng.com,false,sponsorship-13
 invoice-11,IN-9759-6891,2007/05/20 11:13,2020/06/14 18:20,USD 1343.4,21,https://newyorker.com,false,sponsorship-14
 invoice-12,IN-4034-1719,2014/04/17 04:31,2015/07/21 21:42,USD 9.90,10,https://godaddy.com,false,sponsorship-02
-invoice-13,IN-9029-5741,2018/05/04 07:43,2018/08/05 23:30,EUR 700.89,12,"http://www.lorem-ipsum.org/dolor/sit/amet,/consectetur/adipiscing/elit,/sed/do/eiusmod/tempor/incididunt/ut/labore/et/dolore/magna/aliqua/Ut/enim/ad/minim/veniam/quis/nostrud/exercitation/ullamco/laboris/nisi/ut/aliquip/ex/ea/commodo/consequat/duis/aute/XY",true,sponsorship-04
+invoice-13,IN-9029-5741,2018/05/04 07:43,2018/08/05 23:30,EUR 700.89,12,,true,sponsorship-04
 invoice-14,IN-5673-7542,2007/07/30 03:05,2007/09/02 04:44,GBP 890,5,,false,sponsorship-06
 invoice-15,IN-1407-4179,2007/01/08 02:27,2007/11/22 19:29,USD 20.9,4,http://www.lorem-ipsum.org/dolor/sit.html#dolor,false,sponsorship-08
 invoice-16,IN-5231-9319,2000/02/05 11:38,2006/06/06 23:44,EUR 1000000.00,15,http://www.lorem-ipsum.org/dolor/sit.html,false,sponsorship-10
