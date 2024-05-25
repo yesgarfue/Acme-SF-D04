@@ -19,3 +19,6 @@ developer.training-module.form.label.optionalLink = Enlace Opcional
 developer.training-module.form.label.totalTime = Tiempo Total
 developer.trainingModule.label.project = Id de Proyecto Asociado
 developer.training-module.label.draftMode = Modo Borrador
+
+
+master.menu.any.trainingModules = Módulos de Entrenamiento
