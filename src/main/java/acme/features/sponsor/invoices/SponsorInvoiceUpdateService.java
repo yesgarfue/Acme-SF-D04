@@ -69,6 +69,11 @@ public class SponsorInvoiceUpdateService extends AbstractService<Sponsor, Invoic
 			Invoice existing;
 			existing = this.repository.findOneInvoiceByCode(object.getCode());
 			super.state(existing == null || existing.equals(object), "code", "Code-duplicated");
+
+			String cadena = object.getCode();
+			String valorStr = cadena.substring(8, 12);
+			int valor = Integer.parseInt(valorStr);
+			super.state(valor > 0, "code", "value-not-allowed");
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("registrationTime")) {
@@ -79,7 +84,7 @@ public class SponsorInvoiceUpdateService extends AbstractService<Sponsor, Invoic
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("quantity")) {
-			super.state(object.getQuantity().getAmount() >= 0, "quantity", "amount-error-negative");
+			super.state(object.getQuantity().getAmount() > 0, "quantity", "amount-error-negative");
 			super.state(object.getQuantity().getAmount() <= 1_000_000.00, "quantity", "amount-error-too-high-salary");
 
 			String isCurrency = object.getQuantity().getCurrency();
@@ -100,62 +105,73 @@ public class SponsorInvoiceUpdateService extends AbstractService<Sponsor, Invoic
 			super.state(MomentHelper.isBeforeOrEqual(object.getDueDate(), limitDate), "dueDate", "sponsor.invoice.form.error.date-out-of-bounds");
 		}
 
-		if (!super.getBuffer().getErrors().hasErrors("dueDate")) {
+		LocalDateTime registrationDateLocal = object.getRegistrationTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
 
-			LocalDateTime registrationDateLocal = object.getRegistrationTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+		int yearValue = registrationDateLocal.getYear();
+		int monthValue = registrationDateLocal.getMonthValue();
+		int dayValue = registrationDateLocal.getDayOfMonth();
 
-			int yearValue = registrationDateLocal.getYear();
-			int monthValue = registrationDateLocal.getMonthValue();
-			int dayValue = registrationDateLocal.getDayOfMonth();
+		Date date30 = this.createService.sumarDias(registrationDateLocal, 30);
+		Date date31 = this.createService.sumarDias(registrationDateLocal, 31);
+		Date date28 = this.createService.sumarDias(registrationDateLocal, 28);
+		Date date29 = this.createService.sumarDias(registrationDateLocal, 29);
 
-			Date date30 = this.createService.sumarDias(registrationDateLocal, 30);
-			Date date31 = this.createService.sumarDias(registrationDateLocal, 31);
-			Date date28 = this.createService.sumarDias(registrationDateLocal, 28);
-			Date date29 = this.createService.sumarDias(registrationDateLocal, 29);
+		boolean esBisiesto = yearValue % 4 == 0 && (yearValue % 100 != 0 || yearValue % 400 == 0);
 
-			boolean esBisiesto = yearValue % 4 == 0 && (yearValue % 100 != 0 || yearValue % 400 == 0);
+		//JANUARY
+		if (monthValue == 01 && esBisiesto && dayValue == 31)
+			if (!super.getBuffer().getErrors().hasErrors("dueDate"))
+				super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date29), "dueDate", "must-be-at-least-one-month-away");
 
-			switch (monthValue) {
-			case 1:
-			case 2:
-				if (esBisiesto) {
-					if (monthValue == 1)
-						switch (dayValue) {
-						case 30:
-						case 31:
-							super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date30), "dueDate", "must-be-at-least-one-month-away");
-							break;
-						default:
-							super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date31), "dueDate", "must-be-at-least-one-month-away");
-							break;
-						}
-					else
-						super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date29), "dueDate", "must-be-at-least-one-month-away");
-				} else if (monthValue == 1) {
-					if (dayValue == 29)
-						super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date30), "dueDate", "must-be-at-least-one-month-away");
-					else {
-						if (dayValue == 30 || dayValue == 31)
-							super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date28), "dueDate", "must-be-at-least-one-month-away");
-						super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date31), "dueDate", "must-be-at-least-one-month-away");
-					}
-				} else
-					super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date28), "dueDate", "must-be-at-least-one-month-away");
-				break;
-			case 12:
-			case 10:
-			case 8:
-			case 7:
-			case 5:
-			case 3:
-				if (dayValue == 31)
-					super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date30), "dueDate", "must-be-at-least-one-month-away");
-				super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date31), "dueDate", "must-be-at-least-one-month-away");
-				break;
-			default:
+		if (monthValue == 01 && esBisiesto && dayValue == 30)
+			if (!super.getBuffer().getErrors().hasErrors("dueDate"))
 				super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date30), "dueDate", "must-be-at-least-one-month-away");
-			}
-		}
+
+		if (monthValue == 01 && esBisiesto && dayValue != 30 && dayValue != 31)
+			if (!super.getBuffer().getErrors().hasErrors("dueDate"))
+				super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date31), "dueDate", "must-be-at-least-one-month-away");
+
+		if (monthValue == 01 && !esBisiesto && dayValue == 29)
+			if (!super.getBuffer().getErrors().hasErrors("dueDate"))
+				super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date30), "dueDate", "must-be-at-least-one-month-away");
+
+		if (monthValue == 01 && !esBisiesto && dayValue == 30)
+			if (!super.getBuffer().getErrors().hasErrors("dueDate"))
+				super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date29), "dueDate", "must-be-at-least-one-month-away");
+
+		if (monthValue == 01 && !esBisiesto && dayValue == 31)
+			if (!super.getBuffer().getErrors().hasErrors("dueDate"))
+				super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date28), "dueDate", "must-be-at-least-one-month-away");
+
+		if (monthValue == 01 && !esBisiesto && dayValue != 29 && dayValue != 30 && dayValue != 31)
+			if (!super.getBuffer().getErrors().hasErrors("dueDate"))
+				super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date31), "dueDate", "must-be-at-least-one-month-away");
+
+		//FEBRUARY
+		if (monthValue == 02 && esBisiesto)
+			if (!super.getBuffer().getErrors().hasErrors("dueDate"))
+				super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date29), "dueDate", "must-be-at-least-one-month-away");
+
+		if (monthValue == 02 && !esBisiesto)
+			if (!super.getBuffer().getErrors().hasErrors("dueDate"))
+				super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date28), "dueDate", "must-be-at-least-one-month-away");
+
+		//OTHERS MONTHS
+		if ((monthValue == 10 || monthValue == 8 || monthValue == 7 || monthValue == 5 || monthValue == 3) && dayValue == 31)
+			if (!super.getBuffer().getErrors().hasErrors("dueDate"))
+				super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date30), "dueDate", "must-be-at-least-one-month-away");
+
+		if ((monthValue == 10 || monthValue == 8 || monthValue == 7 || monthValue == 5 || monthValue == 3) && dayValue != 31)
+			if (!super.getBuffer().getErrors().hasErrors("dueDate"))
+				super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date31), "dueDate", "must-be-at-least-one-month-away");
+
+		if (monthValue == 11 || monthValue == 9 || monthValue == 6 || monthValue == 4)
+			if (!super.getBuffer().getErrors().hasErrors("dueDate"))
+				super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date30), "dueDate", "must-be-at-least-one-month-away");
+
+		if (monthValue == 12)
+			if (!super.getBuffer().getErrors().hasErrors("dueDate"))
+				super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date31), "dueDate", "must-be-at-least-one-month-away");
 
 		if (!super.getBuffer().getErrors().hasErrors("sponsorship")) {
 			Sponsorship existing;
