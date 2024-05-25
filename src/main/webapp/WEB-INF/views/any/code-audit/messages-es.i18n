@@ -1,0 +1,12 @@
+any.code-audit.form.label.correctiveActions = Acciones Correctivas
+any.code-audit.form.label.type = Tipo
+any.code-audit.form.label.executionDate = Fecha de ejecución
+any.code-audit.form.label.code = Código
+any.code-audit.form.title = Auditoría de Código
+any.code-audit.form.button.audit-records = Registros de Auditoría 
+any.code-audit.list.title = Auditorías de Código
+any.code-audit.list.label.code = Código
+any.code-audit.list.label.type = Tipo
+any.code-audit.list.label.correctiveActions = Acciones correctivas 
+
+
