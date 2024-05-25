@@ -1,0 +1,12 @@
+any.code-audit.form.label.correctiveActions = Corrective Actions
+any.code-audit.form.label.type = Type
+any.code-audit.form.label.executionDate = Execution Date
+any.code-audit.form.label.code = Code
+any.code-audit.form.title = Code Audit
+any.code-audit.form.button.audit-records = Audit Records
+any.code-audit.list.title = Code Audits
+any.code-audit.list.label.code = Code
+any.code-audit.list.label.type = Type
+any.code-audit.list.label.correctiveActions = Corrective Actions
+
+

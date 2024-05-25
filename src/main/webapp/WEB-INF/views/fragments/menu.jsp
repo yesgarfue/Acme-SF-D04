@@ -64,6 +64,7 @@
 			<acme:menu-suboption code="master.menu.any.trainingModules" action="/any/training-module/list"/>
 			<acme:menu-suboption code="master.menu.any.sponsorships" action="/any/sponsorship/list"/>
 			<acme:menu-suboption code="master.menu.any.contracts" action="/any/contract/list"/>
+			<acme:menu-suboption code="master.menu.any.code-audit" action="/any/code-audit/list"/>
 		</acme:menu-option>
 		
 		<acme:menu-option code="master.menu.developer" access="hasRole('Developer')">

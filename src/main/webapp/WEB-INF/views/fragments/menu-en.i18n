@@ -22,6 +22,7 @@ master.menu.any.projects = Projects
 master.menu.any.claims = Claims
 master.menu.any.sponsorships = Sponsorships
 master.menu.any.contracts = Contracts
+master.menu.any.code-audit = Code Audits
 
 # master.menu.anonymous #################################################################
 
