@@ -3,7 +3,6 @@ package acme.features.sponsor.invoices;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -136,10 +135,8 @@ public class SponsorInvoicePublishService extends AbstractService<Sponsor, Invoi
 			case 2:
 				if (esBisiesto) {
 					if (monthValue == 1) {
-						if (dayValue == 30 || dayValue == 31) {
-							Date minimumEndDate = MomentHelper.deltaFromMoment(object.getRegistrationTime(), 30, ChronoUnit.DAYS);
-							super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), minimumEndDate), "dueDate", "must-be-at-least-one-month-away");
-						}
+						if (dayValue == 30 || dayValue == 31)
+							super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date30), "dueDate", "must-be-at-least-one-month-away");
 						super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date31), "dueDate", "must-be-at-least-one-month-away");
 					} else
 						super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date29), "dueDate", "must-be-at-least-one-month-away");
@@ -147,10 +144,8 @@ public class SponsorInvoicePublishService extends AbstractService<Sponsor, Invoi
 					if (dayValue == 29)
 						super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date30), "dueDate", "must-be-at-least-one-month-away");
 					else {
-						if (dayValue == 30 || dayValue == 31) {
-							Date minimumEndDate = MomentHelper.deltaFromMoment(object.getRegistrationTime(), 28, ChronoUnit.DAYS);
-							super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), minimumEndDate), "dueDate", "must-be-at-least-one-month-away");
-						}
+						if (dayValue == 30 || dayValue == 31)
+							super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date28), "dueDate", "must-be-at-least-one-month-away");
 						super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date31), "dueDate", "must-be-at-least-one-month-away");
 					}
 				} else
@@ -162,10 +157,8 @@ public class SponsorInvoicePublishService extends AbstractService<Sponsor, Invoi
 			case 7:
 			case 5:
 			case 3:
-				if (dayValue == 31) {
-					Date minimumEndDate = MomentHelper.deltaFromMoment(object.getRegistrationTime(), 30, ChronoUnit.DAYS);
-					super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), minimumEndDate), "dueDate", "must-be-at-least-one-month-away");
-				}
+				if (dayValue == 31)
+					super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date30), "dueDate", "must-be-at-least-one-month-away");
 				super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), date31), "dueDate", "must-be-at-least-one-month-away");
 				break;
 			default:
