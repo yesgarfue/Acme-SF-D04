@@ -15,6 +15,7 @@ import acme.client.data.models.Dataset;
 import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractService;
 import acme.client.views.SelectChoices;
+import acme.entities.invoice.Invoice;
 import acme.entities.projects.Project;
 import acme.entities.sponsorship.Sponsorship;
 import acme.enumerate.SponsorshipType;
@@ -78,9 +79,11 @@ public class SponsorSponsorshipUpdateService extends AbstractService<Sponsor, Sp
 
 		if (!super.getBuffer().getErrors().hasErrors("code")) {
 			Sponsorship existing;
+			Collection<Invoice> invoices = this.repository.findAllInvoicesBySponsorshipId(object.getId());
 
 			existing = this.repository.findOneSponsorshipByCode(object.getCode());
 			super.state(existing == null || existing.equals(object), "code", "Code-duplicated");
+			super.state(invoices != null, "code", "Error-Sponsorship-create");
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("moment")) {
@@ -215,7 +218,7 @@ public class SponsorSponsorshipUpdateService extends AbstractService<Sponsor, Sp
 		choices = SelectChoices.from(projects, "code", object.getProject());
 		choicesEnum = SelectChoices.from(SponsorshipType.class, object.getSponsorshipType());
 
-		dataset = super.unbind(object, "code", "moment", "startDate", "finishDate", "amount", "email", "link");
+		dataset = super.unbind(object, "code", "moment", "startDate", "finishDate", "amount", "email", "link", "isPublished");
 		dataset.put("project", choices.getSelected().getKey());
 		dataset.put("sponsorshipType", choicesEnum);
 		dataset.put("projects", choices);
