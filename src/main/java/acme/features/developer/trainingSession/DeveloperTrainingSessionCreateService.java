@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
-import acme.client.helpers.PrincipalHelper;
 import acme.client.services.AbstractService;
 import acme.client.views.SelectChoices;
 import acme.entities.training.TrainingModule;
@@ -67,7 +66,7 @@ public class DeveloperTrainingSessionCreateService extends AbstractService<Devel
 
 			long oneWeekInMillis = 7 * 24 * 60 * 60 * 1000; // 1 semana en milisegundos
 			long diffM_SF = object.getEndDate().getTime() - object.getStartDate().getTime();
-			long diffM_CS = object.getTrainingModule().getCreationMoment().getTime() - object.getStartDate().getTime();
+			long diffM_CS = object.getStartDate().getTime() - object.getTrainingModule().getCreationMoment().getTime();
 
 			super.state(diffM_SF >= oneWeekInMillis, "startDate", "developer.trainingSession.error.duration.lessThanOneWeek");
 			super.state(diffM_CS >= oneWeekInMillis, "startDate", "developer.trainingSession.error.startDate.lessThanOneWeek");
@@ -101,9 +100,4 @@ public class DeveloperTrainingSessionCreateService extends AbstractService<Devel
 
 	}
 
-	@Override
-	public void onSuccess() {
-		if (super.getRequest().getMethod().equals("POST"))
-			PrincipalHelper.handleUpdate();
-	}
 }
