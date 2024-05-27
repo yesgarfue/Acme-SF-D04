@@ -29,8 +29,9 @@ public class SponsorSponsorshipDeleteService extends AbstractService<Sponsor, Sp
 		Sponsor sponsor;
 		Sponsorship sp;
 
+		int sponsorId = super.getRequest().getPrincipal().getActiveRoleId();
 		shipId = super.getRequest().getData("id", int.class);
-		sp = this.repository.findSponsorshipById(shipId);
+		sp = this.repository.findSponsorshipByIdSponsorId(shipId, sponsorId);
 		sponsor = sp == null ? null : sp.getSponsor();
 		status = sponsor != null && !sp.isPublished() && super.getRequest().getPrincipal().hasRole(Sponsor.class);
 

@@ -20,6 +20,9 @@ public interface SponsorSponsorshipRepository extends AbstractRepository {
 	@Query("SELECT s FROM Sponsorship s WHERE s.id= :id")
 	Sponsorship findSponsorshipById(int id);
 
+	@Query("SELECT s FROM Sponsorship s WHERE s.id= :id AND s.sponsor.id = :sponsorId")
+	Sponsorship findSponsorshipByIdSponsorId(int id, int sponsorId);
+
 	@Query("SELECT p FROM Project p WHERE p.id= :projectId")
 	Project findOneProjectById(int projectId);
 

@@ -2,6 +2,7 @@
 package acme.features.sponsor.invoices;
 
 import java.util.Collection;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,12 +12,16 @@ import acme.client.services.AbstractService;
 import acme.entities.invoice.Invoice;
 import acme.entities.sponsorship.Sponsorship;
 import acme.roles.Sponsor;
+import acme.systemConfiguration.moneyExchange.MoneyExchangePerform;
 
 @Service
 public class SponsorInvoiceListService extends AbstractService<Sponsor, Invoice> {
 
 	@Autowired
-	private SponsorInvoiceRepository repository;
+	private SponsorInvoiceRepository	repository;
+
+	@Autowired
+	private MoneyExchangePerform		moneyExchange;
 
 
 	@Override
@@ -25,8 +30,9 @@ public class SponsorInvoiceListService extends AbstractService<Sponsor, Invoice>
 		int shipId;
 		Sponsorship sponsorship;
 
+		int sponsorId = super.getRequest().getPrincipal().getActiveRoleId();
 		shipId = super.getRequest().getData("shipId", int.class);
-		sponsorship = this.repository.findOneSponsorshipById(shipId);
+		sponsorship = this.repository.findOneSponsorshipByIdAndSponsorId(shipId, sponsorId);
 		status = sponsorship != null && super.getRequest().getPrincipal().hasRole(Sponsor.class);
 
 		super.getResponse().setAuthorised(status);
@@ -49,20 +55,38 @@ public class SponsorInvoiceListService extends AbstractService<Sponsor, Invoice>
 
 		Dataset dataset;
 		double totalAmount;
-		String state = "Yeah";
+		String payload;
+		int shipId = object.getSponsorship().getId();
 
 		totalAmount = object.totalAmount();
 		Boolean temp = object.isPublished();
 
-		dataset = super.unbind(object, "code", "registrationTime", "dueDate", "quantity", "tax", "link", "sponsorship.code", "isPublished");
+		String sponsorshipCurrency = object.getSponsorship().getAmount().getCurrency();
+		Collection<Invoice> invoicesPublishedBySponsorship = this.repository.findManyPublishedInvoicesBySponsorshipId(shipId);
+		double accumulatedAmountInvoices = this.moneyExchange.totalMoneyExchangeInvoices(invoicesPublishedBySponsorship, sponsorshipCurrency);
+
+		dataset = super.unbind(object, "code", "registrationTime", "sponsorship.code", "isPublished");
+
+		if (temp.equals(true)) {
+			final Locale local = super.getRequest().getLocale();
+			dataset.put("state", local.equals(Locale.ENGLISH) ? "Yes" : "Sí");
+		} else
+			dataset.put("state", "No");
+
 		dataset.put("totalAmount", totalAmount);
 
-		if (temp.equals(true))
-			dataset.put("state", state);
-		else {
-			state = "No";
-			dataset.put("state", state);
-		}
+		payload = String.format(//
+			"%s; %s; %s; %s;%s; %s; %s; %s;", //
+			accumulatedAmountInvoices,//
+			object.getDueDate(), //
+			object.getQuantity(),//
+			object.getTax(),//
+			object.getLink(),//
+			sponsorshipCurrency,//
+			object.getSponsorship().getAmount().getAmount(),//
+			shipId);
+
+		dataset.put("payload", payload);
 
 		super.getResponse().addData(dataset);
 	}

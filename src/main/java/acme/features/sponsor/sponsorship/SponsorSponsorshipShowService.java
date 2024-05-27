@@ -28,8 +28,9 @@ public class SponsorSponsorshipShowService extends AbstractService<Sponsor, Spon
 		Sponsor sponsor;
 		Sponsorship sponsorship;
 
+		int sponsorId = super.getRequest().getPrincipal().getActiveRoleId();
 		shipId = super.getRequest().getData("id", int.class);
-		sponsorship = this.repository.findSponsorshipById(shipId);
+		sponsorship = this.repository.findSponsorshipByIdSponsorId(shipId, sponsorId);
 		sponsor = sponsorship == null ? null : sponsorship.getSponsor();
 		status = sponsor != null && super.getRequest().getPrincipal().hasRole(Sponsor.class);
 

@@ -2,6 +2,7 @@
 package acme.features.sponsor.invoices;
 
 import java.util.Collection;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,20 +50,18 @@ public class SponsorInvoiceListAllService extends AbstractService<Sponsor, Invoi
 
 		Dataset dataset;
 		double totalAmount;
-		String state = "Yeah";
 
 		totalAmount = object.totalAmount();
 		Boolean temp = object.isPublished();
 
-		dataset = super.unbind(object, "code", "registrationTime", "dueDate", "quantity", "tax", "link", "sponsorship.code", "isPublished");
+		dataset = super.unbind(object, "code", "registrationTime", "sponsorship.code", "isPublished");
 		dataset.put("totalAmount", totalAmount);
 
-		if (temp.equals(true))
-			dataset.put("state", state);
-		else {
-			state = "No";
-			dataset.put("state", state);
-		}
+		if (temp.equals(true)) {
+			final Locale local = super.getRequest().getLocale();
+			dataset.put("state", local.equals(Locale.ENGLISH) ? "Yes" : "Sí");
+		} else
+			dataset.put("state", "No");
 
 		super.getResponse().addData(dataset);
 	}

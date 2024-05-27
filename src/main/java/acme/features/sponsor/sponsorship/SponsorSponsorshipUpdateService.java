@@ -15,7 +15,6 @@ import acme.client.data.models.Dataset;
 import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractService;
 import acme.client.views.SelectChoices;
-import acme.entities.invoice.Invoice;
 import acme.entities.projects.Project;
 import acme.entities.sponsorship.Sponsorship;
 import acme.enumerate.SponsorshipType;
@@ -39,8 +38,9 @@ public class SponsorSponsorshipUpdateService extends AbstractService<Sponsor, Sp
 		Sponsor sponsor;
 		Sponsorship sp;
 
+		int sponsorId = super.getRequest().getPrincipal().getActiveRoleId();
 		shipId = super.getRequest().getData("id", int.class);
-		sp = this.repository.findSponsorshipById(shipId);
+		sp = this.repository.findSponsorshipByIdSponsorId(shipId, sponsorId);
 		sponsor = sp == null ? null : sp.getSponsor();
 		status = sponsor != null && !sp.isPublished() && super.getRequest().getPrincipal().hasRole(Sponsor.class);
 
@@ -79,11 +79,9 @@ public class SponsorSponsorshipUpdateService extends AbstractService<Sponsor, Sp
 
 		if (!super.getBuffer().getErrors().hasErrors("code")) {
 			Sponsorship existing;
-			Collection<Invoice> invoices = this.repository.findAllInvoicesBySponsorshipId(object.getId());
 
 			existing = this.repository.findOneSponsorshipByCode(object.getCode());
 			super.state(existing == null || existing.equals(object), "code", "Code-duplicated");
-			super.state(invoices != null, "code", "Error-Sponsorship-create");
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("moment")) {

@@ -24,8 +24,9 @@ public class SponsorInvoiceShowService extends AbstractService<Sponsor, Invoice>
 		Invoice inv;
 		Sponsorship sponsorship;
 
+		int sponsorId = super.getRequest().getPrincipal().getActiveRoleId();
 		invoiceId = super.getRequest().getData("id", int.class);
-		inv = this.repository.findOneInvoiceById(invoiceId);
+		inv = this.repository.findOneInvoiceByIdAndSponsorId(invoiceId, sponsorId);
 		sponsorship = inv == null ? null : inv.getSponsorship();
 		status = sponsorship != null && super.getRequest().getPrincipal().hasRole(Sponsor.class);
 
