@@ -9,6 +9,7 @@
 	<acme:list-column code="sponsor.invoice.label.calculatedTotal" path="totalAmount" width="20%"/>
 	<acme:list-column code="sponsor.invoice.label.sponsorshipCode" path="sponsorship.code" width="20%"/>
 	<acme:list-column code="sponsor.invoice.label.isPublished" path="state" width="20%"/>
+	<acme:list-payload path="payload"/>
 </acme:list>
 
 <jstl:if test="${showCreate}">
